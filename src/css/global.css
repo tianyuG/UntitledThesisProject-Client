@@ -1,0 +1,66 @@
+/* disable selection */
+/* https://gist.github.com/Splode/a2ae4f5dbfaca98efad9f93f51832146 */
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+input, button, textarea, :focus {
+    outline: none;
+}
+
+/* disable image and anchor dragging */
+a:not([draggable=true]), img:not([draggable=true]) {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+a[href^="http://"],
+a[href^="https://"],
+a[href^="ftp://"] {
+    -webkit-user-drag: auto;
+    user-drag: auto;
+}
+
+body {
+    margin: 0;
+}
+
+/* .window {
+    height: 100vh;
+} */
+
+#minimiseWindow {
+    background-image: url("../icon/minimize.svg") !important;
+}
+
+#maximiseWindow {
+    background-image: url("../icon/maximize.svg") !important;
+    margin-left: 1px !important;
+}
+
+#closeWindow {
+    background-image: url("../icon/close.svg") !important;
+    margin-left: 1px !important;
+}
+
+::-webkit-scrollbar-track {
+    background-image: url("../icon/scrollbar-background.svg") !important;
+}
+
+::-webkit-scrollbar-button:vertical:start {
+    background-image: url("../icon/button-up.svg") !important;
+}
+
+::-webkit-scrollbar-button:vertical:end {
+    background-image: url("../icon/button-down.svg") !important;
+}
+
+::-webkit-scrollbar-button:horizontal:start {
+    background-image: url("../icon/button-left.svg") !important;
+}
+
+::-webkit-scrollbar-button:horizontal:end {
+    background-image: url("../icon/button-right.svg") !important;
+}

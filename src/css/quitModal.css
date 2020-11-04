@@ -1,0 +1,10 @@
+body {
+  overflow: hidden;
+}
+
+.window {
+  width: 246px;
+  height: 86px;
+  /* min-height: auto; */
+  overflow: hidden;
+}

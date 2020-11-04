@@ -6,23 +6,75 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
+// Used to timeout splashscreen
+const timer = ms => new Promise( res => setTimeout(res, ms));
+
 const createWindow = () => {
+  const splashscreenWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    },
+    transparent: true,
+    frame: false,
+    alwaysOnTop: true
+  });
+  
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      nativeWindowOpen: true
     },
     transparent: true,
     frame: false
   });
-
+  mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
+    if (frameName === 'modal') {
+      // open window as modal
+      event.preventDefault()
+      Object.assign(options, {
+        modal: true,
+        parent: mainWindow,
+        width: 100,
+        height: 100
+      })
+      event.newGuest = new BrowserWindow(options)
+    }
+  })
+  
+  // // Create the quit confirmation window.
+  // const quitWindow = new BrowserWindow({
+  //   width: 250,
+  //   height: 200,
+  //   webPreferences: {
+  //     nodeIntegration: true
+  //   },
+  //   parent: mainWindow,
+  //   modal: true,
+  //   show: false,
+  //   transparent: true,
+  //   frame: false
+  // });
+  
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
+  splashscreenWindow.loadFile(path.join(__dirname, 'splash.html'));
+  // splashscreenWindow.webContents.openDevTools();
+  
+  // After 7.5s, close splashscreen and load main interface
+  // timer(7500).then(function (_) {
+  timer(500).then(function (_) {
+    mainWindow.loadFile(path.join(__dirname, 'index.html'));
+    splashscreenWindow.close();
+    
+    mainWindow.webContents.openDevTools();
+  });
+  
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  
 };
 
 // This method will be called when Electron has finished
@@ -57,3 +109,7 @@ app.on('activate', () => {
 ipcMain.on('quitApp', (event, arg) => {
   app.quit();
 })
+
+// ipcMain.on('invokeQuitModal', (event, arg) => {
+
+// })

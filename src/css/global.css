@@ -3,78 +3,89 @@
 :not(input):not(textarea),
 :not(input):not(textarea)::after,
 :not(input):not(textarea)::before {
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
 }
-input, button, textarea, :focus {
-    outline: none;
+input,
+button,
+textarea,
+:focus {
+  outline: none;
 }
 
 /* disable image and anchor dragging */
-a:not([draggable=true]), img:not([draggable=true]) {
-    -webkit-user-drag: none;
+a:not([draggable="true"]),
+img:not([draggable="true"]) {
+  -webkit-user-drag: none;
 }
 a[href^="http://"],
 a[href^="https://"],
-a[href^="ftp://"] {
-    -webkit-user-drag: auto;
+a[href^="ftp://"]
+{
+  -webkit-user-drag: auto;
 }
 
 body {
-    margin: 0;
-    -webkit-font-smoothing: none;
+  margin: 0;
+  -webkit-font-smoothing: none !important;
+  /* cursor: url("../bin/images/Cursor79.png") !important; */
 }
 
-.window {
-    height: 96vh;
+body > * {
+  -webkit-font-smoothing: none !important;
+  /* TODO: Change cursor to my own recreation */
+  cursor: url("../bin/images/Cursor79.png") 10 10, default !important;
 }
 
 .title-bar {
-    -webkit-app-region: drag;
+  -webkit-app-region: drag;
+}
+
+.title-bar-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #minimiseWindow {
-    background-image: url("../icon/minimize.svg") !important;
-    -webkit-app-region: no-drag;
+  -webkit-app-region: no-drag;
 }
 
 #maximiseWindow {
-    background-image: url("../icon/maximize.svg") !important;
-    margin-left: 1px !important;
-    -webkit-app-region: no-drag;
+  margin-left: 1px !important;
+  -webkit-app-region: no-drag;
 }
 
 #closeWindow {
-    background-image: url("../icon/close.svg") !important;
-    margin-left: 1px !important;
-    -webkit-app-region: no-drag;
+  margin-left: 1px !important;
+  -webkit-app-region: no-drag;
 }
 
 /* Change scrollbar background and button icons */
 
-::-webkit-scrollbar-track {
-    background-image: url("../icon/scrollbar-background.svg") !important;
+/* ::-webkit-scrollbar-track {
+  background-image: url("../icon/scrollbar-background.svg") !important;
 }
 
 ::-webkit-scrollbar-button:vertical:start {
-    background-image: url("../icon/button-up.svg") !important;
+  background-image: url("../icon/button-up.svg") !important;
 }
 
 ::-webkit-scrollbar-button:vertical:end {
-    background-image: url("../icon/button-down.svg") !important;
+  background-image: url("../icon/button-down.svg") !important;
 }
 
 ::-webkit-scrollbar-button:horizontal:start {
-    background-image: url("../icon/button-left.svg") !important;
+  background-image: url("../icon/button-left.svg") !important;
 }
 
 ::-webkit-scrollbar-button:horizontal:end {
-    background-image: url("../icon/button-right.svg") !important;
-}
+  background-image: url("../icon/button-right.svg") !important;
+} */
 
 /* Change checkbox icons */
 
-input[type="checkbox"]:checked + label::after {
-    background: url("../icon/checkmark.svg") !important;
-}
+/* input[type="checkbox"]:checked + label::after {
+  background: url("../icon/checkmark.svg") !important;
+} */

@@ -1,13 +1,16 @@
-const { ipcRenderer, remote } = require('electron');
+const { ipcRenderer, remote } = require("electron");
 
-const closeWindow = document.getElementById('closeWindow');
-closeWindow.addEventListener('click', () => {
-    ipcRenderer.send('invokeQuitModal');
-    // window.open('../quitModal.html', '_blank', 'modal')
-    // let modal = window.open('../quitModal.html', 'modal')
+ipcRenderer.on("activateMainTitleBar", (event, message) => {
+  document.getElementById("mainTitleBar").classList.remove("inactive");
 });
 
-const minimiseWindow = document.getElementById('minimiseWindow');
-minimiseWindow.addEventListener('click', () => {
-    remote.BrowserWindow.getFocusedWindow().minimize();
+const closeWindow = document.getElementById("closeWindow");
+closeWindow.addEventListener("click", () => {
+  window.open("quitModal.html", "quitModal");
+  document.getElementById("mainTitleBar").classList.add("inactive");
+});
+
+const minimiseWindow = document.getElementById("minimiseWindow");
+minimiseWindow.addEventListener("click", () => {
+  remote.BrowserWindow.getFocusedWindow().minimize();
 });

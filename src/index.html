@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="../node_modules/98.css/style.css">
-  </head>
-  <body>
-    <div class="window">
-      <div class="title-bar" style="-webkit-app-region: drag">
-        <div class="title-bar-text">
-          My First VB4 Program
-        </div>
-
-        <div class="title-bar-controls">
-          <button aria-label="Minimize" id="minimiseWindow" style="-webkit-app-region: no-drag"></button>
-          <!-- <button aria-label="Maximize" id="maximiseWindow" style="-webkit-app-region: no-drag"></button> -->
-          <button aria-label="Close" id="closeWindow" style="-webkit-app-region: no-drag"></button>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <title>UTP</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="../node_modules/98.css/style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">
+        UntitledThesisProject UI Demo
       </div>
-      <div class="window-body">
-        <p>Hello, world!</p>
-        <section class="field-row" style="justify-content: flex-end">
-          <button>OK</button>
-          <button>Cancel</button>
-        </section>
+      
+      <div class="title-bar-controls">
+        <button aria-label="Minimize" id="minimiseWindow" style="-webkit-app-region: no-drag"></button>
+        <!-- <button aria-label="Maximize" id="maximiseWindow" style="-webkit-app-region: no-drag"></button> -->
+        <button aria-label="Close" id="closeWindow" style="-webkit-app-region: no-drag"></button>
       </div>
     </div>
-    <script src="js/index.js"></script>    
-  </body>
+    <div class="window-body">
+      <p>This is a user interface demonstration of UntitledThesisProject.</p>
+      <p><i>Text in italic.</i> <b>Text in bold.</b></p>
+      <div class="field-row">
+        <input type="checkbox" id="cb1">
+        <label for="cb1">checkbox</label>&nbsp;&nbsp;&nbsp;
+        <input disabled type="checkbox" id="cb2">
+        <label for="cb2">disabled checkbox</label>
+      </div>
+      <section class="field-row" style="justify-content: flex-end">
+        <button>OK</button>
+        <button>Cancel</button>
+      </section>
+    </div>
+  </div>
+  <script src="js/index.js"></script>    
+</body>
 </html>

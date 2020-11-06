@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "node",
             "request": "launch",
@@ -12,7 +13,27 @@
             //     "<node_internals>/**"
             // ],
             // "program": "${workspaceFolder}\\src\\main.js"
-            "name": "Electron Main",
+            "name": "UTP Debug",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge-vscode-nix",
+            "windows": {
+                "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge-vscode-win.cmd"
+            },
+            "runtimeArgs": [
+                "dev"
+            ],
+            "args": ["dev"],
+            "cwd": "${workspaceFolder}",
+            "outputCapture": "std"
+        }, 
+        {
+            "type": "node",
+            "request": "launch",
+            // "name": "Launch Program",
+            // "skipFiles": [
+            //     "<node_internals>/**"
+            // ],
+            // "program": "${workspaceFolder}\\src\\main.js"
+            "name": "UTP Run",
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge-vscode-nix",
             "windows": {
                 "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge-vscode-win.cmd"
@@ -21,7 +42,8 @@
             //     "foo",
             //     "bar"
             // ],
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "outputCapture": "std"
         }
     ]
 }

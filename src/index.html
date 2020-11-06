@@ -13,7 +13,7 @@
 <body>
   <div class="window">
     <div class="title-bar" id="mainTitleBar">
-      <div class="title-bar-text">UntitledThesisProject UI Demo</div>
+      <div class="title-bar-text">UntitledThesisProject (Beta Build 04.11.20)</div>
 
       <div class="title-bar-controls">
         <button aria-label="Minimize" id="minimiseWindow" style="-webkit-app-region: no-drag"></button>
@@ -22,6 +22,11 @@
       </div>
     </div>
     <div class="window-body">
+      <section class="field-row" style="justify-content: space-between">
+        <label for="findBar">Find in UTP </label>
+        <input id="findBar" type="text" />
+        <button>Search</button>
+      </section>
       <p>This is a user interface demonstration of UntitledThesisProject.</p>
       <p><i>Text in italic.</i> <b>Text in bold.</b></p>
       <div class="field-row">
@@ -34,8 +39,54 @@
         <button>OK</button>
         <button>Cancel</button>
       </section>
+
+      <ul class="tree-view">
+        <li>Table of Contents</li>
+        <li>What is web development?</li>
+        <li>
+          CSS
+          <ul>
+            <li>Selectors</li>
+            <li>Specificity</li>
+            <li>Properties</li>
+          </ul>
+        </li>
+        <li>
+          <details open>
+            <summary>JavaScript</summary>
+            <ul>
+              <li>Avoid at all costs</li>
+              <li>
+                <details>
+                  <summary>Unless</summary>
+                  <ul>
+                    <li>Avoid</li>
+                    <li>
+                      <details>
+                        <summary>At</summary>
+                        <ul>
+                          <li>Avoid</li>
+                          <li>At</li>
+                          <li>All</li>
+                          <li>Cost</li>
+                        </ul>
+                      </details>
+                    </li>
+                    <li>All</li>
+                    <li>Cost</li>
+                  </ul>
+                </details>
+              </li>
+            </ul>
+          </details>
+        </li>
+        <li>HTML</li>
+        <li>Special Thanks</li>
+      </ul>
     </div>
   </div>
+
+
   <script src="js/index.js"></script>
 </body>
 

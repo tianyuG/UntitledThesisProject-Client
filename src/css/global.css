@@ -26,6 +26,14 @@ a[href^="ftp://"]
   -webkit-user-drag: auto;
 }
 
+.auto {
+  cursor: url("../bin/images/Cursor79.png") !important;
+}
+
+.default {
+  cursor: url("../bin/images/Cursor79.png") !important;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: none !important;
@@ -35,7 +43,6 @@ body {
 body > * {
   -webkit-font-smoothing: none !important;
   /* TODO: Change cursor to my own recreation */
-  cursor: url("../bin/images/Cursor79.png") 10 10, default !important;
 }
 
 .title-bar {
@@ -89,3 +96,8 @@ body > * {
 /* input[type="checkbox"]:checked + label::after {
   background: url("../icon/checkmark.svg") !important;
 } */
+
+/* Remowe trangle arrows in list view */
+details summary::-webkit-details-marker {
+  display: none;
+}

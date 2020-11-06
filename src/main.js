@@ -35,10 +35,13 @@ const createWindow = () => {
     frame: false,
   });
 
+  // When mainWindow becomes active window again, change window shade colour
+  // from inactive (grey) to active (blue)
   ipcMain.on("doActivateMainTitleBar", (event, arg) => {
     mainWindow.webContents.send("activateMainTitleBar");
   });
 
+  // Set up quit confirmation modal
   mainWindow.webContents.on(
     "new-window",
     (event, url, frameName, disposition, options, additionalFeatures) => {
@@ -61,7 +64,7 @@ const createWindow = () => {
     }
   );
 
-  // and load the index.html of the app.
+  // and load splash screen.
   splashscreenWindow.loadFile(path.join(__dirname, "splash.html"));
   // splashscreenWindow.webContents.openDevTools();
 
@@ -71,7 +74,7 @@ const createWindow = () => {
     splashscreenWindow.close();
     mainWindow.loadFile(path.join(__dirname, "index.html"));
 
-    // Open the DevTools.
+    // Open the DevTools in mainWindow
     mainWindow.center();
     mainWindow.webContents.openDevTools();
   });

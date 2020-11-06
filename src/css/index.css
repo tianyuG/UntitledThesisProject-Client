@@ -1,0 +1,12 @@
+body {
+  min-width: 1194px;
+  min-height: 794px;
+}
+
+.window {
+  min-height: 794px;
+}
+
+#findBar {
+  width: 84vw;
+}

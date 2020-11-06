@@ -101,3 +101,36 @@ body > * {
 details summary::-webkit-details-marker {
   display: none;
 }
+
+/* Menu bar */
+
+.menubar {
+  margin: 4px 0 6px 0;
+}
+
+.menubar button {
+  color: black;
+  outline: none;
+  text-decoration: none;
+  padding: 1px 1px;
+  min-width: unset;
+  min-height: unset;
+  box-shadow: unset;
+}
+
+.menubar button:hover {
+  outline-style: solid;
+  outline-width: 1px;
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.menubar button:not(:disabled):active {
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  outline: none;
+}
+
+.menubar button:focus {
+  outline: none;
+  box-shadow: none;
+}

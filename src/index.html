@@ -13,7 +13,11 @@
 <body>
   <div class="window">
     <div class="title-bar" id="mainTitleBar">
-      <div class="title-bar-text">UntitledThesisProject (Beta Build 04.11.20)</div>
+      <div class="title-bar-text-container">
+        <span class="title-bar-text">TODO-ICON </span>
+        <span class="title-bar-text">UntitledThesisProject (Beta Build 04.11.20)</span>
+      </div>
+
 
       <div class="title-bar-controls">
         <button aria-label="Minimize" id="minimiseWindow" style="-webkit-app-region: no-drag"></button>
@@ -22,6 +26,17 @@
       </div>
     </div>
     <div class="window-body">
+      <div class="menubar">
+        <button>File</button>
+        <span class="menubar-padding">&nbsp;</span>
+        <button>Settings</button>
+        <span class="menubar-padding">&nbsp;</span>
+        <button>Debug</button>
+        <span class="menubar-padding">&nbsp;</span>
+        <button>Help</button>
+        <span class="menubar-padding">&nbsp;</span>
+        <button>About</button>
+      </div>
       <section class="field-row" style="justify-content: space-between">
         <label for="findBar">Find in UTP </label>
         <input id="findBar" type="text" />

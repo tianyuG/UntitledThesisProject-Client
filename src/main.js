@@ -12,8 +12,8 @@ const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const createWindow = () => {
   const splashscreenWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 600,
+    height: 480,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -24,8 +24,8 @@ const createWindow = () => {
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 800,
+    height: 600,
     webPreferences: {
       nodeIntegration: true,
       nativeWindowOpen: true,
@@ -74,8 +74,11 @@ const createWindow = () => {
     splashscreenWindow.close();
     mainWindow.loadFile(path.join(__dirname, "index.html"));
 
-    // Open the DevTools in mainWindow
+    // Center mainWindow and prevent it from being resized
     mainWindow.center();
+    mainWindow.setResizable(false);
+    mainWindow.setMaximizable(false);
+
     mainWindow.webContents.openDevTools();
   });
 };

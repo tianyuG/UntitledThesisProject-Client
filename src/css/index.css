@@ -1,12 +1,15 @@
 body {
-  min-width: 1194px;
-  min-height: 794px;
+  min-width: 796px;
+  min-height: 596px;
+  overflow: hidden;
 }
 
 .window {
-  min-height: 794px;
+  /* min-height: 594px; */
+  width: 794px;
+  height: 594px;
 }
 
 #findBar {
-  width: 84vw;
+  width: 76vw;
 }

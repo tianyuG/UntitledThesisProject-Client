@@ -30,7 +30,7 @@ a[href^="ftp://"]
   cursor: url("../bin/images/Cursor79.png") !important;
 }
 
-.default {
+body {
   cursor: url("../bin/images/Cursor79.png") !important;
 }
 
@@ -118,7 +118,12 @@ details summary::-webkit-details-marker {
   box-shadow: unset;
 }
 
-.menubar button:hover {
+.menubar button:disabled,
+.menubar button[disabled] {
+  color: var(--dialog-gray);
+}
+
+.menubar button:hover:not([disabled]) {
   outline-style: solid;
   outline-width: 1px;
   outline-offset: 2px;
@@ -126,7 +131,10 @@ details summary::-webkit-details-marker {
 }
 
 .menubar button:not(:disabled):active {
-  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  box-shadow: inset -1px -1px var(--button-highlight),
+    inset 1px 1px var(--window-frame), inset -2px -2px var(--button-face),
+    inset 2px 2px var(--button-shadow);
+  padding: 1px 1px;
   outline: none;
 }
 

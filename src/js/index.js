@@ -11,7 +11,7 @@ closeWindow.addEventListener("click", () => {
 });
 
 const titleBarIcon = document.getElementById("titleBarIcon");
-titleBarIcon.addEventListener("click", () => {
+titleBarIcon.addEventListener("dblclick", () => {
   console.log("HEE");
   window.open("quitModal.html", "quitModal");
   document.getElementById("mainTitleBar").classList.add("inactive");

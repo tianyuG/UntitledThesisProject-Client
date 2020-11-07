@@ -13,3 +13,19 @@ body {
 #findBar {
   width: 76vw;
 }
+
+#titleBarIcon,
+#titleBarIcon:hover,
+#titleBarIcon:active,
+#titleBarIcon:focus {
+  outline: none;
+  padding: 0;
+  margin-right: 2px;
+  background-image: url("../bin/images/titleBarIcon.png") !important;
+  width: 12px;
+  height: 12px;
+  min-width: unset;
+  min-height: unset;
+  box-sizing: unset;
+  box-shadow: unset;
+}

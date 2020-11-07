@@ -10,6 +10,13 @@ closeWindow.addEventListener("click", () => {
   document.getElementById("mainTitleBar").classList.add("inactive");
 });
 
+const titleBarIcon = document.getElementById("titleBarIcon");
+titleBarIcon.addEventListener("click", () => {
+  console.log("HEE");
+  window.open("quitModal.html", "quitModal");
+  document.getElementById("mainTitleBar").classList.add("inactive");
+});
+
 const minimiseWindow = document.getElementById("minimiseWindow");
 minimiseWindow.addEventListener("click", () => {
   remote.BrowserWindow.getFocusedWindow().minimize();

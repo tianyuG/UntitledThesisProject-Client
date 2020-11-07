@@ -1,12 +1,13 @@
 /* disable selection */
 /* https://gist.github.com/Splode/a2ae4f5dbfaca98efad9f93f51832146 */
-:not(input):not(textarea),
-:not(input):not(textarea)::after,
-:not(input):not(textarea)::before {
+:not(input):not(textarea):not(ul):not(li):not(div):not(span),
+:not(input):not(textarea):not(ul):not(li):not(div):not(span)::after,
+:not(input):not(textarea):not(ul):not(li):not(div):not(span)::before {
   -webkit-user-select: none;
   user-select: none;
-  cursor: default;
+  /* cursor: default; */
 }
+
 input,
 button,
 textarea,
@@ -26,17 +27,13 @@ a[href^="ftp://"]
   -webkit-user-drag: auto;
 }
 
-.auto {
-  cursor: url("../bin/images/Cursor79.png") !important;
-}
-
-body {
-  cursor: url("../bin/images/Cursor79.png") !important;
+html {
+  cursor: url("../bin/images/Cursor79.png"), auto !important;
+  -webkit-font-smoothing: none !important;
 }
 
 body {
   margin: 0;
-  -webkit-font-smoothing: none !important;
   /* cursor: url("../bin/images/Cursor79.png") !important; */
 }
 
@@ -53,6 +50,14 @@ body > * {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.title-bar-icon {
+  position: relative;
+  top: 1px;
+  height: 12px;
+  width: 12px;
+  padding: 0 2px 0 0;
 }
 
 #minimiseWindow {
@@ -116,6 +121,7 @@ details summary::-webkit-details-marker {
   min-width: unset;
   min-height: unset;
   box-shadow: unset;
+  cursor: url("../bin/images/Cursor79.png"), auto !important;
 }
 
 .menubar button:disabled,

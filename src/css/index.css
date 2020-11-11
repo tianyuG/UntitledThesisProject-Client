@@ -44,18 +44,19 @@ body {
 
 #mainIndexSection {
   height: 100%;
-  max-width: 20%;
+  max-width: 19%;
   /* float: left; */
   flex: 1;
   /* padding: 0; */
 }
 
 #mainContentSection {
-  height: 100%;
-  max-width: 76%;
+  height: calc(100% + 12px);
+  max-width: 78%;
   /* float: right; */
   box-shadow: var(--border-field);
   flex: 1;
-  padding: 6px;
+  /* padding: 6px; */
+  padding: 0;
   border: 0;
 }

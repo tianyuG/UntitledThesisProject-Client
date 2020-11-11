@@ -4,13 +4,18 @@
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "src/main.js",
+  "build": {
+    "appId": "com.utpc",
+    "target": "portable"
+  },
   "scripts": {
     "start": "electron-forge start",
     "dev": "electron-forge start --inspect-electron",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "build": "electron-builder build"
   },
   "keywords": [],
   "author": {
@@ -60,6 +65,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "10.1.5"
+    "electron": "10.1.5",
+    "electron-builder": "^22.9.1"
   }
 }

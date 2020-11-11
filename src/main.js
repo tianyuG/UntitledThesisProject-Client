@@ -104,7 +104,7 @@ const createWindow = () => {
 
   // After 7.5s, close splashscreen and load main interface
   // timer(7500).then(function (_) {
-  timer(500).then(function (_) {
+  timer(4500).then(function (_) {
     splashscreenWindow.close();
     mainWindow.loadFile(path.join(__dirname, "index.html"));
 

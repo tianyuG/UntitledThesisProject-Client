@@ -56,6 +56,58 @@
   background-image: url("../css/98css/icon/button-right.svg");
 }
 
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  src: url("../css/98css/fonts/converted/ms_sans_serif.woff") format("woff");
+  src: url("../css/98css/fonts/converted/ms_sans_serif.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+button {
+  font-family: "Pixelated MS Sans Serif";
+  font-size: 12px;
+  cursor: url("../bin/images/Cursor79.png"), auto !important;
+  box-sizing: border-box;
+  border: none;
+  background: #c0c0c0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff,
+    inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+  border-radius: 0;
+
+  min-width: 75px;
+  min-height: 23px;
+  padding: 0 12px;
+}
+
+button:not(:disabled):active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+  padding: 2px 11px 0 13px;
+}
+
+@media (not(hover)) {
+  button:not(:disabled):hover {
+    box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a,
+      inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+  }
+}
+
+button:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -4px;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+:disabled,
+:disabled + label {
+  color: #808080;
+  text-shadow: 1px 1px 0 #ffffff;
+}
+
 html {
   user-select: none;
   cursor: url("../bin/images/Cursor79.png"), auto !important;

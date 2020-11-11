@@ -29,3 +29,13 @@ const openDevTools = document.getElementById("mainMenuDevTools");
 openDevTools.addEventListener("click", () => {
   ipcRenderer.send("toggleMainWindowDevTools");
 });
+
+const mainListDemo2 = document.getElementById("mainListDemo2");
+mainListDemo2.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/demo2.html";
+});
+
+const mainListDemo1 = document.getElementById("mainListDemo1");
+mainListDemo1.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/demo1.html";
+});

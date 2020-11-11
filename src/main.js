@@ -20,6 +20,7 @@ const createWindow = () => {
     transparent: true,
     frame: false,
     alwaysOnTop: true,
+    icon: path.join(__dirname, "bin/images/appIcon.png"),
   });
 
   // Create the browser window.
@@ -33,6 +34,7 @@ const createWindow = () => {
     },
     transparent: true,
     frame: false,
+    icon: path.join(__dirname, "bin/images/appIcon.png"),
   });
 
   // When mainWindow becomes active window again, change window shade colour
@@ -41,12 +43,27 @@ const createWindow = () => {
     mainWindow.webContents.send("activateMainTitleBar");
   });
 
-  // Set up quit confirmation modal
+  // Deactivate window shade when window loses focus
+  app.on("browser-window-blur", () => {
+    mainWindow.webContents.send("deactivateMainTitleBar");
+  });
+
+  // Reactivate window shade when window regains focus
+  app.on("browser-window-focus", () => {
+    mainWindow.webContents.send("activateMainTitleBar");
+  });
+
+  // Toggle mainWindow DevTools
+  ipcMain.on("toggleMainWindowDevTools", () => {
+    mainWindow.webContents.toggleDevTools();
+  });
+
+  // Set new window properties
   mainWindow.webContents.on(
     "new-window",
     (event, url, frameName, disposition, options, additionalFeatures) => {
       if (frameName === "quitModal") {
-        // open window as modal
+        // Set up quit confirmation modal
         event.preventDefault();
         Object.assign(options, {
           modal: true,
@@ -56,10 +73,27 @@ const createWindow = () => {
           resizable: false,
           width: 250,
           height: 90,
+          icon: path.join(__dirname, "bin/images/appIcon.png"),
           // useContentSize: true,
         });
         event.newGuest = new BrowserWindow(options);
         event.newGuest.center();
+      } else if (frameName === "mediaPlayerModal") {
+        // Set up media player modal
+        // event.preventDefault();
+        // Object.assign(options, {
+        //   modal: true,
+        //   parent: mainWindow,
+        //   transparent: true,
+        //   frame: false,
+        //   resizable: false,
+        //   width: 250,
+        //   height: 90,
+        //   icon: path.join(__dirname, "bin/images/appIcon.png"),
+        //   // useContentSize: true,
+        // });
+        // event.newGuest = new BrowserWindow(options);
+        // event.newGuest.center();
       }
     }
   );

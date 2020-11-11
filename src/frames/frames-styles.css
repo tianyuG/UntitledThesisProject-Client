@@ -12,6 +12,8 @@
 
 html {
   user-select: none;
+  cursor: url("../bin/images/Cursor79.png"), auto !important;
+  -webkit-font-smoothing: none !important;
 }
 
 h1 {

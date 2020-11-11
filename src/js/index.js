@@ -4,6 +4,10 @@ ipcRenderer.on("activateMainTitleBar", (event, message) => {
   document.getElementById("mainTitleBar").classList.remove("inactive");
 });
 
+ipcRenderer.on("deactivateMainTitleBar", (event, message) => {
+  document.getElementById("mainTitleBar").classList.add("inactive");
+});
+
 const closeWindow = document.getElementById("closeWindow");
 closeWindow.addEventListener("click", () => {
   window.open("quitModal.html", "quitModal");
@@ -12,7 +16,6 @@ closeWindow.addEventListener("click", () => {
 
 const titleBarIcon = document.getElementById("titleBarIcon");
 titleBarIcon.addEventListener("dblclick", () => {
-  console.log("HEE");
   window.open("quitModal.html", "quitModal");
   document.getElementById("mainTitleBar").classList.add("inactive");
 });
@@ -20,4 +23,9 @@ titleBarIcon.addEventListener("dblclick", () => {
 const minimiseWindow = document.getElementById("minimiseWindow");
 minimiseWindow.addEventListener("click", () => {
   remote.BrowserWindow.getFocusedWindow().minimize();
+});
+
+const openDevTools = document.getElementById("mainMenuDevTools");
+openDevTools.addEventListener("click", () => {
+  ipcRenderer.send("toggleMainWindowDevTools");
 });

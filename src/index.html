@@ -15,7 +15,7 @@
     <div class="title-bar" id="mainTitleBar">
       <div class="title-bar-text-container">
         <button class="title-bar-icon" id="titleBarIcon" style="-webkit-app-region: no-drag"></button>
-        <span class="title-bar-text">UntitledThesisProject (Beta Build 04.11.20)</span>
+        <span class="title-bar-text">UntitledThesisProject (Beta Build 10.11.2020)</span>
       </div>
 
 
@@ -32,6 +32,8 @@
         <button>Settings</button>
         <span class="menubar-padding">&nbsp;</span>
         <button>Debug</button>
+        <span class="menubar-padding">&nbsp;</span>
+        <button id="mainMenuDevTools">DevTools</button>
         <span class="menubar-padding">&nbsp;</span>
         <button>Help</button>
         <span class="menubar-padding">&nbsp;</span>
@@ -57,7 +59,7 @@
 
       <div id="mainIndexContentContainer">
         <ul class="tree-view" id="mainIndexSection">
-          <li>Welcome</li>
+          <li id="mainListWelcome">Welcome</li>
           <li>What is UTP?</li>
           <li>
             <details>
@@ -89,9 +91,12 @@
             </details>
           </li>
           <li>
-            <details>
+            <details open>
               <summary>Demostrations</summary>
-              <ul>Demo 1</ul>
+              <ul>
+                <li id="mainListDemo1">Demo 1</li>
+                <li id="mainListDemo2">Demo 2</li>
+              </ul>
             </details>
           </li>
           <li>Glossary</li>

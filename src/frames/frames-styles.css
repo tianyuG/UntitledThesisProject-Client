@@ -10,10 +10,60 @@
     format("truetype");
 }
 
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 17px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #dfdfdf;
+}
+
+::-webkit-scrollbar-track {
+  background-image: url("../css/98css/icon/scrollbar-background.svg");
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  /* box-shadow: var(--border-raised-outer), var(--border-raised-inner); */
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff,
+    inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment {
+  display: block;
+}
+
+::-webkit-scrollbar-button:vertical:start {
+  height: 17px;
+  background-image: url("../css/98css/icon/button-up.svg");
+}
+::-webkit-scrollbar-button:vertical:end {
+  height: 17px;
+  background-image: url("../css/98css/icon/button-down.svg");
+}
+::-webkit-scrollbar-button:horizontal:start {
+  width: 16px;
+  background-image: url("../css/98css/icon/button-left.svg");
+}
+::-webkit-scrollbar-button:horizontal:end {
+  width: 16px;
+  background-image: url("../css/98css/icon/button-right.svg");
+}
+
 html {
   user-select: none;
   cursor: url("../bin/images/Cursor79.png"), auto !important;
   -webkit-font-smoothing: none !important;
+}
+
+body {
+  padding: 4px;
 }
 
 h1 {
@@ -24,11 +74,14 @@ h1 {
   margin-top: 0;
   padding-top: 0;
   margin-top: 0;
+  margin-bottom: 12px;
 }
 
 div {
   font-family: "TimesNRReg";
   font-weight: 400;
-  font-size: 18px;
-  /* padding-top: 8px; */
+  font-size: 16px;
+  margin-top: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }

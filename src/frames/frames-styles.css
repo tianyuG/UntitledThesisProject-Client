@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "TimesNRReg";
+  src: url("../bin/fonts/times-new-roman-pixel/times-new-roman-pixel.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "TimesNRBld";
+  src: url("../bin/fonts/pixelated-times-new-roman/pixelated-times-new-roman.ttf")
+    format("truetype");
+}
+
+html {
+  user-select: none;
+}
+
+h1 {
+  font-family: "TimesNRBld";
+  font-weight: 400;
+  font-size: 72px;
+  padding-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+div {
+  font-family: "TimesNRReg";
+  font-weight: 400;
+  font-size: 18px;
+  /* padding-top: 8px; */
+}

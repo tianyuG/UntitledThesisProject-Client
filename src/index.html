@@ -37,12 +37,12 @@
         <span class="menubar-padding">&nbsp;</span>
         <button>About</button>
       </div>
-      <section class="field-row" style="justify-content: space-between">
+      <section class="field-row" style="justify-content: space-between" id="mainSearchSection">
         <label for="findBar">Find in UTP </label>
         <input id="findBar" type="text" spellcheck="false" />
         <button>Search</button>
       </section>
-      <p>This is a user interface demostration of UntitledThesisProject.</p>
+      <!-- <p>This is a user interface demostration of UntitledThesisProject.</p>
       <p><i>Text in italic.</i> <b>Text in bold.</b></p>
       <div class="field-row">
         <input type="checkbox" id="cb1" />
@@ -53,49 +53,56 @@
       <section class="field-row" style="justify-content: flex-end">
         <button>OK</button>
         <button>Cancel</button>
-      </section>
+      </section> -->
 
-      <ul class="tree-view">
-        <li>Welcome</li>
-        <li>What is UTP?</li>
-        <li>
-          <details>
-            <summary>Table of Contents</summary>
-            <ul>
-              <li>Avoid at all costs</li>
-              <li>
-                <details>
-                  <summary>Unless</summary>
-                  <ul>
-                    <li>Avoid</li>
-                    <li>
-                      <details>
-                        <summary>At</summary>
-                        <ul>
-                          <li>Avoid</li>
-                          <li>At</li>
-                          <li>All</li>
-                          <li>Cost</li>
-                        </ul>
-                      </details>
-                    </li>
-                    <li>All</li>
-                    <li>Cost</li>
-                  </ul>
-                </details>
-              </li>
-            </ul>
-          </details>
-        </li>
-        <li>
-          <details>
-            <summary>Demostrations</summary>
-            <ul>Demo 1</ul>
-          </details>
-        </li>
-        <li>Glossary</li>
-        <li>DO NOT DISTRIBUTE</li>
-      </ul>
+      <div id="mainIndexContentContainer">
+        <ul class="tree-view" id="mainIndexSection">
+          <li>Welcome</li>
+          <li>What is UTP?</li>
+          <li>
+            <details>
+              <summary>Table of Contents</summary>
+              <ul>
+                <li>Avoid at all costs</li>
+                <li>
+                  <details>
+                    <summary>Unless</summary>
+                    <ul>
+                      <li>Avoid</li>
+                      <li>
+                        <details>
+                          <summary>At</summary>
+                          <ul>
+                            <li>Avoid</li>
+                            <li>At</li>
+                            <li>All</li>
+                            <li>Cost</li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li>All</li>
+                      <li>Cost</li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary>Demostrations</summary>
+              <ul>Demo 1</ul>
+            </details>
+          </li>
+          <li>Glossary</li>
+          <li>DO NOT DISTRIBUTE</li>
+        </ul>
+
+        <iframe src="" id="mainContentSection"></iframe>
+
+      </div>
+
+
     </div>
   </div>
 

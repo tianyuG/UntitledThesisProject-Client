@@ -29,3 +29,33 @@ body {
   box-sizing: unset;
   box-shadow: unset;
 }
+
+#mainSearchSection {
+  padding-bottom: 10px;
+}
+
+#mainIndexContentContainer {
+  height: 82vh;
+  /* display: inline-block; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#mainIndexSection {
+  height: 100%;
+  max-width: 20%;
+  /* float: left; */
+  flex: 1;
+  /* padding: 0; */
+}
+
+#mainContentSection {
+  height: 100%;
+  max-width: 76%;
+  /* float: right; */
+  box-shadow: var(--border-field);
+  flex: 1;
+  padding: 6px;
+  border: 0;
+}

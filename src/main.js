@@ -113,7 +113,7 @@ const createWindow = () => {
     mainWindow.setResizable(false);
     mainWindow.setMaximizable(false);
 
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
   });
 };
 

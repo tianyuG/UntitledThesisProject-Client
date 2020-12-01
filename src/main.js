@@ -44,12 +44,12 @@ const createWindow = () => {
   });
 
   // Deactivate window shade when window loses focus
-  app.on("browser-window-blur", () => {
+  mainWindow.on("blur", () => {
     mainWindow.webContents.send("deactivateMainTitleBar");
   });
 
   // Reactivate window shade when window regains focus
-  app.on("browser-window-focus", () => {
+  mainWindow.on("focus", () => {
     mainWindow.webContents.send("activateMainTitleBar");
   });
 

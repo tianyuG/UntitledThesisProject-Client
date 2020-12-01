@@ -6,7 +6,13 @@
   "main": "src/main.js",
   "build": {
     "appId": "com.utpc",
-    "target": "portable"
+    "win": {
+      "target": "portable"
+    },
+    "directories": {
+      "buildResources": "./buildResources"
+    },
+    "files": ["**/*", "./buildResources/icon.png"]
   },
   "scripts": {
     "start": "electron-forge start",

@@ -1,13 +1,11 @@
 @font-face {
-  font-family: "TimesNRReg";
-  src: url("../bin/fonts/times-new-roman-pixel/times-new-roman-pixel.ttf")
-    format("truetype");
+  font-family: "MondwestReg";
+  src: url("../bin/fonts/Mondwest/Mondwest-Regular.otf") format("truetype");
 }
 
 @font-face {
-  font-family: "TimesNRBld";
-  src: url("../bin/fonts/pixelated-times-new-roman/pixelated-times-new-roman.ttf")
-    format("truetype");
+  font-family: "MondwestBld";
+  src: url("../bin/fonts/Mondwest/Mondwest-Bold.otf") format("truetype");
 }
 
 ::-webkit-scrollbar {
@@ -119,9 +117,9 @@ body {
 }
 
 h1 {
-  font-family: "TimesNRBld";
+  font-family: "MondwestBld";
   font-weight: 400;
-  font-size: 72px;
+  font-size: 48px;
   padding-top: 0;
   margin-top: 0;
   padding-top: 0;
@@ -130,9 +128,10 @@ h1 {
 }
 
 div {
-  font-family: "TimesNRReg";
+  font-family: "MondwestReg";
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.2;
   margin-top: 0;
   padding-top: 8px;
   padding-bottom: 8px;

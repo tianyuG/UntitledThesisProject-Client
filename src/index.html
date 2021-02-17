@@ -1,50 +1,64 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <!-- <link rel="stylesheet" href="../node_modules/98.css/style.css" /> -->
+    <link rel="stylesheet" href="./css/98css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>UTP</title>
-  <link rel="stylesheet" href="css/index.css" />
-  <link rel="stylesheet" href="css/global.css" />
-  <!-- <link rel="stylesheet" href="../node_modules/98.css/style.css" /> -->
-  <link rel="stylesheet" href="./css/98css/style.css" />
-</head>
+  <body>
+    <div class="window">
+      <div class="title-bar" id="mainTitleBar">
+        <div class="title-bar-text-container">
+          <button
+            class="title-bar-icon"
+            id="titleBarIcon"
+            style="-webkit-app-region: no-drag"
+          ></button>
+          <span class="title-bar-text">UntitledThesisProject</span>
+        </div>
 
-<body>
-  <div class="window">
-    <div class="title-bar" id="mainTitleBar">
-      <div class="title-bar-text-container">
-        <button class="title-bar-icon" id="titleBarIcon" style="-webkit-app-region: no-drag"></button>
-        <span class="title-bar-text">UntitledThesisProject (Beta Build 12.11.2020)</span>
+        <div class="title-bar-controls">
+          <button
+            aria-label="Minimize"
+            id="minimiseWindow"
+            style="-webkit-app-region: no-drag"
+          ></button>
+          <!-- <button aria-label="Maximize" id="maximiseWindow" style="-webkit-app-region: no-drag"></button> -->
+          <button
+            aria-label="Close"
+            id="closeWindow"
+            style="-webkit-app-region: no-drag"
+          ></button>
+        </div>
       </div>
-
-
-      <div class="title-bar-controls">
-        <button aria-label="Minimize" id="minimiseWindow" style="-webkit-app-region: no-drag"></button>
-        <!-- <button aria-label="Maximize" id="maximiseWindow" style="-webkit-app-region: no-drag"></button> -->
-        <button aria-label="Close" id="closeWindow" style="-webkit-app-region: no-drag"></button>
-      </div>
-    </div>
-    <div class="window-body">
-      <div class="menubar">
-        <button disabled>File</button>
-        <span class="menubar-padding">&nbsp;</span>
-        <button>Settings</button>
-        <span class="menubar-padding">&nbsp;</span>
-        <button>Debug</button>
-        <span class="menubar-padding">&nbsp;</span>
-        <button id="mainMenuDevTools">DevTools</button>
-        <span class="menubar-padding">&nbsp;</span>
-        <button>Help</button>
-        <span class="menubar-padding">&nbsp;</span>
-        <button>About</button>
-      </div>
-      <section class="field-row" style="justify-content: space-between" id="mainSearchSection">
-        <label for="findBar">Find in UTP </label>
-        <input id="findBar" type="text" spellcheck="false" />
-        <button>Search</button>
-      </section>
-      <!-- <p>This is a user interface demostration of UntitledThesisProject.</p>
+      <div class="window-body">
+        <div class="menubar">
+          <button disabled>File</button>
+          <span class="menubar-padding">&nbsp;</span>
+          <button>Settings</button>
+          <span class="menubar-padding">&nbsp;</span>
+          <button>Debug</button>
+          <span class="menubar-padding">&nbsp;</span>
+          <button id="mainMenuDevTools">DevTools</button>
+          <span class="menubar-padding">&nbsp;</span>
+          <button>Help</button>
+          <span class="menubar-padding">&nbsp;</span>
+          <button>About</button>
+        </div>
+        <section
+          class="field-row"
+          style="justify-content: space-between"
+          id="mainSearchSection"
+        >
+          <label for="findBar">Find in UTP </label>
+          <input id="findBar" type="text" spellcheck="false" />
+          <button>Search</button>
+        </section>
+        <!-- <p>This is a user interface demostration of UntitledThesisProject.</p>
       <p><i>Text in italic.</i> <b>Text in bold.</b></p>
       <div class="field-row">
         <input type="checkbox" id="cb1" />
@@ -57,62 +71,58 @@
         <button>Cancel</button>
       </section> -->
 
-      <div id="mainIndexContentContainer">
-        <ul class="tree-view" id="mainIndexSection">
-          <li id="mainListWelcome">Welcome</li>
-          <li>What is UTP?</li>
-          <li>
-            <details>
-              <summary>Table of Contents</summary>
-              <ul>
-                <li>Avoid at all costs</li>
-                <li>
-                  <details>
-                    <summary>Unless</summary>
-                    <ul>
-                      <li>Avoid</li>
-                      <li>
-                        <details>
-                          <summary>At</summary>
-                          <ul>
-                            <li>Avoid</li>
-                            <li>At</li>
-                            <li>All</li>
-                            <li>Cost</li>
-                          </ul>
-                        </details>
-                      </li>
-                      <li>All</li>
-                      <li>Cost</li>
-                    </ul>
-                  </details>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <details open>
-              <summary>Demostrations</summary>
-              <ul>
-                <li id="mainListDemo1">Demo 1</li>
-                <li id="mainListDemo2">Demo 2</li>
-              </ul>
-            </details>
-          </li>
-          <li>Glossary</li>
-          <li>DO NOT DISTRIBUTE</li>
-        </ul>
+        <div id="mainIndexContentContainer">
+          <ul class="tree-view" id="mainIndexSection">
+            <li id="mainListWelcome">Welcome</li>
+            <li>What is UTP?</li>
+            <li>
+              <details>
+                <summary>Table of Contents</summary>
+                <ul>
+                  <li>Avoid at all costs</li>
+                  <li>
+                    <details>
+                      <summary>Unless</summary>
+                      <ul>
+                        <li>Avoid</li>
+                        <li>
+                          <details>
+                            <summary>At</summary>
+                            <ul>
+                              <li>Avoid</li>
+                              <li>At</li>
+                              <li>All</li>
+                              <li>Cost</li>
+                            </ul>
+                          </details>
+                        </li>
+                        <li>All</li>
+                        <li>Cost</li>
+                      </ul>
+                    </details>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details open>
+                <summary>Demostrations</summary>
+                <ul>
+                  <li id="mainListDemo1">Demo 1</li>
+                  <li id="mainListDemo2">Demo 2</li>
+                </ul>
+              </details>
+            </li>
+            <li>Glossary</li>
+            <li>DO NOT DISTRIBUTE</li>
+          </ul>
 
-        <iframe src="./frames/welcome.html" id="mainContentSection"></iframe>
-
+          <iframe src="./frames/welcome.html" id="mainContentSection"></iframe>
+        </div>
       </div>
-
-
     </div>
-  </div>
 
-  <script src="js/global.js"></script>
-  <script src="js/index.js"></script>
-</body>
-
+    <script src="js/global.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>

@@ -12,7 +12,10 @@
     "directories": {
       "buildResources": "./buildResources"
     },
-    "files": ["**/*", "./buildResources/icon.png"]
+    "files": [
+      "**/*",
+      "./buildResources/icon.png"
+    ]
   },
   "scripts": {
     "start": "electron-forge start",

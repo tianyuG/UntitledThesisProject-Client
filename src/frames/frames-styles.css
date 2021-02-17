@@ -65,7 +65,7 @@
 button {
   font-family: "Pixelated MS Sans Serif";
   font-size: 12px;
-  cursor: url("../bin/images/Cursor79.png"), auto !important;
+  /* cursor: url("../bin/images/Cursor79.png"), auto !important; */
   box-sizing: border-box;
   border: none;
   background: #c0c0c0;
@@ -108,7 +108,7 @@ button::-moz-focus-inner {
 
 html {
   user-select: none;
-  cursor: url("../bin/images/Cursor79.png"), auto !important;
+  /* cursor: url("../bin/images/Cursor79.png"), auto !important; */
   -webkit-font-smoothing: none !important;
 }
 

@@ -28,7 +28,7 @@ a[href^="ftp://"]
 }
 
 html {
-  cursor: url("../bin/images/Cursor79.png"), auto !important;
+  /* cursor: url("../bin/images/Cursor79.png"), auto !important; */
   -webkit-font-smoothing: none !important;
 }
 

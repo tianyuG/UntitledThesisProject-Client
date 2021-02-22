@@ -1,4 +1,5 @@
 const { ipcRenderer, remote } = require("electron");
+// import Typewriter from "typewriter-effect";
 
 ipcRenderer.on("activateMainTitleBar", (event, message) => {
   document.getElementById("mainTitleBar").classList.remove("inactive");
@@ -39,3 +40,22 @@ const mainListDemo1 = document.getElementById("mainListDemo1");
 mainListDemo1.addEventListener("click", () => {
   document.getElementById("mainContentSection").src = "./frames/demo1.html";
 });
+
+// var typEl = document.getElementById("typ");
+
+// var typ = new Typewriter(typEl, {
+//   loop: true,
+//   cursor: " ",
+// });
+
+// typ
+//   .pauseFor(500)
+//   .typeString("Hello World!")
+//   .pauseFor(2500)
+//   .deleteAll()
+//   .typeString("Strings can be removed")
+//   .pauseFor(2500)
+//   .deleteChars(7)
+//   .typeString("<strong>altered!</strong>")
+//   .pauseFor(2500)
+//   .start();

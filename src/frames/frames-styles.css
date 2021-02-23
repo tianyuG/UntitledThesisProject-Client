@@ -8,6 +8,16 @@
   src: url("../bin/fonts/Mondwest/Mondwest-Bold.otf") format("truetype");
 }
 
+@font-face {
+  font-family: "Iosevka Web";
+  font-display: swap;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  src: url("../bin/fonts/Iosevka/iosevka-regular.woff2") format("woff2"),
+    url("../bin/fonts/Iosevka/iosevka-regular.ttf") format("truetype");
+}
+
 ::-webkit-scrollbar {
   width: 16px;
 }
@@ -124,7 +134,7 @@ h1 {
   margin-top: 0;
   padding-top: 0;
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 div {
@@ -135,4 +145,19 @@ div {
   margin-top: 0;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.Typewriter__cursor {
+  /* animation: none !important; */
+  /* animation: Typewriter-cursor 1s infinite; */
+  animation-duration: 1.25s !important;
+  animation-timing-function: step-end !important;
+  animation-delay: 0.35s !important;
+  /* animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: Typewriter-cursor; */
+  font-family: "Iosevka Web";
+  font-size: 16px;
 }

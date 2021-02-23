@@ -82,9 +82,12 @@
     <script type="text/javascript">
       var typEl = document.getElementById("typ");
       const typewriter = new Typewriter(typEl, {
-        loop: true,
-        delay: 125,
-        cursor: "",
+        loop: false,
+        delay: "natural",
+        // cursor: "▌",
+        // cursor: "&#9647;",
+        cursor: "⎕",
+        // skipAddStyles: true,
       });
 
       typewriter
@@ -95,7 +98,8 @@
         .typeString(
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Sit amet commodo nulla facilisi nullam. Odio pellentesque diam volutpat commodo. Eget est lorem psum dolor sit amet consectetur adipiscing. Egestas congue quisque egestas diam in arcu cursus euismod. Enim nec dui nunc mattis enim uttellus elementum. Habitant morbi tristique senectus et netus et malesuada fames. Duis ultricies lacus sed turpis. Mauris a diam maecenas sed enim utsem viverra. Bibendum arcu vitae elementum curabitur vitae. Proin sagittisnisl rhoncus mattis rhoncus urna neque viverra justo. Ut tristique etegestas quis ipsum suspendisse."
         )
-        .pauseFor(2500)
+        // .pauseFor(2500)
+        .changeCursor(" ")
         .start();
     </script>
   </body>

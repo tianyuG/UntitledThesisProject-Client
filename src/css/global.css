@@ -121,7 +121,7 @@ details summary::-webkit-details-marker {
   min-width: unset;
   min-height: unset;
   box-shadow: unset;
-  cursor: url("../bin/images/Cursor79.png"), auto !important;
+  /* cursor: url("../bin/images/Cursor79.png"), auto !important; */
 }
 
 .menubar button:disabled,

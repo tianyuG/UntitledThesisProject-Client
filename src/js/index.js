@@ -41,6 +41,12 @@ mainListDemo1.addEventListener("click", () => {
   document.getElementById("mainContentSection").src = "./frames/demo1.html";
 });
 
+const mainIndexA = document.getElementById("mainindexA");
+mainIndexA.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src =
+    "./frames/boilerplate.html";
+});
+
 // var typEl = document.getElementById("typ");
 
 // var typ = new Typewriter(typEl, {

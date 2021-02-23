@@ -40,6 +40,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 10;
 }
 
 #mainIndexSection {
@@ -47,6 +48,9 @@ body {
   max-width: 19%;
   /* float: left; */
   flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+
   /* padding: 0; */
 }
 
@@ -59,4 +63,63 @@ body {
   /* padding: 6px; */
   padding: 0;
   border: 0;
+  z-index: 10;
+}
+
+ul.tree-view details > summary:before {
+  font-size: 10px !important;
+}
+
+ul.tree-view details[open] > summary:before {
+  font-size: 10px !important;
+}
+
+#mainIndexContentContainer > * {
+  font-size: 12px;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 17px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #dfdfdf;
+}
+
+::-webkit-scrollbar-track {
+  background-image: url("./98css/icon/scrollbar-background.svg");
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  /* box-shadow: var(--border-raised-outer), var(--border-raised-inner); */
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff,
+    inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment {
+  display: block;
+}
+
+::-webkit-scrollbar-button:vertical:start {
+  height: 17px;
+  background-image: url("./98css/icon/button-up.svg");
+}
+::-webkit-scrollbar-button:vertical:end {
+  height: 17px;
+  background-image: url("./98css/icon/button-down.svg");
+}
+::-webkit-scrollbar-button:horizontal:start {
+  width: 16px;
+  background-image: url("./98css/icon/button-left.svg");
+}
+::-webkit-scrollbar-button:horizontal:end {
+  width: 16px;
+  background-image: url("./98css/icon/button-right.svg");
 }

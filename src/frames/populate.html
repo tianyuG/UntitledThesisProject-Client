@@ -47,13 +47,21 @@
         .changeCursor(" ")
         .callFunction(() => {
           tw2
+            .typeString("Article Starter")
+            .pauseFor(500)
+            // .changeCursor(" ")
+            .start();
+          tw2
+            .pauseFor(2000)
+            .changeCursor("⎕")
             .typeString("//Appending to the article starter")
             .pauseFor(500)
             .changeCursor(" ")
             .start();
         })
         .start();
-      tw2.typeString("Article Starter").pauseFor(500).changeCursor(" ").start();
+
+      tw3.changeCursor(" ").start();
     </script>
   </body>
 </html>

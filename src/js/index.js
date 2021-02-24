@@ -47,6 +47,11 @@ mainIndexA.addEventListener("click", () => {
     "./frames/boilerplate.html";
 });
 
+const mainIndexB = document.getElementById("mainindexB");
+mainIndexB.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/populate.html";
+});
+
 // var typEl = document.getElementById("typ");
 
 // var typ = new Typewriter(typEl, {

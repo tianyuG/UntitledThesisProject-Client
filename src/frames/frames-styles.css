@@ -124,27 +124,27 @@ html {
 
 body {
   padding: 4px;
+  -webkit-font-smoothing: none;
+  zoom: 200%;
+  margin: 0;
 }
 
 h1 {
   font-family: "MondwestBld";
   font-weight: 400;
-  font-size: 48px;
+  font-size: 22px;
   padding-top: 0;
   margin-top: 0;
   padding-top: 0;
-  margin-top: 0;
-  margin-bottom: 10px;
 }
 
 div {
   font-family: "MondwestReg";
   font-weight: 400;
-  font-size: 18px;
+  font-size: 10px;
   line-height: 1.2;
   margin-top: 0;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .Typewriter__cursor {
@@ -159,5 +159,20 @@ div {
   animation-play-state: running;
   animation-name: Typewriter-cursor; */
   font-family: "Iosevka Web";
-  font-size: 16px;
+  font-size: 8px;
+}
+
+h1 .Typewriter__cursor {
+  /* animation: none !important; */
+  /* animation: Typewriter-cursor 1s infinite; */
+  animation-duration: 1.25s !important;
+  animation-timing-function: step-end !important;
+  animation-delay: 0.35s !important;
+  /* animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: Typewriter-cursor; */
+  font-family: "Iosevka Web";
+  font-size: 20px;
 }

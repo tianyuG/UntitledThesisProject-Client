@@ -18,7 +18,7 @@
             id="titleBarIcon"
             style="-webkit-app-region: no-drag"
           ></button>
-          <span class="title-bar-text">UntitledThesisProject</span>
+          <span class="title-bar-text">Encyclopaedia Mundi</span>
         </div>
 
         <div class="title-bar-controls">
@@ -56,7 +56,7 @@
         >
           <label for="findBar">Find in UTP </label>
           <input id="findBar" type="text" spellcheck="false" />
-          <button>Search</button>
+          <button id="commitSearch">Search</button>
         </section>
         <!-- <p>This is a user interface demostration of UntitledThesisProject.</p>
       <p><i>Text in italic.</i> <b>Text in bold.</b></p>
@@ -153,11 +153,11 @@
             <li>Licenses</li>
           </ul>
 
-          <iframe
-            src="./frames/welcome.html"
+          <webview
+            src="frames/welcome.html"
             id="mainContentSection"
-            allow
-          ></iframe>
+            nodeintegration
+          ></webview>
         </div>
       </div>
     </div>

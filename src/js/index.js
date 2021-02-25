@@ -1,5 +1,6 @@
 const { ipcRenderer, remote } = require("electron");
-// import Typewriter from "typewriter-effect";
+// import wiki from "wikijs";
+const wiki = require("wikijs").default;
 
 ipcRenderer.on("activateMainTitleBar", (event, message) => {
   document.getElementById("mainTitleBar").classList.remove("inactive");
@@ -70,3 +71,17 @@ mainIndexB.addEventListener("click", () => {
 //   .typeString("<strong>altered!</strong>")
 //   .pauseFor(2500)
 //   .start();
+
+const commitSearch = document.getElementById("commitSearch");
+commitSearch.addEventListener("click", () => {
+  var searchTerm = document.getElementById("findBar").value;
+  if (searchTerm !== "") {
+    var mainContent = document.getElementById("mainContentSection");
+    mainContent.src = "./frames/populate.html";
+
+    mainContent.addEventListener("dom-ready", () => {
+      mainContent.send("change-tw1", searchTerm);
+      mainContent.openDevTools();
+    });
+  }
+});

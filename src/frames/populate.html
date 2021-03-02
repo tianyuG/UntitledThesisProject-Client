@@ -22,8 +22,8 @@
         delay: "natural",
         // cursor: "▌",
         // cursor: "&#9647;",
-        // cursor: "⎕",
-        cursor: "",
+        cursor: "⎕",
+        // cursor: "",
         // skipAddStyles: true,
       });
       const tw2 = new Typewriter(introEl, {
@@ -31,8 +31,8 @@
         delay: "natural",
         // cursor: "▌",
         // cursor: "&#9647;",
-        // cursor: "⎕",
-        cursor: "",
+        cursor: "⎕",
+        // cursor: "",
         // skipAddStyles: true,
       });
       const tw3 = new Typewriter(genEl, {
@@ -46,7 +46,31 @@
       });
 
       ipcRenderer.on("change-tw1", (event, arg) => {
+        tw1.stop();
         tw1
+          .deleteAll(1000)
+          .changeCursor("⎕")
+          .pauseFor(150)
+          .typeString(arg)
+          .pauseFor(250)
+          .changeCursor(" ")
+          .start();
+      });
+      ipcRenderer.on("change-tw2", (event, arg) => {
+        tw2.stop();
+        tw2
+          .deleteAll(1000)
+          .changeCursor("⎕")
+          .pauseFor(150)
+          .typeString(arg)
+          .pauseFor(250)
+          .changeCursor(" ")
+          .start();
+      });
+      ipcRenderer.on("change-tw3", (event, arg) => {
+        tw3.stop();
+        tw3
+          .deleteAll(1000)
           .changeCursor("⎕")
           .pauseFor(150)
           .typeString(arg)

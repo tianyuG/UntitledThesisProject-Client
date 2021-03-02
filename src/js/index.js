@@ -81,7 +81,12 @@ commitSearch.addEventListener("click", () => {
 
     mainContent.addEventListener("dom-ready", () => {
       mainContent.send("change-tw1", searchTerm);
-      mainContent.openDevTools();
+      // mainContent.openDevTools();
+
+      wiki()
+        .page(searchTerm)
+        .then((page) => page.summary())
+        .then((res) => mainContent.send("change-tw2", res));
     });
   }
 });

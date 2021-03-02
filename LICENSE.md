@@ -252,6 +252,34 @@ If you have Invariant Sections without Cover Texts, or some other combination of
 If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software.
 ```
 
+### Pierre-Auguste Renoir - Luncheon of the Boating Party (1881)
+
+Image adapted from [https://commons.wikimedia.org/wiki/File:Pierre-Auguste*Renoir*-_Luncheon_of_the_Boating_Party_-\_Google_Art_Project.jpg](https://commons.wikimedia.org/wiki/File:Pierre-Auguste_Renoir_-_Luncheon_of_the_Boating_Party_-_Google_Art_Project.jpg).
+
+With digital modification applied (cropping, scaling, and dithering).
+
+```
+This is a faithful photographic reproduction of a two-dimensional, public domain work of art. The work of art itself is in the public domain for the following reason:
+Public domain
+
+This work is in the public domain in its country of origin and other countries and areas where the copyright term is the author's life plus 70 years or fewer.
+
+This work is in the public domain in the United States because it was published (or registered with the U.S. Copyright Office) before January 1, 1926.
+This file has been identified as being free of known restrictions under copyright law, including all related and neighboring rights.
+The official position taken by the Wikimedia Foundation is that "faithful reproductions of two-dimensional public domain works of art are public domain".
+This photographic reproduction is therefore also considered to be in the public domain in the United States. In other jurisdictions, re-use of this content may be restricted; see Reuse of PD-Art photographs for details.
+```
+
+### Leroy Anderson And His "Pops" Concert Orchestra - The Typewriter (October 1953)
+
+Audio adapted from [https://archive.org/details/78_the-typewriter_leroy-anderson-and-his-pops-concert-orchestra-leroy-anderson_gbia0013102b](https://archive.org/details/78_the-typewriter_leroy-anderson-and-his-pops-concert-orchestra-leroy-anderson_gbia0013102b).
+
+With digital modification applied (trimming, noise removal).
+
+This audio recording was published in October 1953.
+
+**(Not going to use it without reinterpretation, wow the copyright lasts forever)**
+
 ## Fonts
 
 ### Iosevka

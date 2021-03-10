@@ -124,6 +124,7 @@ function getSearchResults(query) {
     exlimit: "1",
     exintro: 1,
     explaintext: 1,
+    redirects: 1,
     ppprop: "disambiguation",
   };
 

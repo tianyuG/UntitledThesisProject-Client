@@ -104,8 +104,8 @@ const createWindow = () => {
   // splashscreenWindow.webContents.openDevTools();
 
   // After 7.5s, close splashscreen and load main interface
-  // timer(7500).then(function (_) {
-  timer(500).then(function (_) {
+  timer(7500).then(function (_) {
+    // timer(500).then(function (_) {
     splashscreenWindow.close();
     mainWindow.loadFile(path.join(__dirname, "index.html"));
 
@@ -114,7 +114,7 @@ const createWindow = () => {
     mainWindow.setResizable(false);
     mainWindow.setMaximizable(false);
 
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
   });
 };
 

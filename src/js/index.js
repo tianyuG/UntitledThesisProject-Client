@@ -88,7 +88,7 @@ commitSearch.addEventListener("click", () => {
     // mainContent.openDevTools();
 
     // NEEDSWORK: If dom-ready event is observed, clicking the button will fire off getSearchResults with all previous search terms, and the result will be unpredictable. If dom-ready is not observed, sometimes clicking on the button will result in a blank page as the page was not fully loaded. Setting 500ms delay is a temp fix.
-    setTimeout(getSearchResults(searchTerm), 500);
+    setTimeout(getSearchResults(searchTerm), 1250);
 
     // wiki()
     //   .page(searchTerm)

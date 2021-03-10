@@ -1,6 +1,7 @@
 const { ipcRenderer, remote } = require("electron");
 // import wiki from "wikijs";
 const wiki = require("wikijs").default;
+// import wiki from "wiki.js";
 
 ipcRenderer.on("activateMainTitleBar", (event, message) => {
   document.getElementById("mainTitleBar").classList.remove("inactive");
@@ -75,18 +76,147 @@ mainIndexB.addEventListener("click", () => {
 const commitSearch = document.getElementById("commitSearch");
 commitSearch.addEventListener("click", () => {
   var searchTerm = document.getElementById("findBar").value;
+  console.log(searchTerm);
   if (searchTerm !== "") {
     var mainContent = document.getElementById("mainContentSection");
+    // mainContent.reloadIgnoringCache();
     mainContent.src = "./frames/populate.html";
 
-    mainContent.addEventListener("dom-ready", () => {
-      mainContent.send("change-tw1", searchTerm);
-      // mainContent.openDevTools();
+    // mainContent.addEventListener("dom-ready", () => {
+    // mainContent.send("clear-tw");
 
-      wiki()
-        .page(searchTerm)
-        .then((page) => page.summary())
-        .then((res) => mainContent.send("change-tw2", res));
-    });
+    mainContent.openDevTools();
+
+    getSearchResults(searchTerm);
+
+    // wiki()
+    //   .page(searchTerm)
+    //   // TODO: Return random article suggestions.
+    //   .then((page) => page.summary())
+    //   .then((res) => {
+    //     mainContent.send("change-tw1", searchTerm);
+    //     mainContent.send("change-tw2", res);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //     mainContent.send("change-tw1", searchTerm);
+    //     mainContent.send(
+    //       "change-tw2",
+    //       "Absolutely nothing related to your search term was found. Well done. We humbly suggest these topics: TODO"
+    //     );
+    //   });
+    // });
   }
 });
+
+function getSearchResults(query) {
+  var mainContent = document.getElementById("mainContentSection");
+
+  var url = "https://en.wikipedia.org/w/api.php";
+
+  var params = {
+    action: "query",
+    format: "json",
+    prop: "extracts|pageprops",
+    titles: query,
+    exsentences: "2",
+    exlimit: "1",
+    exintro: 1,
+    explaintext: 1,
+    ppprop: "disambiguation",
+  };
+
+  url = url + "?origin=*";
+  Object.keys(params).forEach(function (key) {
+    url += "&" + key + "=" + params[key];
+  });
+
+  console.log(url);
+  console.log(url.length);
+
+  fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      var artKey = Object.keys(response.query.pages)[0];
+      // console.log(response.query.pages[artKey]);
+
+      if (artKey === "-1") {
+        console.log("Nothing");
+        mainContent.send("change-tw1", query);
+        mainContent.send(
+          "change-tw2",
+          "Absolutely nothing related to your search term was found. Well done. We humbly suggest these topics: TODO"
+        );
+      } else if (
+        Object.keys(response.query.pages[artKey]).includes("pageprops")
+      ) {
+        if (
+          Object.keys(response.query.pages[artKey].pageprops).includes(
+            "disambiguation"
+          )
+        ) {
+          console.log("disambiguation");
+          mainContent.send("change-tw1", query);
+          mainContent.send("change-tw2", response.query.pages[artKey].extract);
+          mainContent.send(
+            "change-tw3",
+            "this is a disambiguation page. will be fixed to redirect to first result soon."
+          );
+        }
+      } else {
+        var artExtract = response.query.pages[artKey].extract;
+        var splitArtExtract = [
+          artExtract.substring(0, artExtract.search(/[\.!\?]+/) + 1),
+          artExtract.substring(artExtract.search(/[\.!\?]+/) + 2),
+        ];
+        // console.log(splitArtExtract);
+        mainContent.send("change-tw1", response.query.pages[artKey].title);
+        // mainContent.send("change-tw2", response.query.pages[artKey].extract);
+        mainContent.send("change-tw23", splitArtExtract);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+async function getRandom(count) {
+  var url = "https://en.wikipedia.org/w/api.php";
+  var retArr = [];
+
+  var params = {
+    action: "query",
+    format: "json",
+    list: "random",
+    rnnamespace: "0",
+    rnlimit: String(count),
+  };
+
+  await fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      retArr.push(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  return retArr;
+}
+
+async function getArticleCandidates(term, count) {
+  var url = "https://en.wikipedia.org/w/api.php";
+  var retArr = [];
+
+  var params = {
+    action: "query",
+    format: "json",
+    list: "random",
+    rnnamespace: "0",
+    rnlimit: "5",
+  };
+}

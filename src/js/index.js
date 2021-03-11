@@ -145,12 +145,18 @@ function getSearchResults(query) {
       // console.log(response.query.pages[artKey]);
 
       if (artKey === "-1") {
-        console.log("Nothing");
-        mainContent.send("change-tw1", query);
-        mainContent.send(
-          "change-tw2",
-          "Absolutely nothing related to your search term was found. Well done. We humbly suggest these topics: TODO"
-        );
+        getRandom(5)
+          .then((randRes) => {
+            console.log("Nothing");
+            mainContent.send("change-tw1", query);
+            mainContent.send(
+              "change-tw2",
+              "Absolutely nothing related to your search term was found. Well done. We humbly suggest the following topics: ".concat(
+                randRes.join(", ")
+              )
+            );
+          })
+          .catch((e) => console.log(e));
       } else if (
         Object.keys(response.query.pages[artKey]).includes("pageprops")
       ) {
@@ -193,15 +199,29 @@ async function getRandom(count) {
     format: "json",
     list: "random",
     rnnamespace: "0",
-    rnlimit: String(count),
+    rnlimit: count,
   };
+  url = url + "?origin=*";
+  Object.keys(params).forEach(function (key) {
+    url += "&" + key + "=" + params[key];
+  });
+
+  // var res = await (await fetch(url)).json();
+  // console.log(res);
 
   await fetch(url)
     .then(function (response) {
       return response.json();
     })
     .then(function (response) {
-      retArr.push(response);
+      console.log(response);
+      for (var i in response.query.random) {
+        Object.keys(response.query.random[i]).forEach((k) => {
+          if (k === "title") {
+            retArr.push(response.query.random[i][k]);
+          }
+        });
+      }
     })
     .catch(function (error) {
       console.log(error);
@@ -215,10 +235,15 @@ async function getArticleCandidates(term, count) {
   var retArr = [];
 
   var params = {
-    action: "query",
+    action: "opensearch",
     format: "json",
-    list: "random",
-    rnnamespace: "0",
-    rnlimit: "5",
+    search: term,
+    namespace: "0",
+    limit: count,
   };
+
+  url = url + "?origin=*";
+  Object.keys(params).forEach(function (key) {
+    url += "&" + key + "=" + params[key];
+  });
 }

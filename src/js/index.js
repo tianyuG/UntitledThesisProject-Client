@@ -89,24 +89,6 @@ commitSearch.addEventListener("click", () => {
 
     // NEEDSWORK: If dom-ready event is observed, clicking the button will fire off getSearchResults with all previous search terms, and the result will be unpredictable. If dom-ready is not observed, sometimes clicking on the button will result in a blank page as the page was not fully loaded. Setting 500ms delay is a temp fix.
     setTimeout(getSearchResults(searchTerm), 1250);
-
-    // wiki()
-    //   .page(searchTerm)
-    //   // TODO: Return random article suggestions.
-    //   .then((page) => page.summary())
-    //   .then((res) => {
-    //     mainContent.send("change-tw1", searchTerm);
-    //     mainContent.send("change-tw2", res);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     mainContent.send("change-tw1", searchTerm);
-    //     mainContent.send(
-    //       "change-tw2",
-    //       "Absolutely nothing related to your search term was found. Well done. We humbly suggest these topics: TODO"
-    //     );
-    //   });
-    // });
   }
 });
 

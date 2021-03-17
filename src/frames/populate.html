@@ -10,6 +10,8 @@
     <h1 id="typ-h1"></h1>
     <div id="typ-intro"></div>
     <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator"></div>
 
     <script src="../js/core.js"></script>
     <script type="text/javascript">
@@ -17,9 +19,13 @@
       var h1El = document.getElementById("typ-h1");
       var introEl = document.getElementById("typ-intro");
       var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
       var tw1 = null;
       var tw2 = null;
       var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
 
       ipcRenderer.on("change-tw1", (event, arg) => {
         tw1 = null;
@@ -75,40 +81,46 @@
           .changeCursor(" ")
           .start();
       });
-      ipcRenderer.on("change-tw23", (event, arg) => {
-        console.log(arg);
-        tw2 = null;
-        tw3 = null;
-        tw2 = new Typewriter(introEl, {
+      ipcRenderer.on("change-tw4", (event, arg) => {
+        tw4 = null;
+        tw4 = new Typewriter(outroEl, {
           loop: false,
           delay: "natural",
           cursor: "⎕",
           devMode: true,
         });
-        tw3 = new Typewriter(genEl, {
-          loop: false,
-          delay: "natural",
-          cursor: "⎕",
-          devMode: true,
-        });
-        tw2
+        tw4
           // .stop()
           // .deleteAll(2000)
           .changeCursor("⎕")
           .pauseFor(150)
-          .typeString(arg[0])
+          .typeString(arg)
           .pauseFor(250)
           .changeCursor(" ")
-          .callFunction(() => {
-            tw3
-              .changeCursor("⎕")
-              .pauseFor(150)
-              .typeString(arg[1])
-              .pauseFor(250)
-              .changeCursor(" ")
-              .start();
-          })
           .start();
+      });
+      ipcRenderer.on("enable-tw5", (event, arg) => {
+        console.log(arg);
+        tw5 = null;
+        tw5 = new Typewriter(indicatorEl, {
+          loop: false,
+          delay: "natural",
+          cursor: "⎕",
+          devMode: true,
+        });
+
+        tw5
+          // .stop()
+          // .deleteAll(2000)
+          .changeCursor("⎕")
+          .start();
+      });
+
+      ipcRenderer.on("disable-tw5", (event, arg) => {
+        console.log(arg);
+        if (tw5 !== null) {
+          indicatorEl.parentElement.removeChild(indicatorEl);
+        }
       });
       // ipcRenderer.on("clear-tw", (event, arg) => {
       //   tw1.stop().deleteAll(2000).start();

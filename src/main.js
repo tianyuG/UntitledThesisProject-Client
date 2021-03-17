@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain, remote } = require("electron");
 const path = require("path");
 
+global.remoteServerGeneratorURL = "http://34.69.37.51:1901/generate";
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   // eslint-disable-line global-require

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/license.css" />
+    <title>LICENSE</title>
+  </head>
+  <body>
+    <audio id="la-preloop"><source src="./bin/audio/la-preloop.mp3" /></audio>
+    <audio id="la-loop-noremainder">
+      <source src="./bin/audio/la-loop-noremainder.mp3" />
+    </audio>
+    <audio id="la-loop"><source src="./bin/audio/la-loop.mp3" /></audio>
+  </body>
+  <script>
+    const audioContext = new AudioContext();
+    audioContext.crossOrigin = "anonymous";
+
+    var la0 = document.getElementById("la-preloop");
+    var la1 = document.getElementById("la-loop-noremainder");
+    var la2 = document.getElementById("la-loop");
+    la0.crossOrigin = "anonymous";
+    la1.crossOrigin = "anonymous";
+    la2.crossOrigin = "anonymous";
+    const tr0 = audioContext.createMediaElementSource(la0);
+    const tr1 = audioContext.createMediaElementSource(la1);
+    const tr2 = audioContext.createMediaElementSource(la2);
+
+    tr0.connect(audioContext.destination);
+    la0.play();
+    // la0.addEventListener("ended", () => {
+    //   la1.play();
+    // });
+    // la1.addEventListener("ended", () => {
+    //   la2.play();
+    // });
+    // la2.addEventListener("ended", () => {
+    //   la2.play();
+    // });
+  </script>
+</html>

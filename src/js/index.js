@@ -192,6 +192,12 @@ function getSearchResults(query) {
           artExtract.substring(artExtract.search(/[\.!\?]+/) + 2),
         ];
 
+        // Remove remnants of Wikipedia-styled articles
+        var checkString = splitArtExtract[0].toLowerCase();
+        if (checkString.includes("(listen) ")) {
+          splitArtExtract[0].replace(/\(listen\) /gii, "");
+        }
+
         // console.log(splitArtExtract);
         mainContent.send("enable-tw5");
         getGeneratedAbstract(splitArtExtract[0], 300).then((genCont) => {

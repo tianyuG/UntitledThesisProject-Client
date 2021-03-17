@@ -1,6 +1,6 @@
 const { ipcRenderer, remote } = require("electron");
 // import wiki from "wikijs";
-const wiki = require("wikijs").default;
+// const wiki = require("wikijs").default;
 // import wiki from "wiki.js";
 
 ipcRenderer.on("activateMainTitleBar", (event, message) => {
@@ -92,6 +92,26 @@ commitSearch.addEventListener("click", () => {
   }
 });
 
+const findBar = document.getElementById("findBar");
+findBar.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    var searchTerm = document.getElementById("findBar").value;
+    if (searchTerm !== "") {
+      var mainContent = document.getElementById("mainContentSection");
+      // mainContent.reloadIgnoringCache();
+      mainContent.src = "./frames/populate.html";
+
+      // mainContent.addEventListener("dom-ready", () => {
+      // mainContent.send("clear-tw");
+
+      // mainContent.openDevTools();
+
+      // NEEDSWORK: If dom-ready event is observed, clicking the button will fire off getSearchResults with all previous search terms, and the result will be unpredictable. If dom-ready is not observed, sometimes clicking on the button will result in a blank page as the page was not fully loaded. Setting 500ms delay is a temp fix.
+      setTimeout(getSearchResults(searchTerm), 1250);
+    }
+  }
+});
+
 function getSearchResults(query) {
   var mainContent = document.getElementById("mainContentSection");
 
@@ -155,16 +175,35 @@ function getSearchResults(query) {
             "this is a disambiguation page. will be fixed to redirect to first result soon."
           );
         }
+        // TODO
+        // try {
+        //   eval("var response");
+        // } catch (e) {
+        //   console.log(e);
+        // } finally {
+        //   console.log("completed");
+        // }
+        // NOTE: response is a var, not const or let, so it can be modified in this stage!
+        // Once response gets updated to the first link in disambiguation, take the content in the else clause (below) out of it so that the normal getGeneratedAbstract can be used on it.
       } else {
         var artExtract = response.query.pages[artKey].extract;
         var splitArtExtract = [
           artExtract.substring(0, artExtract.search(/[\.!\?]+/) + 1),
           artExtract.substring(artExtract.search(/[\.!\?]+/) + 2),
         ];
+
         // console.log(splitArtExtract);
+        mainContent.send("enable-tw5");
+        getGeneratedAbstract(splitArtExtract[0], 300).then((genCont) => {
+          console.log(genCont);
+          mainContent.send("change-tw3", genCont);
+          mainContent.send("change-tw4", splitArtExtract[1]);
+          mainContent.send("disable-tw5");
+        });
         mainContent.send("change-tw1", response.query.pages[artKey].title);
         // mainContent.send("change-tw2", response.query.pages[artKey].extract);
-        mainContent.send("change-tw23", splitArtExtract);
+
+        mainContent.send("change-tw2", splitArtExtract[0]);
       }
     })
     .catch(function (error) {
@@ -228,4 +267,33 @@ async function getArticleCandidates(term, count) {
   Object.keys(params).forEach(function (key) {
     url += "&" + key + "=" + params[key];
   });
+}
+
+async function getGeneratedAbstract(term, count) {
+  var url = remote.getGlobal("remoteServerGeneratorURL");
+  var ret = "";
+
+  var params = {
+    text: term,
+    max_length: count,
+  };
+
+  // url = url + "?";
+  // Object.keys(params).forEach(function (key) {
+  //   url += "&" + key + "=" + params[key];
+  // });
+
+  await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(params),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      ret = response.output;
+    });
+
+  return ret;
 }

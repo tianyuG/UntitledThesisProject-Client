@@ -135,8 +135,8 @@ function getSearchResults(query) {
     url += "&" + key + "=" + params[key];
   });
 
-  console.log(url);
-  console.log(url.length);
+  // console.log(url);
+  // console.log(url.length);
 
   fetch(url)
     .then(function (response) {
@@ -193,10 +193,7 @@ function getSearchResults(query) {
         ];
 
         // Remove remnants of Wikipedia-styled articles
-        var checkString = splitArtExtract[0].toLowerCase();
-        if (checkString.includes("(listen) ")) {
-          splitArtExtract[0].replace(/\(listen\) /gii, "");
-        }
+        splitArtExtract[0] = sanitiseAbstract(splitArtExtract[0]);
 
         // console.log(splitArtExtract);
         mainContent.send("enable-tw5");
@@ -302,4 +299,24 @@ async function getGeneratedAbstract(term, count) {
     });
 
   return ret;
+}
+
+function sanitiseAbstract(term) {
+  var outputString = term;
+  var checkString = term.toLowerCase();
+  console.log(checkString);
+  if (checkString.includes(" (listen) ")) {
+    outputString = outputString.replace(/\(listen\)/gi, "");
+    checkString = outputString.toLowerCase();
+  }
+  if (checkString.includes("( ")) {
+    outputString = outputString.replace(/\(([ ])+/gi, "(");
+    checkString = outputString.toLowerCase();
+  }
+  if (checkString.includes(" )")) {
+    outputString = outputString.replace(/([ ])+\)/gi, ")");
+    checkString = outputString.toLowerCase();
+  }
+
+  return outputString;
 }

@@ -436,7 +436,7 @@ under a Creative Commons Attribution Share Alike license
 (http://creativecommons.org/licenses/by-sa/3.0/).
 ```
 
-### The Ultimate Oldschool PC Font Pack (Web437_IBM_VGA_8x16, Web437_IBM_VGA_9x16)
+### The Ultimate Oldschool PC Font Pack (Web437_IBM_VGA_8x16, Web437_PhoenixVGA_9x14, WebPlus_ToshibaSat_8x16)
 
 ```
 Attribution-ShareAlike 4.0 International

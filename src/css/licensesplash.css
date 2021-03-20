@@ -1,11 +1,16 @@
 @font-face {
-    font-family: "Web437-8x16";
+    font-family: "Web437";
     src: url("../bin/fonts/Web437/Web437_IBM_VGA_8x16.woff") format("woff");
   }
 
   @font-face {
-    font-family: "Web437-9x16";
-    src: url("../bin/fonts/Web437/Web437_IBM_VGA_9x16.woff") format("woff");
+    font-family: "Web437-wide";
+    src: url("../bin/fonts/Web437/Web437_PhoenixVGA_9x14.woff") format("woff");
+  }
+
+@font-face {
+    font-family: "Web437-narrow";
+    src: url("../bin/fonts/Web437/WebPlus_ToshibaSat_8x16.woff") format("woff");
   }
 
 html, body {
@@ -14,7 +19,7 @@ html, body {
 
 body {
     overflow: hidden;
-    
+    user-select: none;
 }
 
 .license-container {
@@ -24,7 +29,7 @@ body {
     width: 600px;
     margin-left: -300px;
     text-align: left;
-    animation: 360s licenseroll linear infinite;
+    animation: 900s licenseroll linear infinite;
 }
 
 pre {
@@ -36,12 +41,16 @@ pre {
     word-wrap: break-word;
  }
 
- h1, h2, h3 {
-     font-family: "Web437-8x16";
+ h1, h2 {
+     font-family: "Web437";
+ }
+
+ h3 {
+     font-family: "Web437-wide";
  }
 
  code {
-    font-family: "Web437-9x16";
+    font-family: "Web437-narrow";
  }
 
  @keyframes licenseroll {

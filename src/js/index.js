@@ -73,8 +73,8 @@ mainIndexB.addEventListener("click", () => {
 //   .pauseFor(2500)
 //   .start();
 
-const commitSearch = document.getElementById("commitSearch");
-commitSearch.addEventListener("click", () => {
+const commitSearchButton = document.getElementById("commitSearch");
+commitSearchButton.addEventListener("click", () => {
   var searchTerm = document.getElementById("findBar").value;
   console.log(searchTerm);
   if (searchTerm !== "") {
@@ -158,59 +158,106 @@ function getSearchResults(query) {
               )
             );
           })
-          .catch((e) => console.log(e));
-      } else if (
-        Object.keys(response.query.pages[artKey]).includes("pageprops")
-      ) {
-        if (
-          Object.keys(response.query.pages[artKey].pageprops).includes(
-            "disambiguation"
-          )
-        ) {
-          console.log("disambiguation");
-          mainContent.send("change-tw1", query);
-          mainContent.send("change-tw2", response.query.pages[artKey].extract);
-          mainContent.send(
-            "change-tw3",
-            "this is a disambiguation page. will be fixed to redirect to first result soon."
-          );
-        }
-        // TODO
-        // try {
-        //   eval("var response");
-        // } catch (e) {
-        //   console.log(e);
-        // } finally {
-        //   console.log("completed");
-        // }
-        // NOTE: response is a var, not const or let, so it can be modified in this stage!
-        // Once response gets updated to the first link in disambiguation, take the content in the else clause (below) out of it so that the normal getGeneratedAbstract can be used on it.
+          .catch((e) => {
+            mainContent.send("change-tw1", "Come Again?");
+            mainContent.send(
+              "change-tw2",
+              "An error occurred when trying to retrieve the content. Please try again. (Error: " +
+                e +
+                ")"
+            );
+          });
       } else {
-        var artExtract = response.query.pages[artKey].extract;
-        var splitArtExtract = [
-          artExtract.substring(0, artExtract.search(/[\.!\?]+/) + 1),
-          artExtract.substring(artExtract.search(/[\.!\?]+/) + 2),
-        ];
+        if (Object.keys(response.query.pages[artKey]).includes("pageprops")) {
+          if (
+            Object.keys(response.query.pages[artKey].pageprops).includes(
+              "disambiguation"
+            )
+          ) {
+            url = "https://en.wikipedia.org/w/api.php";
+            params = {
+              action: "query",
+              format: "json",
+              prop: "links",
+              pageids: response.query.pages[artKey].pageid,
+              pllimit: "10",
+              pldir: "ascending",
+            };
 
-        // Remove remnants of Wikipedia-styled articles
-        splitArtExtract[0] = sanitiseAbstract(splitArtExtract[0]);
+            url = url + "?origin=*";
+            Object.keys(params).forEach(function (key) {
+              url += "&" + key + "=" + params[key];
+            });
 
-        // console.log(splitArtExtract);
-        mainContent.send("enable-tw5");
-        getGeneratedAbstract(splitArtExtract[0], 300).then((genCont) => {
-          console.log(genCont);
-          mainContent.send("change-tw3", genCont);
-          mainContent.send("change-tw4", splitArtExtract[1]);
-          mainContent.send("disable-tw5");
-        });
-        mainContent.send("change-tw1", response.query.pages[artKey].title);
-        // mainContent.send("change-tw2", response.query.pages[artKey].extract);
+            fetch(url)
+              .then((r) => {
+                return r.json();
+              })
+              .then((r) => {
+                artKey = Object.keys(r.query.pages)[0];
 
-        mainContent.send("change-tw2", splitArtExtract[0]);
+                console.log(r);
+                // TODO!!!
+                // Get the page title for a random result
+                var pageCount = r.query.pages[artKey].links.length;
+                var pageTitle =
+                  r.query.pages[artKey].links[
+                    Math.floor(Math.random() * pageCount)
+                  ].title;
+
+                url = "https://en.wikipedia.org/w/api.php";
+                var params = {
+                  action: "query",
+                  format: "json",
+                  prop: "extracts|pageprops",
+                  titles: pageTitle,
+                  exsentences: "2",
+                  exlimit: "1",
+                  exintro: 1,
+                  explaintext: 1,
+                  redirects: 1,
+                  ppprop: "disambiguation",
+                };
+                url = url + "?origin=*";
+                Object.keys(params).forEach(function (key) {
+                  url += "&" + key + "=" + params[key];
+                });
+                url = encodeURI(url);
+                // console.log(url);
+
+                fetch(url)
+                  .then((r) => {
+                    return r.json();
+                  })
+                  .then((r) => {
+                    displayContent(r, mainContent);
+                  });
+              })
+              .catch((e) => {
+                mainContent.send("change-tw1", "Come Again?");
+                mainContent.send(
+                  "change-tw2",
+                  "An error occurred when trying to retrieve the content. Please try again. (Error: " +
+                    e +
+                    ")"
+                );
+              });
+
+            console.log("disambiguation");
+          }
+        } else {
+          displayContent(response, mainContent);
+        }
       }
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch((e) => {
+      mainContent.send("change-tw1", "Come Again?");
+      mainContent.send(
+        "change-tw2",
+        "An error occurred when trying to retrieve the content. Please try again. (Error: " +
+          e +
+          ")"
+      );
     });
 }
 
@@ -281,11 +328,6 @@ async function getGeneratedAbstract(term, count) {
     max_length: count,
   };
 
-  // url = url + "?";
-  // Object.keys(params).forEach(function (key) {
-  //   url += "&" + key + "=" + params[key];
-  // });
-
   await fetch(url, {
     method: "POST",
     body: JSON.stringify(params),
@@ -320,3 +362,44 @@ function sanitiseAbstract(term) {
 
   return outputString;
 }
+
+function displayContent(r, c) {
+  artKey = Object.keys(r.query.pages)[0];
+  var artExtract = r.query.pages[artKey].extract;
+  console.log(artKey + ": " + artExtract);
+  var splitArtExtract = [
+    artExtract.substring(0, artExtract.search(/[\.!\?]+/) + 1),
+    artExtract.substring(artExtract.search(/[\.!\?]+/) + 2),
+  ];
+
+  // Remove remnants of Wikipedia-styled articles
+  splitArtExtract[0] = sanitiseAbstract(splitArtExtract[0]);
+
+  // console.log(splitArtExtract);
+  c.send("enable-tw5");
+  getGeneratedAbstract(splitArtExtract[0], 300).then((genCont) => {
+    // console.log(genCont);
+    c.send("change-tw3", genCont);
+    c.send("change-tw4", splitArtExtract[1]);
+    c.send("disable-tw5");
+  });
+  c.send("change-tw1", r.query.pages[artKey].title);
+  // c.send("change-tw2", r.query.pages[artKey].extract);
+
+  c.send("change-tw2", splitArtExtract[0]);
+}
+
+ipcRenderer.on("navigate-to", (e, m) => {
+  if (m !== "") {
+    var mainContent = document.getElementById("mainContentSection");
+    mainContent.src = "./frames/populate.html";
+    setTimeout(getSearchResults(m), 1250);
+  }
+});
+
+ipcRenderer.on("change-findbar", (e, m) => {
+  if (m !== "") {
+    var findbar = document.getElementById("findBar");
+    findbar.value = m;
+  }
+});

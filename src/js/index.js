@@ -33,6 +33,12 @@ openDevTools.addEventListener("click", () => {
   ipcRenderer.send("toggleMainWindowDevTools");
 });
 
+const openAbout = document.getElementById("mainMenuAbout");
+openAbout.addEventListener("click", () => {
+  window.open("aboutModal.html", "aboutModal");
+  document.getElementById("mainTitleBar").classList.add("inactive");
+});
+
 const mainListDemo2 = document.getElementById("mainListDemo2");
 mainListDemo2.addEventListener("click", () => {
   document.getElementById("mainContentSection").src = "./frames/demo2.html";

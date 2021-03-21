@@ -81,7 +81,21 @@ const createWindow = () => {
         });
         event.newGuest = new BrowserWindow(options);
         event.newGuest.center();
-      } else if (frameName === "mediaPlayerModal") {
+      } else if (frameName === "aboutModal") {
+        event.preventDefault();
+        Object.assign(options, {
+          modal: true,
+          parent: mainWindow,
+          transparent: true,
+          frame: false,
+          resizable: false,
+          width: 360,
+          height: 190,
+          icon: path.join(__dirname, "bin/images/appIcon.png"),
+          // useContentSize: true,
+        });
+        event.newGuest = new BrowserWindow(options);
+        event.newGuest.center();
         // Set up media player modal
         // event.preventDefault();
         // Object.assign(options, {
@@ -97,6 +111,22 @@ const createWindow = () => {
         // });
         // event.newGuest = new BrowserWindow(options);
         // event.newGuest.center();
+      } else if (frameName === "licenseSplash") {
+        // TODO: Modify license splash window properties
+        event.preventDefault();
+        Object.assign(options, {
+          modal: true,
+          parent: mainWindow,
+          transparent: true,
+          frame: false,
+          resizable: false,
+          width: 360,
+          height: 190,
+          icon: path.join(__dirname, "bin/images/appIcon.png"),
+          // useContentSize: true,
+        });
+        event.newGuest = new BrowserWindow(options);
+        event.newGuest.center();
       }
     }
   );

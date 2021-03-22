@@ -1,64 +1,71 @@
 @font-face {
-    font-family: "Web437";
-    src: url("../bin/fonts/Web437/Web437_IBM_VGA_8x16.woff") format("woff");
-  }
-
-  @font-face {
-    font-family: "Web437-wide";
-    src: url("../bin/fonts/Web437/Web437_PhoenixVGA_9x14.woff") format("woff");
-  }
+  font-family: "Web437";
+  src: url("../bin/fonts/Web437/Web437_IBM_VGA_8x16.woff") format("woff");
+}
 
 @font-face {
-    font-family: "Web437-narrow";
-    src: url("../bin/fonts/Web437/WebPlus_ToshibaSat_8x16.woff") format("woff");
-  }
+  font-family: "Web437-wide";
+  src: url("../bin/fonts/Web437/Web437_PhoenixVGA_9x14.woff") format("woff");
+}
 
-html, body {
-    height: 100%;
+@font-face {
+  font-family: "Web437-narrow";
+  src: url("../bin/fonts/Web437/WebPlus_ToshibaSat_8x16.woff") format("woff");
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-    overflow: hidden;
-    user-select: none;
+  overflow: hidden;
+  user-select: none;
 }
 
 .license-container {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    width: 600px;
-    margin-left: -300px;
-    text-align: left;
-    animation: 900s licenseroll linear infinite;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 500px;
+  margin-left: -260px;
+  text-align: left;
+  animation: 900s licenseroll linear infinite;
+  background: rgba(0, 0, 0, 0.3);
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 pre {
-    overflow-x: auto;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;
- }
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
 
- h1, h2 {
-     font-family: "Web437";
- }
+h1,
+h2 {
+  font-family: "Web437";
+}
 
- h3 {
-     font-family: "Web437-wide";
- }
+h3,
+p {
+  font-family: "Web437-wide";
+}
 
- code {
-    font-family: "Web437-narrow";
- }
+code,
+code * {
+  font-family: "Web437-narrow";
+}
 
- @keyframes licenseroll {
-    0% {
-      top: 100%;
-    }
-    100% {
-        /* Increase (or decrease, since it's negative) this number to adapt to longer license */
-      top: -18000%;
-    }
+@keyframes licenseroll {
+  0% {
+    top: 100%;
   }
+  100% {
+    /* Increase (or decrease, since it's negative) this number to adapt to longer license */
+    top: -18000%;
+  }
+}

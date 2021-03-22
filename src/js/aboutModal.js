@@ -1,4 +1,5 @@
 const { ipcRenderer, remote } = require("electron");
+const audioContext = new AudioContext();
 
 const closeWindow = document.getElementById("closeWindow");
 closeWindow.addEventListener("click", () => {
@@ -12,4 +13,12 @@ closeModal.addEventListener("click", () => {
   ipcRenderer.send("doActivateMainTitleBar");
   var currWin = remote.getCurrentWindow();
   currWin.close();
+});
+
+const licenseModal = document.getElementById("aMod-license");
+licenseModal.addEventListener("click", () => {
+  ipcRenderer.send("doActivateMainTitleBar");
+  var currWin = remote.getCurrentWindow();
+  // currWin.close();
+  window.open("licensesplash.html", "licenseSplash");
 });

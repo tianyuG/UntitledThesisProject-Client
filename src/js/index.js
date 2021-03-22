@@ -1,7 +1,4 @@
 const { ipcRenderer, remote } = require("electron");
-// import wiki from "wikijs";
-// const wiki = require("wikijs").default;
-// import wiki from "wiki.js";
 
 ipcRenderer.on("activateMainTitleBar", (event, message) => {
   document.getElementById("mainTitleBar").classList.remove("inactive");

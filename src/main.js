@@ -96,6 +96,7 @@ const createWindow = () => {
         });
         event.newGuest = new BrowserWindow(options);
         event.newGuest.center();
+        // event.newGuest.openDevTools();
         // Set up media player modal
         // event.preventDefault();
         // Object.assign(options, {
@@ -113,20 +114,27 @@ const createWindow = () => {
         // event.newGuest.center();
       } else if (frameName === "licenseSplash") {
         // TODO: Modify license splash window properties
+        app.commandLine.appendSwitch(
+          "autoplay-policy",
+          "no-user-gesture-required"
+        );
+        console.log("license detected");
         event.preventDefault();
         Object.assign(options, {
-          modal: true,
-          parent: mainWindow,
-          transparent: true,
           frame: false,
           resizable: false,
-          width: 360,
-          height: 190,
-          icon: path.join(__dirname, "bin/images/appIcon.png"),
+          fullscreen: true,
+          transparent: false,
+          // webPreferences: {
+          //   nodeIntegration: true,
+          // },
           // useContentSize: true,
         });
         event.newGuest = new BrowserWindow(options);
         event.newGuest.center();
+        // event.newGuest.webContents.on("dom-ready", () => {
+        //   event.newGuest.send("play-audio");
+        // });
       }
     }
   );

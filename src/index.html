@@ -45,7 +45,7 @@
           <span class="menubar-padding">&nbsp;</span>
           <button id="mainMenuDevTools">DevTools</button>
           <span class="menubar-padding">&nbsp;</span>
-          <button>Help</button>
+          <button id="mainMenuHelp">Help</button>
           <span class="menubar-padding">&nbsp;</span>
           <button id="mainMenuAbout">About</button>
         </div>
@@ -74,14 +74,14 @@
         <div id="mainIndexContentContainer">
           <ul class="tree-view" id="mainIndexSection">
             <li id="mainListWelcome">Welcome</li>
-            <li>What is UTP?</li>
+            <li id="mainListHowToUse">How to use</li>
             <li>
               <details open>
                 <summary>Index</summary>
                 <ul>
                   <li>
-                    <details>
-                      <summary>A-M</summary>
+                    <details open>
+                      <summary>A-I</summary>
                       <ul>
                         <li id="mainindexA">A</li>
                         <li id="mainindexB">B</li>
@@ -92,22 +92,29 @@
                         <li id="mainindexG">G</li>
                         <li id="mainindexH">H</li>
                         <li id="mainindexI">I</li>
-                        <li id="mainindexJ">J</li>
-                        <li id="mainindexK">K</li>
-                        <li id="mainindexL">L</li>
-                        <li id="mainindexM">M</li>
                       </ul>
                     </details>
                   </li>
                   <li>
                     <details>
-                      <summary>N-Z</summary>
+                      <summary>J-R</summary>
                       <ul>
+                        <li id="mainindexJ">J</li>
+                        <li id="mainindexK">K</li>
+                        <li id="mainindexL">L</li>
+                        <li id="mainindexM">M</li>
                         <li id="mainindexN">N</li>
                         <li id="mainindexO">O</li>
                         <li id="mainindexP">P</li>
                         <li id="mainindexQ">Q</li>
                         <li id="mainindexR">R</li>
+                      </ul>
+                    </details>
+                  </li>
+                  <li>
+                    <details>
+                      <summary>S-Z</summary>
+                      <ul>
                         <li id="mainindexS">S</li>
                         <li id="mainindexT">T</li>
                         <li id="mainindexU">U</li>
@@ -121,7 +128,7 @@
                   </li>
                   <li>
                     <details>
-                      <summary>0-9</summary>
+                      <summary>Numeral</summary>
                       <ul>
                         <li id="mainindex0">0</li>
                         <li id="mainindex1">1</li>
@@ -136,11 +143,26 @@
                       </ul>
                     </details>
                   </li>
-                  <li id="mainindexNonAN">Nonalphanumerial</li>
+                  <li>
+                    <details>
+                      <summary>Symbol</summary>
+                      <ul>
+                        <li id="mainindexPeriod">. (Period)</li>
+                        <li id="mainindexAmpersand">& (Ampersand)</li>
+                        <li id="mainindexPound"># (Number/Pound)</li>
+                        <li id="mainindexAt">@ (At)</li>
+                        <li id="mainindexPercentage">% (Percentage)</li>
+                        <li id="mainindexPlus">+ (Plus)</li>
+                        <li id="mainindexEqual">&equals; (Equal)</li>
+                        <li id="mainindexOthers">(Others)</li>
+                      </ul>
+                    </details>
+                  </li>
+                  <li id="mainindexNonAN">Symbol</li>
                 </ul>
               </details>
             </li>
-            <li>
+            <!-- <li>
               <details open>
                 <summary>Demostrations</summary>
                 <ul>
@@ -148,9 +170,9 @@
                   <li id="mainListDemo2">Demo 2</li>
                 </ul>
               </details>
-            </li>
+            </li> -->
             <li>Random Page</li>
-            <li>Licenses</li>
+            <!-- <li>Licenses</li> -->
           </ul>
 
           <webview

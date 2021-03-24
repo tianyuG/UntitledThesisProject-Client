@@ -140,7 +140,9 @@ h1 {
   padding-bottom: 10px;
 }
 
-div {
+div,
+a,
+li {
   font-family: "MondwestReg";
   font-weight: 400;
   /* font-size: 36px; */

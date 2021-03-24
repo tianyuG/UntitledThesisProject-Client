@@ -30,31 +30,181 @@ openDevTools.addEventListener("click", () => {
   ipcRenderer.send("toggleMainWindowDevTools");
 });
 
+const openHelp = document.getElementById("mainMenuHelp");
+openHelp.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/howtouse.html";
+});
+
 const openAbout = document.getElementById("mainMenuAbout");
 openAbout.addEventListener("click", () => {
   window.open("aboutModal.html", "aboutModal");
   document.getElementById("mainTitleBar").classList.add("inactive");
 });
 
-const mainListDemo2 = document.getElementById("mainListDemo2");
-mainListDemo2.addEventListener("click", () => {
-  document.getElementById("mainContentSection").src = "./frames/demo2.html";
+const mainListWelcome = document.getElementById("mainListWelcome");
+mainListWelcome.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/welcome.html";
 });
 
-const mainListDemo1 = document.getElementById("mainListDemo1");
-mainListDemo1.addEventListener("click", () => {
-  document.getElementById("mainContentSection").src = "./frames/demo1.html";
+const mainListHowToUse = document.getElementById("mainListHowToUse");
+mainListHowToUse.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/howtouse.html";
 });
 
 const mainIndexA = document.getElementById("mainindexA");
 mainIndexA.addEventListener("click", () => {
-  document.getElementById("mainContentSection").src =
-    "./frames/boilerplate.html";
+  document.getElementById("mainContentSection").src = "./frames/index/A.html";
 });
 
 const mainIndexB = document.getElementById("mainindexB");
 mainIndexB.addEventListener("click", () => {
-  document.getElementById("mainContentSection").src = "./frames/populate.html";
+  document.getElementById("mainContentSection").src = "./frames/index/B.html";
+});
+
+const mainIndexC = document.getElementById("mainindexC");
+mainIndexC.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/C.html";
+});
+
+const mainIndexD = document.getElementById("mainindexD");
+mainIndexD.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/D.html";
+});
+
+const mainIndexE = document.getElementById("mainindexE");
+mainIndexE.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/E.html";
+});
+
+const mainIndexF = document.getElementById("mainindexF");
+mainIndexF.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/F.html";
+});
+
+const mainIndexG = document.getElementById("mainindexG");
+mainIndexG.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/G.html";
+});
+
+const mainIndexH = document.getElementById("mainindexH");
+mainIndexH.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/H.html";
+});
+
+const mainIndexI = document.getElementById("mainindexI");
+mainIndexI.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/I.html";
+});
+
+const mainIndexJ = document.getElementById("mainindexJ");
+mainIndexJ.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/J.html";
+});
+
+const mainIndexK = document.getElementById("mainindexK");
+mainIndexK.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/K.html";
+});
+
+const mainIndexL = document.getElementById("mainindexL");
+mainIndexL.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/L.html";
+});
+
+const mainIndexM = document.getElementById("mainindexM");
+mainIndexM.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/M.html";
+});
+
+const mainIndexN = document.getElementById("mainindexN");
+mainIndexN.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/N.html";
+});
+
+const mainIndexU = document.getElementById("mainindexU");
+mainIndexU.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/U.html";
+});
+
+const mainIndexV = document.getElementById("mainindexV");
+mainIndexV.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/V.html";
+});
+
+const mainIndexW = document.getElementById("mainindexW");
+mainIndexW.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/W.html";
+});
+
+const mainIndexX = document.getElementById("mainindexX");
+mainIndexX.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/X.html";
+});
+
+const mainIndexY = document.getElementById("mainindexY");
+mainIndexY.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/Y.html";
+});
+
+const mainIndexZ = document.getElementById("mainindexZ");
+mainIndexZ.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/Z.html";
+});
+
+const mainIndex0 = document.getElementById("mainindex0");
+mainIndex0.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/0.html";
+});
+
+const mainIndex1 = document.getElementById("mainindex1");
+mainIndex1.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/1.html";
+});
+
+const mainIndex2 = document.getElementById("mainindex2");
+mainIndex2.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/2.html";
+});
+
+const mainIndex3 = document.getElementById("mainindex3");
+mainIndex3.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/3.html";
+});
+
+const mainIndex4 = document.getElementById("mainindex4");
+mainIndex4.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/4.html";
+});
+
+const mainIndex5 = document.getElementById("mainindex5");
+mainIndex5.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/5.html";
+});
+
+const mainIndex6 = document.getElementById("mainindex6");
+mainIndex6.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/6.html";
+});
+
+const mainIndex7 = document.getElementById("mainindex7");
+mainIndex7.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/7.html";
+});
+
+const mainIndex8 = document.getElementById("mainindex8");
+mainIndex8.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/8.html";
+});
+
+const mainIndex9 = document.getElementById("mainindex9");
+mainIndex9.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/index/Z.html";
+});
+
+const mainIndexNonAN = document.getElementById("mainindexNonAN");
+mainIndexNonAN.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src =
+    "./frames/index/Symbol.html";
 });
 
 // var typEl = document.getElementById("typ");

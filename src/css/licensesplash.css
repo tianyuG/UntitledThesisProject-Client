@@ -51,10 +51,10 @@ body {
   position: absolute;
   top: 100%;
   left: 50%;
-  width: 500px;
-  margin-left: -260px;
+  width: 640px;
+  margin-left: -330px;
   text-align: left;
-  animation: 900s licenseroll linear infinite;
+  animation: 600s licenseroll linear infinite;
   background: rgba(0, 0, 0, 0.2);
   padding-left: 10px;
   padding-right: 10px;
@@ -95,10 +95,9 @@ code * {
   }
   100% {
     /* Increase (or decrease, since it's negative) this number to adapt to longer license */
-    top: -18000%;
+    top: -8300%;
   }
 }
 
 a {
-  
 }

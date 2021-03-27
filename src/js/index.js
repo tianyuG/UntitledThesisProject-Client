@@ -274,7 +274,7 @@ findBar.addEventListener("keyup", (e) => {
       // mainContent.addEventListener("dom-ready", () => {
       // mainContent.send("clear-tw");
 
-      mainContent.openDevTools();
+      // mainContent.openDevTools();
 
       // NEEDSWORK: If dom-ready event is observed, clicking the button will fire off getSearchResults with all previous search terms, and the result will be unpredictable. If dom-ready is not observed, sometimes clicking on the button will result in a blank page as the page was not fully loaded. Setting 500ms delay is a temp fix.
       setTimeout(getSearchResults(searchTerm), 1250);
@@ -317,14 +317,14 @@ function getSearchResults(query) {
       // console.log(response.query.pages[artKey]);
 
       if (artKey === "-1") {
-        getRandom(5)
+        getArticleCandidates(query, 2)
           .then((randRes) => {
             console.log("Nothing");
             mainContent.send("change-tw1", query);
             mainContent.send(
               "change-tw2",
-              "Absolutely nothing related to your search term was found. Well done. We humbly suggest the following topics: ".concat(
-                randRes.join(", ")
+              "<p>Absolutely nothing related to your search term was found. Well done. We humbly suggest the following topics:</p>".concat(
+                randRes.join("")
               )
             );
           })
@@ -400,7 +400,27 @@ function getSearchResults(query) {
                     return r.json();
                   })
                   .then((r) => {
-                    displayContent(r, mainContent);
+                    console.log(r.query.pages);
+                    artKey = Object.keys(r.query.pages)[0];
+                    if (
+                      Object.keys(r.query.pages[artKey]).includes("pageprops")
+                    ) {
+                      if (
+                        Object.keys(r.query.pages[artKey].pageprops).includes(
+                          "disambiguation"
+                        )
+                      ) {
+                        mainContent.send("change-tw1", pageTitle);
+                        mainContent.send(
+                          "change-tw2",
+                          "You are reading this message because the page you are looking for does exist in the print edition of Encyclopaedia Mundi, but the digitization process for this article is not yet complete. For now, plesae try looking for something else."
+                        );
+                      } else {
+                        displayContent(r, mainContent);
+                      }
+                    } else {
+                      displayContent(r, mainContent);
+                    }
                   });
               })
               .catch((e) => {
@@ -431,7 +451,7 @@ function getSearchResults(query) {
     });
 }
 
-async function getRandom(count) {
+async function getRandoms(count) {
   var url = "https://en.wikipedia.org/w/api.php";
   var retArr = [];
 
@@ -455,11 +475,51 @@ async function getRandom(count) {
       return response.json();
     })
     .then(function (response) {
-      console.log(response);
+      // console.log(response);
       for (var i in response.query.random) {
         Object.keys(response.query.random[i]).forEach((k) => {
           if (k === "title") {
-            retArr.push(response.query.random[i][k]);
+            retArr.push("<li>" + response.query.random[i][k] + "</li>");
+          }
+        });
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  return retArr;
+}
+
+async function getRandomPage() {
+  var url = "https://en.wikipedia.org/w/api.php";
+  var retArr = [];
+
+  var params = {
+    action: "query",
+    format: "json",
+    list: "random",
+    rnnamespace: "0",
+    rnlimit: 1,
+  };
+  url = url + "?origin=*";
+  Object.keys(params).forEach(function (key) {
+    url += "&" + key + "=" + params[key];
+  });
+
+  // var res = await (await fetch(url)).json();
+  // console.log(res);
+
+  await fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      // console.log(response);
+      for (var i in response.query.random) {
+        Object.keys(response.query.random[i]).forEach((k) => {
+          if (k === "title") {
+            retArr.push("<li>" + response.query.random[i][k] + "</li>");
           }
         });
       }
@@ -487,6 +547,22 @@ async function getArticleCandidates(term, count) {
   Object.keys(params).forEach(function (key) {
     url += "&" + key + "=" + params[key];
   });
+
+  console.log(url);
+
+  await fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      retArr = response[1].map((r) => "<li>" + r + "</li>");
+    });
+
+  await getRandoms(4).then((r) => {
+    retArr = retArr.concat(r);
+  });
+
+  return retArr;
 }
 
 async function getGeneratedAbstract(term, count) {

@@ -1,6 +1,7 @@
 # Client
 
 ## Source Code
+
 ### EncyclopaediaMundi-Client
 
 ```
@@ -255,7 +256,7 @@ If your document contains nontrivial examples of program code, we recommend rele
 
 ### Pierre-Auguste Renoir - Luncheon of the Boating Party (1881)
 
-Image adapted from [https://commons.wikimedia.org/wiki/File:Pierre-Auguste*Renoir*-_Luncheon_of_the_Boating_Party_-\_Google_Art_Project.jpg](https://commons.wikimedia.org/wiki/File:Pierre-Auguste_Renoir_-_Luncheon_of_the_Boating_Party_-_Google_Art_Project.jpg).
+Image adapted from `https://commons.wikimedia.org/wiki/File:Pierre-Auguste_Renoir_-_Luncheon_of_the_Boating_Party_-_Google_Art_Project.jpg`
 
 With digital modification applied (cropping, scaling, and dithering).
 
@@ -270,16 +271,6 @@ This file has been identified as being free of known restrictions under copyrigh
 The official position taken by the Wikimedia Foundation is that "faithful reproductions of two-dimensional public domain works of art are public domain".
 This photographic reproduction is therefore also considered to be in the public domain in the United States. In other jurisdictions, re-use of this content may be restricted; see Reuse of PD-Art photographs for details.
 ```
-
-### Leroy Anderson And His "Pops" Concert Orchestra - The Typewriter (October 1953)
-
-Audio adapted from [https://archive.org/details/78_the-typewriter_leroy-anderson-and-his-pops-concert-orchestra-leroy-anderson_gbia0013102b](https://archive.org/details/78_the-typewriter_leroy-anderson-and-his-pops-concert-orchestra-leroy-anderson_gbia0013102b).
-
-With digital modification applied (trimming, noise removal).
-
-This audio recording was published in October 1953.
-
-**(Not going to use it without reinterpretation, wow the copyright lasts forever)**
 
 ## Fonts
 
@@ -490,7 +481,7 @@ exhaustive, and do not form part of our licenses.
      such as asking that all changes be marked or described.
      Although not required by our licenses, you are encouraged to
      respect those requests where reasonable. More_considerations
-     for the public: 
+     for the public:
 	wiki.creativecommons.org/Considerations_for_licensees
 
 =======================================================================
@@ -2552,6 +2543,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # Server
 
 ## Source Code
+
 ### EncyclopaediaMundi-Server
 
 ```

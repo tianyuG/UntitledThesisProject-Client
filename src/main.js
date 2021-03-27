@@ -97,8 +97,8 @@ const createWindow = () => {
           transparent: true,
           frame: false,
           resizable: false,
-          width: 410,
-          height: 285,
+          width: 450,
+          height: 232,
           icon: path.join(__dirname, "bin/images/appIcon.png"),
           // useContentSize: true,
         });

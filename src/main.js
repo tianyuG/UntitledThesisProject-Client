@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, remote } = require("electron");
+const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
 const path = require("path");
 
 global.remoteServerGeneratorURL = "http://34.69.37.51:1901/generate";
@@ -18,6 +18,7 @@ const createWindow = () => {
     height: 480,
     webPreferences: {
       nodeIntegration: true,
+      // devTools: false,
     },
     transparent: true,
     frame: false,
@@ -34,6 +35,7 @@ const createWindow = () => {
       nativeWindowOpen: true,
       enableRemoteModule: true,
       webviewTag: true,
+      // devTools: false,
     },
     transparent: true,
     frame: false,
@@ -71,6 +73,9 @@ const createWindow = () => {
         Object.assign(options, {
           modal: true,
           parent: mainWindow,
+          // webPreferences: {
+          //   devTools: false,
+          // },
           transparent: true,
           frame: false,
           resizable: false,
@@ -86,11 +91,14 @@ const createWindow = () => {
         Object.assign(options, {
           modal: true,
           parent: mainWindow,
+          // webPreferences: {
+          //   devTools: false,
+          // },
           transparent: true,
           frame: false,
           resizable: false,
-          width: 360,
-          height: 190,
+          width: 410,
+          height: 285,
           icon: path.join(__dirname, "bin/images/appIcon.png"),
           // useContentSize: true,
         });
@@ -121,13 +129,13 @@ const createWindow = () => {
         console.log("license detected");
         event.preventDefault();
         Object.assign(options, {
+          // webPreferences: {
+          //   devTools: false,
+          // },
           frame: false,
           resizable: false,
           fullscreen: true,
           transparent: false,
-          // webPreferences: {
-          //   nodeIntegration: true,
-          // },
           // useContentSize: true,
         });
         event.newGuest = new BrowserWindow(options);
@@ -135,6 +143,42 @@ const createWindow = () => {
         // event.newGuest.webContents.on("dom-ready", () => {
         //   event.newGuest.send("play-audio");
         // });
+      } else if (frameName === "debugModal") {
+        event.preventDefault();
+        Object.assign(options, {
+          modal: true,
+          parent: mainWindow,
+          // webPreferences: {
+          //   devTools: false,
+          // },
+          transparent: true,
+          frame: false,
+          resizable: false,
+          width: 300,
+          height: 134,
+          icon: path.join(__dirname, "bin/images/appIcon.png"),
+          // useContentSize: true,
+        });
+        event.newGuest = new BrowserWindow(options);
+        event.newGuest.center();
+      } else if (frameName === "settingsModal") {
+        event.preventDefault();
+        Object.assign(options, {
+          modal: true,
+          parent: mainWindow,
+          // webPreferences: {
+          //   devTools: false,
+          // },
+          transparent: true,
+          frame: false,
+          resizable: false,
+          width: 240,
+          height: 88,
+          icon: path.join(__dirname, "bin/images/appIcon.png"),
+          // useContentSize: true,
+        });
+        event.newGuest = new BrowserWindow(options);
+        event.newGuest.center();
       }
     }
   );
@@ -154,7 +198,7 @@ const createWindow = () => {
     mainWindow.setResizable(false);
     mainWindow.setMaximizable(false);
 
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
   });
 };
 
@@ -164,6 +208,12 @@ const createWindow = () => {
 app.on("ready", () => {
   // Force light theme
   require("electron").nativeTheme.themeSource = "light";
+  globalShortcut.registerAll(
+    ["CommandOrControl+R", "CommandOrControl+Shift+R", "F5"],
+    () => {
+      console.log("Refresh keyboard shortcut detected. Ignoring.");
+    }
+  );
   createWindow();
 });
 
@@ -172,6 +222,7 @@ app.on("ready", () => {
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
+    globalShortcut.unregisterAll();
     app.quit();
   }
 });

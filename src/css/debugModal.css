@@ -3,8 +3,8 @@ body {
 }
 
 .window {
-  width: 406px;
-  height: 280px;
+  width: 294px;
+  height: 130px;
   /* min-height: auto; */
   overflow: hidden;
 }

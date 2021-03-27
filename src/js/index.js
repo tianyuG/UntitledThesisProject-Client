@@ -30,6 +30,18 @@ openDevTools.addEventListener("click", () => {
   ipcRenderer.send("toggleMainWindowDevTools");
 });
 
+const openDebug = document.getElementById("mainMenuDebug");
+openDebug.addEventListener("click", () => {
+  window.open("debugModal.html", "debugModal");
+  document.getElementById("mainTitleBar").classList.add("inactive");
+});
+
+const openSettings = document.getElementById("mainMenuSettings");
+openSettings.addEventListener("click", () => {
+  window.open("settingsModal.html", "settingsModal");
+  document.getElementById("mainTitleBar").classList.add("inactive");
+});
+
 const openHelp = document.getElementById("mainMenuHelp");
 openHelp.addEventListener("click", () => {
   document.getElementById("mainContentSection").src = "./frames/howtouse.html";
@@ -44,6 +56,11 @@ openAbout.addEventListener("click", () => {
 const mainListWelcome = document.getElementById("mainListWelcome");
 mainListWelcome.addEventListener("click", () => {
   document.getElementById("mainContentSection").src = "./frames/welcome.html";
+});
+
+const mainListNote = document.getElementById("mainListNote");
+mainListNote.addEventListener("click", () => {
+  document.getElementById("mainContentSection").src = "./frames/note.html";
 });
 
 const mainListHowToUse = document.getElementById("mainListHowToUse");

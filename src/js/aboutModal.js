@@ -19,6 +19,7 @@ const licenseModal = document.getElementById("aMod-license");
 licenseModal.addEventListener("click", () => {
   ipcRenderer.send("doActivateMainTitleBar");
   var currWin = remote.getCurrentWindow();
+  // ipcRenderer.send("closeLicense");
+  window.open("licenseSplash.html", "licenseSplash");
   // currWin.close();
-  window.open("licensesplash.html", "licenseSplash");
 });

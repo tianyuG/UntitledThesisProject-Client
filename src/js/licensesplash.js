@@ -8,6 +8,8 @@ document.onkeydown = function (e) {
 };
 
 document.body.addEventListener("click", closeSelf, true);
+document.body.addEventListener("contextmenu", closeSelf, true);
+document.body.addEventListener("visibilitychange", closeSelf, true);
 
 document.body.addEventListener(
   "mousemove",
@@ -32,3 +34,5 @@ function closeSelf() {
 
 // TODO: Do this in aboutModal!
 ipcRenderer.on("play-audio", () => {});
+
+ipcRenderer.on("closeGuest", closeSelf);

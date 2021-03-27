@@ -136,10 +136,12 @@ const createWindow = () => {
           resizable: false,
           fullscreen: true,
           transparent: false,
+          // kiosk: true,
           // useContentSize: true,
         });
         event.newGuest = new BrowserWindow(options);
         event.newGuest.center();
+        event.newGuest.setAlwaysOnTop(true, "modal-panel");
         // event.newGuest.webContents.on("dom-ready", () => {
         //   event.newGuest.send("play-audio");
         // });

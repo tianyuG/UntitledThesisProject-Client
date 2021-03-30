@@ -49,7 +49,8 @@ openHelp.addEventListener("click", () => {
 
 const openAbout = document.getElementById("mainMenuAbout");
 openAbout.addEventListener("click", () => {
-  window.open("aboutModal.html", "aboutModal");
+  // window.open("aboutModal.html", "aboutModal");
+  ipcRenderer.send("open-aboutModal");
   document.getElementById("mainTitleBar").classList.add("inactive");
 });
 

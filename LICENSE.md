@@ -272,6 +272,12 @@ The official position taken by the Wikimedia Foundation is that "faithful reprod
 This photographic reproduction is therefore also considered to be in the public domain in the United States. In other jurisdictions, re-use of this content may be restricted; see Reuse of PD-Art photographs for details.
 ```
 
+### Keita Hoshi/Hudson Soft - Aldynes (Stage 4) (1991)
+
+Audio adapted from the Stage 4 background music of Aldynes, a PC Engine SuperGrafx game published by Hudson Soft in 1991. This soundtrack was originally composed by Keita Hoshi.
+
+The audio used in this project was roughly transcribed from YouTube video `https://www.youtube.com/watch?v=PfK6Idj4LBc` with different instruments applied.
+
 ## Fonts
 
 ### Iosevka

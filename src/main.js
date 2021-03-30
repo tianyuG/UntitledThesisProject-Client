@@ -7,16 +7,23 @@ global.remoteServerURL = "http://34.69.37.51:1901";
 global.remoteServerGeneratorURL = "http://34.69.37.51:1901/generate";
 global.isServerReachable = false;
 // DEV FLAGS
-global.ignoreOfflineNags = false;
-global.ignoreStartupSlowdown = true;
-global.allowDevTools = false; // Unused
 global.allowCliFlags = true;
+global.ignoreOfflineNags = false;
+global.ignoreStartupSlowdown = false;
+global.allowDevTools = false; // Unused
+global.allowKeyboardShortcuts = true;
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require("electron-squirrel-startup")) {
-  // eslint-disable-line global-require
-  app.quit();
-}
+// // Handle creating/removing shortcuts on Windows when installing/uninstalling.
+// // add "electron-squirrel-startup": "^1.0.0", to dependencies in package.json if uncommented
+// if (require("electron-squirrel-startup")) {
+//   // eslint-disable-line global-require
+//   app.quit();
+// }
+
+// Code to deal with screen flickering when opening/closing frameless child window:
+// https://www.electronjs.org/docs/api/browser-window#showing-window-gracefully
+// And
+// https://github.com/electron/electron/issues/10616
 
 // Used to timeout splashscreen
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -29,12 +36,14 @@ const createWindow = () => {
     height: 480,
     webPreferences: {
       nodeIntegration: true,
-      devTools: false,
+      devTools:
+        global.allowDevTools || app.commandLine.hasSwitch("allow-devtools"),
     },
     transparent: true,
     frame: false,
     alwaysOnTop: true,
     icon: path.join(__dirname, "bin/images/appIcon.png"),
+    show: false,
   });
 
   // Create the browser window.
@@ -46,17 +55,23 @@ const createWindow = () => {
       nativeWindowOpen: true,
       enableRemoteModule: true,
       webviewTag: true,
-      devTools: false,
+      devTools:
+        global.allowDevTools || app.commandLine.hasSwitch("allow-devtools"),
     },
     transparent: true,
     frame: false,
     icon: path.join(__dirname, "bin/images/appIcon.png"),
+    show: false,
   });
 
   // When mainWindow becomes active window again, change window shade colour
   // from inactive (grey) to active (blue)
   ipcMain.on("doActivateMainTitleBar", (event, arg) => {
     mainWindow.webContents.send("activateMainTitleBar");
+  });
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
   });
 
   // Deactivate window shade when window loses focus
@@ -70,6 +85,7 @@ const createWindow = () => {
   });
 
   splashscreenWindow.on("ready-to-show", async () => {
+    splashscreenWindow.show();
     var iRRet;
     if (
       app.commandLine.hasSwitch("ignore-startup-slowdown") ||
@@ -103,7 +119,8 @@ const createWindow = () => {
       width: 800,
       height: 600,
       webPreferences: {
-        devTools: true,
+        devTools:
+          global.allowDevTools || app.commandLine.hasSwitch("allow-devtools"),
         enableRemoteModule: true,
         nodeIntegration: true,
       },
@@ -111,9 +128,21 @@ const createWindow = () => {
       resizable: false,
       // fullscreen: true,
       transparent: false,
+      show: false,
     });
     licenseSplash.loadFile(path.join(__dirname, "licenseSplash.html"));
-    licenseSplash.on("closed", () => {
+    mainWindow.setAlwaysOnTop(false);
+    licenseSplash.once("ready-to-show", () => {
+      licenseSplash.show();
+    });
+    licenseSplash.on("close", () => {
+      licenseSplash.hide();
+    });
+    licenseSplash.on("blur", () => {
+      aboutModal.webContents.send("stop-audio");
+      licenseSplash.close();
+    });
+    licenseSplash.on("close", () => {
       aboutModal.webContents.send("stop-audio");
     });
   });
@@ -124,7 +153,8 @@ const createWindow = () => {
       modal: true,
       parent: mainWindow,
       webPreferences: {
-        devTools: true,
+        devTools:
+          global.allowDevTools || app.commandLine.hasSwitch("allow-devtools"),
         enableRemoteModule: true,
         nodeIntegration: true,
       },
@@ -134,135 +164,245 @@ const createWindow = () => {
       width: 432,
       height: 232,
       icon: path.join(__dirname, "bin/images/appIcon.png"),
+      show: false,
     });
     aboutModal.loadFile(path.join(__dirname, "aboutModal.html"));
-    aboutModal.on("closed", () => {
+    aboutModal.once("ready-to-show", () => {
+      aboutModal.show();
+    });
+    aboutModal.on("focus", () => {
+      mainWindow.setAlwaysOnTop(true);
+    });
+    // aboutModal.on("blur", () => {
+    //   mainWindow.setAlwaysOnTop(false);
+    // });
+    aboutModal.on("close", () => {
       ipcMain.send("stop-audio");
+      mainWindow.setAlwaysOnTop(false);
     });
   });
 
-  // Set new window properties
-  mainWindow.webContents.on(
-    "new-window",
-    (event, url, frameName, disposition, options, additionalFeatures) => {
-      if (frameName === "quitModal") {
-        // Set up quit confirmation modal
-        event.preventDefault();
-        Object.assign(options, {
-          modal: true,
-          parent: mainWindow,
-          webPreferences: {
-            devTools: false,
-            enableRemoteModule: true,
-          },
-          transparent: true,
-          frame: false,
-          resizable: false,
-          width: 250,
-          height: 90,
-          icon: path.join(__dirname, "bin/images/appIcon.png"),
-          // useContentSize: true,
-        });
-        event.newGuest = new BrowserWindow(options);
-        event.newGuest.center();
-      } else if (frameName === "aboutModal") {
-        event.preventDefault();
-        Object.assign(options, {
-          modal: true,
-          parent: mainWindow,
-          webPreferences: {
-            devTools: true,
-            enableRemoteModule: true,
-          },
-          transparent: true,
-          frame: false,
-          resizable: false,
-          width: 430,
-          height: 232,
-          icon: path.join(__dirname, "bin/images/appIcon.png"),
-          // useContentSize: true,
-        });
-        event.newGuest = new BrowserWindow(options);
-        event.newGuest.center();
-        // event.newGuest.openDevTools();
-        // Set up media player modal
-        // event.preventDefault();
-        // Object.assign(options, {
-        //   modal: true,
-        //   parent: mainWindow,
-        //   transparent: true,
-        //   frame: false,
-        //   resizable: false,
-        //   width: 250,
-        //   height: 90,
-        //   icon: path.join(__dirname, "bin/images/appIcon.png"),
-        //   // useContentSize: true,
-        // });
-        // event.newGuest = new BrowserWindow(options);
-        // event.newGuest.center();
-      } else if (frameName === "licenseSplash") {
-        // TODO: Modify license splash window properties
-        app.commandLine.appendSwitch(
-          "autoplay-policy",
-          "no-user-gesture-required"
-        );
-        // console.log("license detected");
-        event.preventDefault();
-        Object.assign(options, {
-          webPreferences: {
-            devTools: false,
-            enableRemoteModule: true,
-          },
-          frame: false,
-          resizable: false,
-          fullscreen: true,
-          transparent: false,
-          // kiosk: true,
-          // useContentSize: true,
-        });
-        event.newGuest = new BrowserWindow(options);
-        event.newGuest.center();
-        event.newGuest.setAlwaysOnTop(true, "modal-panel");
-      } else if (frameName === "debugModal") {
-        event.preventDefault();
-        Object.assign(options, {
-          modal: true,
-          parent: mainWindow,
-          webPreferences: {
-            devTools: false,
-            enableRemoteModule: true,
-          },
-          transparent: true,
-          frame: false,
-          resizable: false,
-          width: 300,
-          height: 138,
-          icon: path.join(__dirname, "bin/images/appIcon.png"),
-          // useContentSize: true,
-        });
-        event.newGuest = new BrowserWindow(options);
-        event.newGuest.center();
-      } else if (frameName === "settingsModal") {
-        event.preventDefault();
-        Object.assign(options, {
-          modal: true,
-          parent: mainWindow,
-          webPreferences: {
-            devTools: false,
-            enableRemoteModule: true,
-          },
-          transparent: true,
-          frame: false,
-          resizable: false,
-          width: 240,
-          height: 88,
-          icon: path.join(__dirname, "bin/images/appIcon.png"),
-        });
-        event.newGuest = new BrowserWindow(options);
-        event.newGuest.center();
-      }
-    }
-  );
+  ipcMain.on("open-quitModal", () => {
+    quitModal = new BrowserWindow({
+      modal: true,
+      parent: mainWindow,
+      webPreferences: {
+        devTools:
+          global.allowDevTools || app.commandLine.hasSwitch("allow-devtools"),
+        enableRemoteModule: true,
+        nodeIntegration: true,
+      },
+      transparent: true,
+      frame: false,
+      resizable: false,
+      width: 252,
+      height: 92,
+      icon: path.join(__dirname, "bin/images/appIcon.png"),
+      show: false,
+    });
+    quitModal.loadFile(path.join(__dirname, "quitModal.html"));
+    quitModal.once("ready-to-show", () => {
+      quitModal.show();
+    });
+    quitModal.on("focus", () => {
+      mainWindow.setAlwaysOnTop(true);
+    });
+    quitModal.on("blur", () => {
+      mainWindow.setAlwaysOnTop(false);
+    });
+    quitModal.on("close", () => {
+      mainWindow.setAlwaysOnTop(true);
+    });
+  });
+
+  ipcMain.on("open-debugModal", () => {
+    debugModal = new BrowserWindow({
+      modal: true,
+      parent: mainWindow,
+      webPreferences: {
+        devTools:
+          global.allowDevTools || app.commandLine.hasSwitch("allow-devtools"),
+        enableRemoteModule: true,
+        nodeIntegration: true,
+      },
+      transparent: true,
+      frame: false,
+      resizable: false,
+      width: 300,
+      height: 140,
+      icon: path.join(__dirname, "bin/images/appIcon.png"),
+      show: false,
+    });
+    debugModal.loadFile(path.join(__dirname, "debugModal.html"));
+    debugModal.once("ready-to-show", () => {
+      debugModal.show();
+    });
+    debugModal.on("focus", () => {
+      mainWindow.setAlwaysOnTop(true);
+    });
+    debugModal.on("blur", () => {
+      mainWindow.setAlwaysOnTop(false);
+    });
+    debugModal.on("close", () => {
+      mainWindow.setAlwaysOnTop(true);
+    });
+  });
+
+  ipcMain.on("open-settingsModal", () => {
+    settingsModal = new BrowserWindow({
+      modal: true,
+      parent: mainWindow,
+      webPreferences: {
+        devTools:
+          global.allowDevTools || app.commandLine.hasSwitch("allow-devtools"),
+        enableRemoteModule: true,
+        nodeIntegration: true,
+      },
+      transparent: true,
+      frame: false,
+      resizable: false,
+      width: 240,
+      height: 88,
+      icon: path.join(__dirname, "bin/images/appIcon.png"),
+      show: false,
+    });
+    settingsModal.loadFile(path.join(__dirname, "settingsModal.html"));
+    settingsModal.once("ready-to-show", () => {
+      settingsModal.show();
+    });
+    settingsModal.on("focus", () => {
+      mainWindow.setAlwaysOnTop(true);
+    });
+    settingsModal.on("blur", () => {
+      mainWindow.setAlwaysOnTop(false);
+    });
+    settingsModal.on("close", () => {
+      mainWindow.setAlwaysOnTop(true);
+    });
+  });
+
+  // // Set new window properties
+  // mainWindow.webContents.on(
+  //   "new-window",
+  //   (event, url, frameName, disposition, options, additionalFeatures) => {
+  //     if (frameName === "quitModal") {
+  //       // Set up quit confirmation modal
+  //       event.preventDefault();
+  //       Object.assign(options, {
+  //         modal: true,
+  //         parent: mainWindow,
+  //         webPreferences: {
+  //           devTools: false,
+  //           enableRemoteModule: true,
+  //         },
+  //         transparent: true,
+  //         frame: false,
+  //         resizable: false,
+  //         width: 250,
+  //         height: 90,
+  //         icon: path.join(__dirname, "bin/images/appIcon.png"),
+  //         // useContentSize: true,
+  //       });
+  //       event.newGuest = new BrowserWindow(options);
+  //       event.newGuest.center();
+  //     } else if (frameName === "aboutModal") {
+  //       event.preventDefault();
+  //       Object.assign(options, {
+  //         modal: true,
+  //         parent: mainWindow,
+  //         webPreferences: {
+  //           devTools: true,
+  //           enableRemoteModule: true,
+  //         },
+  //         transparent: true,
+  //         frame: false,
+  //         resizable: false,
+  //         width: 430,
+  //         height: 232,
+  //         icon: path.join(__dirname, "bin/images/appIcon.png"),
+  //         // useContentSize: true,
+  //       });
+  //       event.newGuest = new BrowserWindow(options);
+  //       event.newGuest.center();
+  //       // event.newGuest.openDevTools();
+  //       // Set up media player modal
+  //       // event.preventDefault();
+  //       // Object.assign(options, {
+  //       //   modal: true,
+  //       //   parent: mainWindow,
+  //       //   transparent: true,
+  //       //   frame: false,
+  //       //   resizable: false,
+  //       //   width: 250,
+  //       //   height: 90,
+  //       //   icon: path.join(__dirname, "bin/images/appIcon.png"),
+  //       //   // useContentSize: true,
+  //       // });
+  //       // event.newGuest = new BrowserWindow(options);
+  //       // event.newGuest.center();
+  //     } else if (frameName === "licenseSplash") {
+  //       // TODO: Modify license splash window properties
+  //       app.commandLine.appendSwitch(
+  //         "autoplay-policy",
+  //         "no-user-gesture-required"
+  //       );
+  //       // console.log("license detected");
+  //       event.preventDefault();
+  //       Object.assign(options, {
+  //         webPreferences: {
+  //           devTools: false,
+  //           enableRemoteModule: true,
+  //         },
+  //         frame: false,
+  //         resizable: false,
+  //         fullscreen: true,
+  //         transparent: false,
+  //         // kiosk: true,
+  //         // useContentSize: true,
+  //       });
+  //       event.newGuest = new BrowserWindow(options);
+  //       event.newGuest.center();
+  //       event.newGuest.setAlwaysOnTop(true, "modal-panel");
+  //     } else if (frameName === "debugModal") {
+  //       event.preventDefault();
+  //       Object.assign(options, {
+  //         modal: true,
+  //         parent: mainWindow,
+  //         webPreferences: {
+  //           devTools: false,
+  //           enableRemoteModule: true,
+  //         },
+  //         transparent: true,
+  //         frame: false,
+  //         resizable: false,
+  //         width: 300,
+  //         height: 138,
+  //         icon: path.join(__dirname, "bin/images/appIcon.png"),
+  //         // useContentSize: true,
+  //       });
+  //       event.newGuest = new BrowserWindow(options);
+  //       event.newGuest.center();
+  //     } else if (frameName === "settingsModal") {
+  //       event.preventDefault();
+  //       Object.assign(options, {
+  //         modal: true,
+  //         parent: mainWindow,
+  //         webPreferences: {
+  //           devTools: false,
+  //           enableRemoteModule: true,
+  //         },
+  //         transparent: true,
+  //         frame: false,
+  //         resizable: false,
+  //         width: 240,
+  //         height: 88,
+  //         icon: path.join(__dirname, "bin/images/appIcon.png"),
+  //       });
+  //       event.newGuest = new BrowserWindow(options);
+  //       event.newGuest.center();
+  //     }
+  //   }
+  // );
 
   // and load splash screen.
   splashscreenWindow.loadFile(path.join(__dirname, "splash.html"));
@@ -299,7 +439,7 @@ const createWindow = () => {
     // Warn that server is not reachable
     if (!global.isServerReachable && !global.ignoreOfflineNags) {
       // Create the browser window.
-      const crcWindow = new BrowserWindow({
+      const crcModal = new BrowserWindow({
         modal: true,
         parent: mainWindow,
         webPreferences: {
@@ -313,8 +453,21 @@ const createWindow = () => {
         width: 320,
         height: 150,
         icon: path.join(__dirname, "bin/images/appIcon.png"),
+        show: false,
       });
-      crcWindow.loadFile(path.join(__dirname, "crcModal.html"));
+      crcModal.loadFile(path.join(__dirname, "crcModal.html"));
+      crcModal.once("ready-to-show", () => {
+        crcModal.show();
+      });
+      crcModal.on("focus", () => {
+        mainWindow.setAlwaysOnTop(true);
+      });
+      crcModal.on("blur", () => {
+        mainWindow.setAlwaysOnTop(false);
+      });
+      crcModal.on("close", () => {
+        mainWindow.setAlwaysOnTop(true);
+      });
     }
 
     // console.log(global.isServerReachable);
@@ -329,12 +482,20 @@ const createWindow = () => {
 app.on("ready", () => {
   // Force light theme
   require("electron").nativeTheme.themeSource = "light";
-  globalShortcut.registerAll(
-    ["CommandOrControl+R", "CommandOrControl+Shift+R", "F5", "F11"],
-    () => {
-      console.log("Refresh/full screen keyboard shortcut detected. Ignoring.");
-    }
-  );
+  if (
+    !app.commandLine.hasSwitch("allow-keyboard-shortcuts") &&
+    !global.allowKeyboardShortcuts
+  ) {
+    globalShortcut.registerAll(
+      ["CommandOrControl+R", "CommandOrControl+Shift+R", "F5", "F11"],
+      () => {
+        console.log(
+          "Refresh/full screen keyboard shortcut detected. Ignoring."
+        );
+      }
+    );
+  }
+
   createWindow();
 });
 

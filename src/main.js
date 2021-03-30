@@ -5,10 +5,12 @@ const iR = require("is-reachable");
 global.remoteServerURL = "http://34.69.37.51:1901";
 // global.remoteServerURL = "http://google.com";
 global.remoteServerGeneratorURL = "http://34.69.37.51:1901/generate";
-global.isServerReachable = true;
+global.isServerReachable = false;
 // DEV FLAGS
-global.ignoreOfflineNags = true;
-global.ignoreStartupSlowdown = true;
+global.ignoreOfflineNags = false;
+global.ignoreStartupSlowdown = false;
+global.allowDevTools = false;
+global.allowCliFlags = true;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -66,10 +68,26 @@ const createWindow = () => {
   });
 
   splashscreenWindow.on("ready-to-show", async () => {
-    var iRRet = await iR(global.remoteServerURL, { timeout: 3000 });
-    if (!iRRet) {
-      global.isServerReachable = false;
+    var iRRet;
+    if (
+      app.commandLine.hasSwitch("ignore-startup-slowdown") ||
+      global.ignoreStartupSlowdown
+    ) {
+      if (
+        (app.commandLine.hasSwitch("ignore-offline-nags") ||
+          global.ignoreOfflineNags) &&
+        !app.commandLine.hasSwitch("force-offline")
+      ) {
+        iRRet = true;
+      } else {
+        iRRet = false;
+      }
+    } else if (app.commandLine.hasSwitch("force-offline")) {
+      iRRet = false;
+    } else {
+      iRRet = await iR(global.remoteServerURL, { timeout: 3000 });
     }
+    global.isServerReachable = iRRet;
   });
 
   // Toggle mainWindow DevTools
@@ -209,8 +227,22 @@ const createWindow = () => {
 
   // After 7.5s, close splashscreen and load main interface
   var splashDelay = 6750 + Math.floor(Math.random() * 500);
-  if (ignoreStartupSlowdown) {
+  if (
+    (global.allowCliFlags &&
+      app.commandLine.hasSwitch("ignore-startup-slowdown")) ||
+    global.ignoreStartupSlowdown
+  ) {
     splashDelay = 100;
+  }
+  if (
+    global.allowCliFlags &&
+    app.commandLine.hasSwitch("ignore-offline-nags") &&
+    !app.commandLine.hasSwitch("force-offline")
+  ) {
+    global.ignoreOfflineNags = true;
+  }
+  if (app.commandLine.hasSwitch("force-offline")) {
+    global.isServerReachable = false;
   }
   timer(splashDelay).then(function (_) {
     splashscreenWindow.close();
@@ -222,7 +254,7 @@ const createWindow = () => {
     mainWindow.setMaximizable(false);
 
     // Warn that server is not reachable
-    if (!isServerReachable && !ignoreOfflineNags) {
+    if (!global.isServerReachable && !global.ignoreOfflineNags) {
       // Create the browser window.
       const crcWindow = new BrowserWindow({
         modal: true,
@@ -242,7 +274,7 @@ const createWindow = () => {
       crcWindow.loadFile(path.join(__dirname, "crcModal.html"));
     }
 
-    console.log(global.isServerReachable);
+    // console.log(global.isServerReachable);
 
     // mainWindow.webContents.openDevTools();
   });
@@ -254,12 +286,12 @@ const createWindow = () => {
 app.on("ready", () => {
   // Force light theme
   require("electron").nativeTheme.themeSource = "light";
-  // globalShortcut.registerAll(
-  //   ["CommandOrControl+R", "CommandOrControl+Shift+R", "F5", "F11"],
-  //   () => {
-  //     console.log("Refresh/full screen keyboard shortcut detected. Ignoring.");
-  //   }
-  // );
+  globalShortcut.registerAll(
+    ["CommandOrControl+R", "CommandOrControl+Shift+R", "F5", "F11"],
+    () => {
+      console.log("Refresh/full screen keyboard shortcut detected. Ignoring.");
+    }
+  );
   createWindow();
 });
 

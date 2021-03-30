@@ -1,7 +1,14 @@
 const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
 const path = require("path");
+const iR = require("is-reachable");
 
+global.remoteServerURL = "http://34.69.37.51:1901";
+// global.remoteServerURL = "http://google.com";
 global.remoteServerGeneratorURL = "http://34.69.37.51:1901/generate";
+global.isServerReachable = true;
+// DEV FLAGS
+global.ignoreOfflineNags = true;
+global.ignoreStartupSlowdown = true;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -18,7 +25,7 @@ const createWindow = () => {
     height: 480,
     webPreferences: {
       nodeIntegration: true,
-      // devTools: false,
+      devTools: false,
     },
     transparent: true,
     frame: false,
@@ -58,6 +65,13 @@ const createWindow = () => {
     mainWindow.webContents.send("activateMainTitleBar");
   });
 
+  splashscreenWindow.on("ready-to-show", async () => {
+    var iRRet = await iR(global.remoteServerURL, { timeout: 3000 });
+    if (!iRRet) {
+      global.isServerReachable = false;
+    }
+  });
+
   // Toggle mainWindow DevTools
   ipcMain.on("toggleMainWindowDevTools", () => {
     mainWindow.webContents.toggleDevTools();
@@ -73,9 +87,10 @@ const createWindow = () => {
         Object.assign(options, {
           modal: true,
           parent: mainWindow,
-          // webPreferences: {
-          //   devTools: false,
-          // },
+          webPreferences: {
+            devTools: false,
+            enableRemoteModule: true,
+          },
           transparent: true,
           frame: false,
           resizable: false,
@@ -91,13 +106,14 @@ const createWindow = () => {
         Object.assign(options, {
           modal: true,
           parent: mainWindow,
-          // webPreferences: {
-          //   devTools: false,
-          // },
+          webPreferences: {
+            devTools: false,
+            enableRemoteModule: true,
+          },
           transparent: true,
           frame: false,
           resizable: false,
-          width: 450,
+          width: 430,
           height: 232,
           icon: path.join(__dirname, "bin/images/appIcon.png"),
           // useContentSize: true,
@@ -126,12 +142,13 @@ const createWindow = () => {
           "autoplay-policy",
           "no-user-gesture-required"
         );
-        console.log("license detected");
+        // console.log("license detected");
         event.preventDefault();
         Object.assign(options, {
-          // webPreferences: {
-          //   devTools: false,
-          // },
+          webPreferences: {
+            devTools: false,
+            enableRemoteModule: true,
+          },
           frame: false,
           resizable: false,
           fullscreen: true,
@@ -142,17 +159,18 @@ const createWindow = () => {
         event.newGuest = new BrowserWindow(options);
         event.newGuest.center();
         event.newGuest.setAlwaysOnTop(true, "modal-panel");
-        // event.newGuest.webContents.on("dom-ready", () => {
-        //   event.newGuest.send("play-audio");
-        // });
+        event.newGuest.once("dom-ready", () => {
+          event.newGuest.send("play-audio");
+        });
       } else if (frameName === "debugModal") {
         event.preventDefault();
         Object.assign(options, {
           modal: true,
           parent: mainWindow,
-          // webPreferences: {
-          //   devTools: false,
-          // },
+          webPreferences: {
+            devTools: false,
+            enableRemoteModule: true,
+          },
           transparent: true,
           frame: false,
           resizable: false,
@@ -168,16 +186,16 @@ const createWindow = () => {
         Object.assign(options, {
           modal: true,
           parent: mainWindow,
-          // webPreferences: {
-          //   devTools: false,
-          // },
+          webPreferences: {
+            devTools: false,
+            enableRemoteModule: true,
+          },
           transparent: true,
           frame: false,
           resizable: false,
           width: 240,
           height: 88,
           icon: path.join(__dirname, "bin/images/appIcon.png"),
-          // useContentSize: true,
         });
         event.newGuest = new BrowserWindow(options);
         event.newGuest.center();
@@ -190,8 +208,11 @@ const createWindow = () => {
   // splashscreenWindow.webContents.openDevTools();
 
   // After 7.5s, close splashscreen and load main interface
-  // timer(7500).then(function (_) {
-  timer(500).then(function (_) {
+  var splashDelay = 6750 + Math.floor(Math.random() * 500);
+  if (ignoreStartupSlowdown) {
+    splashDelay = 100;
+  }
+  timer(splashDelay).then(function (_) {
     splashscreenWindow.close();
     mainWindow.loadFile(path.join(__dirname, "index.html"));
 
@@ -199,6 +220,29 @@ const createWindow = () => {
     mainWindow.center();
     mainWindow.setResizable(false);
     mainWindow.setMaximizable(false);
+
+    // Warn that server is not reachable
+    if (!isServerReachable && !ignoreOfflineNags) {
+      // Create the browser window.
+      const crcWindow = new BrowserWindow({
+        modal: true,
+        parent: mainWindow,
+        webPreferences: {
+          devTools: false,
+          nodeIntegration: true,
+          enableRemoteModule: true,
+        },
+        transparent: true,
+        frame: false,
+        resizable: false,
+        width: 320,
+        height: 146,
+        icon: path.join(__dirname, "bin/images/appIcon.png"),
+      });
+      crcWindow.loadFile(path.join(__dirname, "crcModal.html"));
+    }
+
+    console.log(global.isServerReachable);
 
     // mainWindow.webContents.openDevTools();
   });
@@ -210,12 +254,12 @@ const createWindow = () => {
 app.on("ready", () => {
   // Force light theme
   require("electron").nativeTheme.themeSource = "light";
-  globalShortcut.registerAll(
-    ["CommandOrControl+R", "CommandOrControl+Shift+R", "F5"],
-    () => {
-      console.log("Refresh keyboard shortcut detected. Ignoring.");
-    }
-  );
+  // globalShortcut.registerAll(
+  //   ["CommandOrControl+R", "CommandOrControl+Shift+R", "F5", "F11"],
+  //   () => {
+  //     console.log("Refresh/full screen keyboard shortcut detected. Ignoring.");
+  //   }
+  // );
   createWindow();
 });
 
@@ -243,7 +287,3 @@ app.on("activate", () => {
 ipcMain.on("quitApp", (event, arg) => {
   app.quit();
 });
-
-// ipcMain.on('invokeQuitModal', (event, arg) => {
-
-// })

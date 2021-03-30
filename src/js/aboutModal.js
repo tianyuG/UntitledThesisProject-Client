@@ -21,5 +21,6 @@ licenseModal.addEventListener("click", () => {
   var currWin = remote.getCurrentWindow();
   // ipcRenderer.send("closeLicense");
   window.open("licenseSplash.html", "licenseSplash");
+  // window.webContents.openDevTools();
   // currWin.close();
 });

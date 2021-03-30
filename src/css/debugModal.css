@@ -4,7 +4,11 @@ body {
 
 .window {
   width: 294px;
-  height: 130px;
+  height: 134px;
   /* min-height: auto; */
   overflow: hidden;
+}
+
+.window-body p {
+  line-height: 1.2;
 }

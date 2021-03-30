@@ -8,7 +8,7 @@ global.remoteServerGeneratorURL = "http://34.69.37.51:1901/generate";
 global.isServerReachable = false;
 // DEV FLAGS
 global.ignoreOfflineNags = false;
-global.ignoreStartupSlowdown = false;
+global.ignoreStartupSlowdown = true;
 global.allowDevTools = false; // Unused
 global.allowCliFlags = true;
 
@@ -22,6 +22,8 @@ if (require("electron-squirrel-startup")) {
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const createWindow = () => {
+  let licenseSplash;
+  let quitModal, aboutModal, debugModal, settingsModal;
   const splashscreenWindow = new BrowserWindow({
     width: 600,
     height: 480,
@@ -95,6 +97,50 @@ const createWindow = () => {
     mainWindow.webContents.toggleDevTools();
   });
 
+  ipcMain.on("open-licenseSplash", () => {
+    app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
+    licenseSplash = new BrowserWindow({
+      width: 800,
+      height: 600,
+      webPreferences: {
+        devTools: true,
+        enableRemoteModule: true,
+        nodeIntegration: true,
+      },
+      frame: false,
+      resizable: false,
+      // fullscreen: true,
+      transparent: false,
+    });
+    licenseSplash.loadFile(path.join(__dirname, "licenseSplash.html"));
+    licenseSplash.on("closed", () => {
+      aboutModal.webContents.send("stop-audio");
+    });
+  });
+
+  ipcMain.on("open-aboutModal", () => {
+    app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
+    aboutModal = new BrowserWindow({
+      modal: true,
+      parent: mainWindow,
+      webPreferences: {
+        devTools: true,
+        enableRemoteModule: true,
+        nodeIntegration: true,
+      },
+      transparent: true,
+      frame: false,
+      resizable: false,
+      width: 432,
+      height: 232,
+      icon: path.join(__dirname, "bin/images/appIcon.png"),
+    });
+    aboutModal.loadFile(path.join(__dirname, "aboutModal.html"));
+    aboutModal.on("closed", () => {
+      ipcMain.send("stop-audio");
+    });
+  });
+
   // Set new window properties
   mainWindow.webContents.on(
     "new-window",
@@ -125,7 +171,7 @@ const createWindow = () => {
           modal: true,
           parent: mainWindow,
           webPreferences: {
-            devTools: false,
+            devTools: true,
             enableRemoteModule: true,
           },
           transparent: true,
@@ -177,9 +223,6 @@ const createWindow = () => {
         event.newGuest = new BrowserWindow(options);
         event.newGuest.center();
         event.newGuest.setAlwaysOnTop(true, "modal-panel");
-        event.newGuest.once("dom-ready", () => {
-          event.newGuest.send("play-audio");
-        });
       } else if (frameName === "debugModal") {
         event.preventDefault();
         Object.assign(options, {
@@ -193,7 +236,7 @@ const createWindow = () => {
           frame: false,
           resizable: false,
           width: 300,
-          height: 134,
+          height: 138,
           icon: path.join(__dirname, "bin/images/appIcon.png"),
           // useContentSize: true,
         });
@@ -268,7 +311,7 @@ const createWindow = () => {
         frame: false,
         resizable: false,
         width: 320,
-        height: 146,
+        height: 150,
         icon: path.join(__dirname, "bin/images/appIcon.png"),
       });
       crcWindow.loadFile(path.join(__dirname, "crcModal.html"));

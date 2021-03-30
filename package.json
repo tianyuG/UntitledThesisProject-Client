@@ -5,7 +5,7 @@
   "description": "Concise digital knowledge repository",
   "main": "src/main.js",
   "build": {
-    "appId": "com.utpc",
+    "appId": "com.pitchsurvoyinc.encyclopaediamundi",
     "win": {
       "target": "portable"
     },

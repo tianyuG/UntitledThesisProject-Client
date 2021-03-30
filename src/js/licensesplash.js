@@ -27,7 +27,8 @@ document.body.addEventListener("visibilitychange", closeSelf, true);
 // );
 
 function closeSelf() {
-  ipcRenderer.send("doActivateMainTitleBar");
+  // ipcRenderer.send("doActivateMainTitleBar");
+  ipcRenderer.send("stop-audio");
   var currWin = remote.getCurrentWindow();
   currWin.close();
 }

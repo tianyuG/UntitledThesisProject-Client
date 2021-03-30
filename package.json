@@ -62,7 +62,6 @@
   },
   "dependencies": {
     "98.css": "^0.1.16",
-    "electron-squirrel-startup": "^1.0.0",
     "postcss": "^8.2.6",
     "postcss-import": "^13.0.0",
     "postcss-inline": "^1.2.0",

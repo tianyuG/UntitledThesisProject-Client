@@ -10,13 +10,15 @@ ipcRenderer.on("deactivateMainTitleBar", (event, message) => {
 
 const closeWindow = document.getElementById("closeWindow");
 closeWindow.addEventListener("click", () => {
-  window.open("quitModal.html", "quitModal");
+  // window.open("quitModal.html", "quitModal");
+  ipcRenderer.send("open-quitModal");
   document.getElementById("mainTitleBar").classList.add("inactive");
 });
 
 const titleBarIcon = document.getElementById("titleBarIcon");
 titleBarIcon.addEventListener("dblclick", () => {
-  window.open("quitModal.html", "quitModal");
+  // window.open("quitModal.html", "quitModal");
+  ipcRenderer.send("open-quitModal");
   document.getElementById("mainTitleBar").classList.add("inactive");
 });
 
@@ -32,13 +34,15 @@ openDevTools.addEventListener("click", () => {
 
 const openDebug = document.getElementById("mainMenuDebug");
 openDebug.addEventListener("click", () => {
-  window.open("debugModal.html", "debugModal");
+  // window.open("debugModal.html", "debugModal");
+  ipcRenderer.send("open-debugModal");
   document.getElementById("mainTitleBar").classList.add("inactive");
 });
 
 const openSettings = document.getElementById("mainMenuSettings");
 openSettings.addEventListener("click", () => {
-  window.open("settingsModal.html", "settingsModal");
+  // window.open("settingsModal.html", "settingsModal");
+  ipcRenderer.send("open-settingsModal");
   document.getElementById("mainTitleBar").classList.add("inactive");
 });
 

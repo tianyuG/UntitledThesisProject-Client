@@ -60,5 +60,7 @@ ipcRenderer.on("stop-audio", () => {
 });
 
 function stopAudio() {
-  aC.suspend();
+  if (aC != null) {
+    aC.suspend();
+  }
 }

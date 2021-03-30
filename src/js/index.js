@@ -224,41 +224,52 @@ mainIndexNonAN.addEventListener("click", () => {
     "./frames/index/Symbol.html";
 });
 
-// var typEl = document.getElementById("typ");
-
-// var typ = new Typewriter(typEl, {
-//   loop: true,
-//   cursor: " ",
-// });
-
-// typ
-//   .pauseFor(500)
-//   .typeString("Hello World!")
-//   .pauseFor(2500)
-//   .deleteAll()
-//   .typeString("Strings can be removed")
-//   .pauseFor(2500)
-//   .deleteChars(7)
-//   .typeString("<strong>altered!</strong>")
-//   .pauseFor(2500)
-//   .start();
+const mainListRandomPage = document.getElementById("mainListRandomPage");
+mainListRandomPage.addEventListener("click", () => {
+  var mainContent = document.getElementById("mainContentSection");
+  mainContent.src = "./frames/populate.html";
+  if (
+    !remote.getGlobal("isServerReachable") &&
+    !remote.getGlobal("ignoreOfflineNags")
+  ) {
+    mainContent.addEventListener("dom-ready", () => {
+      mainContent.send("change-tw1", "Cannot display content", "0");
+      mainContent.send(
+        "change-tw2",
+        "This content cannot be retrieved as the main database may had been partially damaged. Please inform your supervisor for potential fixes. <br/><br/>Entries listed in the side bar (except for the Random Page) are stored in a separate database, so they are not affected. Please try reading some of those instead.",
+        "0"
+      );
+    });
+  } else {
+    getRandomPage();
+  }
+});
 
 const commitSearchButton = document.getElementById("commitSearch");
 commitSearchButton.addEventListener("click", () => {
   var searchTerm = document.getElementById("findBar").value;
-  console.log(searchTerm);
+  // console.log(searchTerm);
   if (searchTerm !== "") {
     var mainContent = document.getElementById("mainContentSection");
-    // mainContent.reloadIgnoringCache();
     mainContent.src = "./frames/populate.html";
+    if (
+      !remote.getGlobal("isServerReachable") &&
+      !remote.getGlobal("ignoreOfflineNags")
+    ) {
+      mainContent.addEventListener("dom-ready", () => {
+        mainContent.send("change-tw1", "Cannot display content", "0");
+        mainContent.send(
+          "change-tw2",
+          "This content cannot be retrieved as the main database may had been partially damaged. Please inform your supervisor for potential fixes. <br/><br/>Entries listed in the side bar (except for the Random Page) are stored in a separate database, so they are not affected. Please try reading some of those instead.",
+          "0"
+        );
+      });
+      // mainContent.openDevTools();
+    } else {
+      // mainContent.openDevTools();
 
-    // mainContent.addEventListener("dom-ready", () => {
-    // mainContent.send("clear-tw");
-
-    // mainContent.openDevTools();
-
-    // NEEDSWORK: If dom-ready event is observed, clicking the button will fire off getSearchResults with all previous search terms, and the result will be unpredictable. If dom-ready is not observed, sometimes clicking on the button will result in a blank page as the page was not fully loaded. Setting 500ms delay is a temp fix.
-    setTimeout(getSearchResults(searchTerm), 1250);
+      getSearchResults(searchTerm);
+    }
   }
 });
 
@@ -268,16 +279,24 @@ findBar.addEventListener("keyup", (e) => {
     var searchTerm = document.getElementById("findBar").value;
     if (searchTerm !== "") {
       var mainContent = document.getElementById("mainContentSection");
-      // mainContent.reloadIgnoringCache();
       mainContent.src = "./frames/populate.html";
+      if (
+        !remote.getGlobal("isServerReachable") &&
+        !remote.getGlobal("ignoreOfflineNags")
+      ) {
+        mainContent.addEventListener("dom-ready", () => {
+          mainContent.send("change-tw1", "Cannot display content", "0");
+          mainContent.send(
+            "change-tw2",
+            "This content cannot be retrieved as the main database may had been partially damaged. Please inform your supervisor for potential fixes. <br/><br/>Entries listed in the side bar (except for the Random Page) are stored in a separate database, so they are not affected. Please try reading some of those instead.",
+            "0"
+          );
+        });
+      } else {
+        // mainContent.openDevTools();
 
-      // mainContent.addEventListener("dom-ready", () => {
-      // mainContent.send("clear-tw");
-
-      // mainContent.openDevTools();
-
-      // NEEDSWORK: If dom-ready event is observed, clicking the button will fire off getSearchResults with all previous search terms, and the result will be unpredictable. If dom-ready is not observed, sometimes clicking on the button will result in a blank page as the page was not fully loaded. Setting 500ms delay is a temp fix.
-      setTimeout(getSearchResults(searchTerm), 1250);
+        getSearchResults(searchTerm);
+      }
     }
   }
 });
@@ -451,6 +470,7 @@ function getSearchResults(query) {
     });
 }
 
+// Get a number of random wikipedia article titles.
 async function getRandoms(count) {
   var url = "https://en.wikipedia.org/w/api.php";
   var retArr = [];
@@ -491,44 +511,12 @@ async function getRandoms(count) {
   return retArr;
 }
 
+// Get and generate content from one random Wikipedia article.
 async function getRandomPage() {
-  var url = "https://en.wikipedia.org/w/api.php";
-  var retArr = [];
-
-  var params = {
-    action: "query",
-    format: "json",
-    list: "random",
-    rnnamespace: "0",
-    rnlimit: 1,
-  };
-  url = url + "?origin=*";
-  Object.keys(params).forEach(function (key) {
-    url += "&" + key + "=" + params[key];
+  await getRandoms(1).then((r) => {
+    console.log(r);
+    getSearchResults(r[0].slice(4, -5));
   });
-
-  // var res = await (await fetch(url)).json();
-  // console.log(res);
-
-  await fetch(url)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      // console.log(response);
-      for (var i in response.query.random) {
-        Object.keys(response.query.random[i]).forEach((k) => {
-          if (k === "title") {
-            retArr.push("<li>" + response.query.random[i][k] + "</li>");
-          }
-        });
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  return retArr;
 }
 
 async function getArticleCandidates(term, count) {

@@ -27,11 +27,12 @@
       var tw4 = null;
       var tw5 = null;
 
-      ipcRenderer.on("change-tw1", (event, arg) => {
+      ipcRenderer.on("change-tw1", (event, arg, arg1 = "natural") => {
         tw1 = null;
+        console.log(arg1 + " " + Array.isArray(arg1));
         tw1 = new Typewriter(h1El, {
           loop: false,
-          delay: "natural",
+          delay: arg1,
           cursor: "⎕",
           devMode: true,
         });
@@ -45,11 +46,11 @@
           .changeCursor(" ")
           .start();
       });
-      ipcRenderer.on("change-tw2", (event, arg) => {
+      ipcRenderer.on("change-tw2", (event, arg, arg1 = "natural") => {
         tw2 = null;
         tw2 = new Typewriter(introEl, {
           loop: false,
-          delay: "natural",
+          delay: arg1,
           cursor: "⎕",
           devMode: true,
         });
@@ -63,11 +64,11 @@
           .changeCursor(" ")
           .start();
       });
-      ipcRenderer.on("change-tw3", (event, arg) => {
+      ipcRenderer.on("change-tw3", (event, arg, arg1 = "natural") => {
         tw3 = null;
         tw3 = new Typewriter(genEl, {
           loop: false,
-          delay: "natural",
+          delay: arg1,
           cursor: "⎕",
           devMode: true,
         });
@@ -81,11 +82,11 @@
           .changeCursor(" ")
           .start();
       });
-      ipcRenderer.on("change-tw4", (event, arg) => {
+      ipcRenderer.on("change-tw4", (event, arg, arg1 = "natural") => {
         tw4 = null;
         tw4 = new Typewriter(outroEl, {
           loop: false,
-          delay: "natural",
+          delay: arg1,
           cursor: "⎕",
           devMode: true,
         });

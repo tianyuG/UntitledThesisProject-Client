@@ -232,14 +232,7 @@ mainListRandomPage.addEventListener("click", () => {
     !remote.getGlobal("isServerReachable") &&
     !remote.getGlobal("ignoreOfflineNags")
   ) {
-    mainContent.addEventListener("dom-ready", () => {
-      mainContent.send("change-tw1", "Cannot display content", "0");
-      mainContent.send(
-        "change-tw2",
-        "This content cannot be retrieved as the main database may had been partially damaged. Please inform your supervisor for potential fixes. <br/><br/>Entries listed in the side bar (except for the Random Page) are stored in a separate database, so they are not affected. Please try reading some of those instead.",
-        "0"
-      );
-    });
+    mainContent.src = "./frames/crc.html";
   } else {
     getRandomPage();
   }
@@ -256,14 +249,7 @@ commitSearchButton.addEventListener("click", () => {
       !remote.getGlobal("isServerReachable") &&
       !remote.getGlobal("ignoreOfflineNags")
     ) {
-      mainContent.addEventListener("dom-ready", () => {
-        mainContent.send("change-tw1", "Cannot display content", "0");
-        mainContent.send(
-          "change-tw2",
-          "This content cannot be retrieved as the main database may had been partially damaged. Please inform your supervisor for potential fixes. <br/><br/>Entries listed in the side bar (except for the Random Page) are stored in a separate database, so they are not affected. Please try reading some of those instead.",
-          "0"
-        );
-      });
+      mainContent.src = "./frames/crc.html";
       // mainContent.openDevTools();
     } else {
       // mainContent.openDevTools();
@@ -284,14 +270,7 @@ findBar.addEventListener("keyup", (e) => {
         !remote.getGlobal("isServerReachable") &&
         !remote.getGlobal("ignoreOfflineNags")
       ) {
-        mainContent.addEventListener("dom-ready", () => {
-          mainContent.send("change-tw1", "Cannot display content", "0");
-          mainContent.send(
-            "change-tw2",
-            "This content cannot be retrieved as the main database may had been partially damaged. Please inform your supervisor for potential fixes. <br/><br/>Entries listed in the side bar (except for the Random Page) are stored in a separate database, so they are not affected. Please try reading some of those instead.",
-            "0"
-          );
-        });
+        mainContent.src = "./frames/crc.html";
       } else {
         // mainContent.openDevTools();
 

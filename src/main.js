@@ -9,7 +9,7 @@ global.isServerReachable = false;
 // DEV FLAGS
 global.ignoreOfflineNags = false;
 global.ignoreStartupSlowdown = false;
-global.allowDevTools = false;
+global.allowDevTools = false; // Unused
 global.allowCliFlags = true;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -44,7 +44,7 @@ const createWindow = () => {
       nativeWindowOpen: true,
       enableRemoteModule: true,
       webviewTag: true,
-      // devTools: false,
+      devTools: false,
     },
     transparent: true,
     frame: false,

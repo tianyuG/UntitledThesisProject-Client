@@ -18,6 +18,8 @@ aModLogo.addEventListener("dblclick", () => {
   closeModalBtn.removeEventListener("click", closeModal);
   closeModalBtn.innerText = "Quit";
   aModContentVersion.innerHTML = ipcRenderer.sendSync("get-app-path");
+  aModContentVersion.style.fontFamily = "Iosevka Web";
+  // aModContentVersion.style.fontSize = "10pt";
   closeModalBtn.addEventListener("click", () => {
     require("electron").remote.app.quit();
   });

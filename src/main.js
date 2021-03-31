@@ -13,6 +13,7 @@ global.remoteServerURL = "http://34.69.37.51:1901";
 global.remoteServerGeneratorURL = "http://34.69.37.51:1901/generate";
 global.isServerReachable = false;
 global.maxAbstractCharLength = 250;
+global.acceleratedStreamingSpeed = "20";
 // DEV FLAGS
 global.allowCliFlags = true;
 global.ignoreOfflineNags = false;
@@ -75,6 +76,18 @@ const createWindow = () => {
   // from inactive (grey) to active (blue)
   ipcMain.on("doActivateMainTitleBar", (event, arg) => {
     mainWindow.webContents.send("activateMainTitleBar");
+  });
+
+  ipcMain.on("tw1-complete", () => {
+    mainWindow.webContents.send("tw1-complete-m");
+  });
+
+  ipcMain.on("tw2-complete", () => {
+    mainWindow.webContents.send("tw2-complete-m");
+  });
+
+  ipcMain.on("tw3-complete", () => {
+    mainWindow.webContents.send("tw3-complete-m");
   });
 
   mainWindow.once("ready-to-show", () => {

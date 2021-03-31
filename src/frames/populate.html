@@ -26,6 +26,10 @@
       var tw3 = null;
       var tw4 = null;
       var tw5 = null;
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
 
       ipcRenderer.on("change-tw1", (event, arg, arg1 = "natural") => {
         tw1 = null;
@@ -44,6 +48,10 @@
           .typeString(arg)
           .pauseFor(250)
           .changeCursor(" ")
+          .callFunction(() => {
+            ipcRenderer.send("tw1-complete");
+            console.log("tw1-complete");
+          })
           .start();
       });
       ipcRenderer.on("change-tw2", (event, arg, arg1 = "natural") => {
@@ -62,6 +70,9 @@
           .typeString(arg)
           .pauseFor(250)
           .changeCursor(" ")
+          .callFunction(() => {
+            ipcRenderer.send("tw2-complete");
+          })
           .start();
       });
       ipcRenderer.on("change-tw3", (event, arg, arg1 = "natural") => {
@@ -80,6 +91,9 @@
           .typeString(arg)
           .pauseFor(250)
           .changeCursor(" ")
+          .callFunction(() => {
+            ipcRenderer.send("tw3-complete");
+          })
           .start();
       });
       ipcRenderer.on("change-tw4", (event, arg, arg1 = "natural") => {
@@ -101,7 +115,8 @@
           .start();
       });
       ipcRenderer.on("enable-tw5", (event, arg) => {
-        console.log(arg);
+        // console.log(arg);
+        indicatorEl.style.fontFamily = "Iosevka Web";
         tw5 = null;
         tw5 = new Typewriter(indicatorEl, {
           loop: false,
@@ -117,8 +132,33 @@
           .start();
       });
 
+      // Arg: "" changes to block, anything else changes to anything else
+      ipcRenderer.on("change-tw5", (event, arg) => {
+        if (tw5 !== null) {
+          var cchar = arg;
+          if (arg === "") {
+            indicatorEl.style.fontFamily = "Iosevka Web";
+            cchar = "⎕";
+          } else {
+            indicatorEl.style.fontFamily = "MondwestReg";
+          }
+          // tw5 = new Typewriter(indicatorEl, {
+          //   loop: false,
+          //   delay: "natural",
+          //   cursor: cchar,
+          //   devMode: true,
+          // });
+
+          tw5
+            // .stop()
+            // .deleteAll(2000)
+            .changeCursor(cchar)
+            .start();
+        }
+      });
+
       ipcRenderer.on("disable-tw5", (event, arg) => {
-        console.log(arg);
+        // console.log(arg);
         if (tw5 !== null) {
           indicatorEl.parentElement.removeChild(indicatorEl);
         }

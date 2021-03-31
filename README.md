@@ -1,5 +1,32 @@
 # UntitledThesisProject-Client
 
+## Instructions
+
+To compile Encyclopaedia Mundi, you will need git, Node.JS, Electron and yarn. Clone this repository and run `yarn install` to install dependencies.
+
+To compile a portable win32 binary, run `yarn build` in the folder.
+
+## Minimum Hardware Requirement
+
+### For Compiling
+
+Desktop computer with x86-base CPU running Windows 10.
+
+### For Running the Compiled Binary
+
+Desktop computer with x86-base CPU running Windows 10, with at least 300MB free hard disk space.
+
+Per Google's [documentation](https://support.google.com/chrome/a/answer/7100626?hl=en) (this project uses Electron, which in turn uses Chromium):
+
+```
+To use Chrome Browser on Windows®, you'll need:
+
+    Windows 7, Windows 8, Windows 8.1, Windows 10 or later
+    An Intel Pentium 4 processor or later that's SSE3 capable
+```
+
+(Note that this project has only been tested on Windows 10.)
+
 ## Flags
 
 Flags will become available when `global.allowCliFlags` is set to `true` in `src/main.js`.
@@ -12,7 +39,7 @@ Flags will become available when `global.allowCliFlags` is set to `true` in `src
 
 `--ignore-offline-nags`: Application will not check if server is reachable. (CRC fault will never be reported.)
 
-`--ignore-startup-slowdown`: Application will ignore the artificial slowdown between the initial splashscreen and main user interface. Note that if this flag is set, the application will always think that it cannot reach remote server, regardless of your internet connectivity. Combine this flag with `--ignore-offline-nags` to skip connectivity check.
+`--ignore-startup-slowdown`: Application will ignore the artificial slowdown between the initial splashscreen and main user interface (around 7 seconds; randomly picked). Note that if this flag is set, the application will always think that it cannot reach remote server, regardless of your internet connectivity. Combine this flag with `--ignore-offline-nags` to skip connectivity check.
 
 ## Removal
 

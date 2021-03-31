@@ -7,25 +7,20 @@ const a1 = new Audio("./bin/audio/la-loop-noremainder.mp3");
 const a2 = new Audio("./bin/audio/la-loop.mp3");
 
 const closeWindow = document.getElementById("closeWindow");
-closeWindow.addEventListener("click", () => {
-  ipcRenderer.send("doActivateMainTitleBar");
-  var currWin = remote.getCurrentWindow();
-  stopAudio();
-  currWin.close();
-});
+closeWindow.addEventListener("click", closeModal);
 
-const closeModal = document.getElementById("aMod-close");
-closeModal.addEventListener("click", () => {
-  ipcRenderer.send("doActivateMainTitleBar");
-  var currWin = remote.getCurrentWindow();
-  stopAudio();
-  currWin.close();
-});
+const closeModalBtn = document.getElementById("aMod-close");
+closeModalBtn.addEventListener("click", closeModal);
 
 const aModLogo = document.getElementById("aMod-logo-img");
 const aModContentVersion = document.getElementById("aMod-content-version");
 aModLogo.addEventListener("dblclick", () => {
+  closeModalBtn.removeEventListener("click", closeModal);
+  closeModalBtn.innerText = "Quit";
   aModContentVersion.innerHTML = ipcRenderer.sendSync("get-app-path");
+  closeModalBtn.addEventListener("click", () => {
+    require("electron").remote.app.quit();
+  });
   aModContentVersion.addEventListener("dblclick", () => {
     ipcRenderer.send("open-temp");
   });
@@ -72,4 +67,11 @@ function stopAudio() {
   if (aC != null) {
     aC.suspend();
   }
+}
+
+function closeModal() {
+  ipcRenderer.send("doActivateMainTitleBar");
+  var currWin = remote.getCurrentWindow();
+  stopAudio();
+  currWin.close();
 }

@@ -16,7 +16,7 @@ global.isServerReachable = false;
 global.allowCliFlags = true;
 global.ignoreOfflineNags = false;
 global.ignoreStartupSlowdown = false;
-global.allowDevTools = false; // Unused
+global.allowDevTools = false;
 global.allowKeyboardShortcuts = false;
 
 // // Handle creating/removing shortcuts on Windows when installing/uninstalling.

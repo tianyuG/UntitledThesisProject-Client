@@ -22,6 +22,15 @@ closeModal.addEventListener("click", () => {
   currWin.close();
 });
 
+const aModLogo = document.getElementById("aMod-logo-img");
+const aModContentVersion = document.getElementById("aMod-content-version");
+aModLogo.addEventListener("dblclick", () => {
+  aModContentVersion.innerHTML = ipcRenderer.sendSync("get-app-path");
+  aModContentVersion.addEventListener("dblclick", () => {
+    ipcRenderer.send("open-temp");
+  });
+});
+
 const licenseModal = document.getElementById("aMod-license");
 licenseModal.addEventListener("click", () => {
   ipcRenderer.send("open-licenseSplash");

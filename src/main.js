@@ -1,4 +1,10 @@
-const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  globalShortcut,
+  shell,
+} = require("electron");
 const path = require("path");
 const iR = require("is-reachable");
 
@@ -11,7 +17,7 @@ global.allowCliFlags = true;
 global.ignoreOfflineNags = false;
 global.ignoreStartupSlowdown = false;
 global.allowDevTools = false; // Unused
-global.allowKeyboardShortcuts = true;
+global.allowKeyboardShortcuts = false;
 
 // // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 // // add "electron-squirrel-startup": "^1.0.0", to dependencies in package.json if uncommented
@@ -111,6 +117,14 @@ const createWindow = () => {
   // Toggle mainWindow DevTools
   ipcMain.on("toggleMainWindowDevTools", () => {
     mainWindow.webContents.toggleDevTools();
+  });
+
+  ipcMain.on("get-app-path", (e, a) => {
+    e.returnValue = path.basename(path.resolve(app.getAppPath(), "../.."));
+  });
+
+  ipcMain.on("open-temp", () => {
+    shell.showItemInFolder(path.resolve(app.getAppPath(), "../.."));
   });
 
   ipcMain.on("open-licenseSplash", () => {
@@ -443,7 +457,8 @@ const createWindow = () => {
         modal: true,
         parent: mainWindow,
         webPreferences: {
-          devTools: false,
+          devTools:
+            global.allowDevTools || app.commandLine.hasSwitch("allow-devtools"),
           nodeIntegration: true,
           enableRemoteModule: true,
         },

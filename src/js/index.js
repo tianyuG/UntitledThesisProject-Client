@@ -1,4 +1,5 @@
 const { ipcRenderer, remote } = require("electron");
+const path = require("path");
 
 ipcRenderer.on("activateMainTitleBar", (event, message) => {
   document.getElementById("mainTitleBar").classList.remove("inactive");

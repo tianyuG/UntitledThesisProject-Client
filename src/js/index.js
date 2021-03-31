@@ -602,16 +602,25 @@ function displayContent(r, c) {
     remote.getGlobal("maxAbstractCharLength")
   )
     .then((genCont) => {
+      c.send("change-tw5", "");
       c.send("change-typ-speed", remote.getGlobal("acceleratedStreamingSpeed"));
-      ipcRenderer.once("tw2-complete-m", () => {
+      ipcRenderer.on("tw2-complete-m", () => {
         c.send("change-tw5", "");
+        c.send(
+          "change-typ-speed",
+          remote.getGlobal("acceleratedStreamingSpeed")
+        );
         c.send("change-tw3", genCont);
         c.send(
           "change-typ-speed",
           remote.getGlobal("acceleratedStreamingSpeed")
         );
       });
-      ipcRenderer.once("tw3-complete-m", () => {
+      ipcRenderer.on("tw3-complete-m", () => {
+        c.send(
+          "change-typ-speed",
+          remote.getGlobal("acceleratedStreamingSpeed")
+        );
         c.send("change-tw4", splitArtExtract[1]);
         c.send(
           "change-typ-speed",
@@ -626,7 +635,7 @@ function displayContent(r, c) {
   c.send("change-tw1", r.query.pages[artKey].title);
   // c.send("change-tw2", r.query.pages[artKey].extract);
 
-  ipcRenderer.once("tw1-complete-m", () => {
+  ipcRenderer.on("tw1-complete-m", () => {
     console.log("tw1-complete-received");
     c.send("change-tw5", "Still decompressing...");
     c.send("change-tw2", splitArtExtract[0]);

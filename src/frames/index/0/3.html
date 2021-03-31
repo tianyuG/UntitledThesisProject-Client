@@ -25,32 +25,39 @@
       var tw3 = null;
       var tw4 = null;
       var tw5 = null;
-      const s0 = "Anarchy";
-      const s1 = "Here is the 1st sentence";
-      const s2 = "Here is the generated sentence";
-      const s3 = "Here is the second sentence";
+      const s0 = "0-3-0";
+      const s1 =
+        "0-3-0 is a type of wheel arrangement for a monorail steam locomotive.";
+      const s2 =
+        "The rotary engine and a hydraulic system allow the steam engine to move at a slower speed with an increase in speed. This increases the torque applied by the rotary engine and reduces the amount of torque applied by the rotary engine to the rotor. In the same way, the rotary engine can move in a different direction at the same time, but it can move more quickly without a loss of movement, which can cause the engine to stop to a slower pace than in the normal way.";
+      const s3 =
+        "This most unusual wheel arrangement was only used for specialised monorails.";
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
 
       tw1 = new Typewriter(h1El, {
         loop: false,
-        delay: 25,
+        delay: 30,
         cursor: " ",
       });
 
       tw2 = new Typewriter(introEl, {
         loop: false,
-        delay: 25,
+        delay: 30,
         cursor: " ",
       });
 
       tw3 = new Typewriter(genEl, {
         loop: false,
-        delay: 25,
+        delay: 30,
         cursor: " ",
       });
 
       tw4 = new Typewriter(outroEl, {
         loop: false,
-        delay: 25,
+        delay: 30,
         cursor: " ",
       });
 

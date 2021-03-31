@@ -12,6 +12,7 @@ global.remoteServerURL = "http://34.69.37.51:1901";
 // global.remoteServerURL = "http://google.com";
 global.remoteServerGeneratorURL = "http://34.69.37.51:1901/generate";
 global.isServerReachable = false;
+global.maxAbstractCharLength = 250;
 // DEV FLAGS
 global.allowCliFlags = true;
 global.ignoreOfflineNags = false;

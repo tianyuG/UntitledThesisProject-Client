@@ -437,7 +437,7 @@ function getSearchResults(query) {
                 );
               });
 
-            console.log("disambiguation");
+            // console.log("disambiguation");
           }
         } else {
           displayContent(response, mainContent);
@@ -596,8 +596,12 @@ function displayContent(r, c) {
 
   // console.log(splitArtExtract);
   c.send("enable-tw5");
-  getGeneratedAbstract(splitArtExtract[0], 300).then((genCont) => {
+  getGeneratedAbstract(
+    splitArtExtract[0],
+    remote.getGlobal("maxAbstractCharLength")
+  ).then((genCont) => {
     // console.log(genCont);
+    c.send("change-typ-speed", "30");
     c.send("change-tw3", genCont);
     c.send("change-tw4", splitArtExtract[1]);
     c.send("disable-tw5");

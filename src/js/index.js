@@ -30,7 +30,8 @@ minimiseWindow.addEventListener("click", () => {
 
 const openDevTools = document.getElementById("mainMenuDevTools");
 openDevTools.addEventListener("click", () => {
-  ipcRenderer.send("toggleMainWindowDevTools");
+  // ipcRenderer.send("toggleMainWindowDevTools");
+  document.getElementById("mainContentSection").openDevTools();
 });
 
 const openDebug = document.getElementById("mainMenuDebug");
@@ -599,17 +600,37 @@ function displayContent(r, c) {
   getGeneratedAbstract(
     splitArtExtract[0],
     remote.getGlobal("maxAbstractCharLength")
-  ).then((genCont) => {
-    // console.log(genCont);
-    c.send("change-typ-speed", "30");
-    c.send("change-tw3", genCont);
-    c.send("change-tw4", splitArtExtract[1]);
-    c.send("disable-tw5");
-  });
+  )
+    .then((genCont) => {
+      c.send("change-typ-speed", remote.getGlobal("acceleratedStreamingSpeed"));
+      ipcRenderer.once("tw2-complete-m", () => {
+        c.send("change-tw5", "");
+        c.send("change-tw3", genCont);
+        c.send(
+          "change-typ-speed",
+          remote.getGlobal("acceleratedStreamingSpeed")
+        );
+      });
+      ipcRenderer.once("tw3-complete-m", () => {
+        c.send("change-tw4", splitArtExtract[1]);
+        c.send(
+          "change-typ-speed",
+          remote.getGlobal("acceleratedStreamingSpeed")
+        );
+        c.send("disable-tw5");
+      });
+    })
+    .catch((err) => {
+      c.send("change-tw5", "X");
+    });
   c.send("change-tw1", r.query.pages[artKey].title);
   // c.send("change-tw2", r.query.pages[artKey].extract);
 
-  c.send("change-tw2", splitArtExtract[0]);
+  ipcRenderer.once("tw1-complete-m", () => {
+    console.log("tw1-complete-received");
+    c.send("change-tw5", "Still decompressing...");
+    c.send("change-tw2", splitArtExtract[0]);
+  });
 }
 
 ipcRenderer.on("navigate-to", (e, m) => {

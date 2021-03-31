@@ -161,7 +161,9 @@ p {
   margin-top: 0;
 }
 
-.Typewriter__cursor {
+#typ-intro .Typewriter__cursor,
+#typ-gen .Typewriter__cursor,
+#typ-outro .Typewriter__cursor {
   /* animation: none !important; */
   /* animation: Typewriter-cursor 1s infinite; */
   animation-duration: 1.25s !important;
@@ -188,7 +190,11 @@ h1 .Typewriter__cursor {
   animation-play-state: running;
   animation-name: Typewriter-cursor; */
   font-family: "Iosevka Web";
-  font-size: 20px;
+  font-size: 36px;
+}
+
+#typ-indicator .Typewriter__cursor {
+  font-size: 16px;
 }
 
 #typ-outro {

@@ -29,7 +29,7 @@ To use Chrome Browser on Windows®, you'll need:
 
 ## Flags
 
-Flags will become available when `global.allowCliFlags` is set to `true` in `src/main.js`.
+Flags will become available when `global.allowCliFlags` is set to `true` in `src/main.js` before compilation.
 
 `--allow-devtools`: Application will be allowed to invoke Chromium DevTools with Ctrl-Shift-I keyboard shortcuts. Note that this flag does not affect `<webview>` tag inside the main window.
 

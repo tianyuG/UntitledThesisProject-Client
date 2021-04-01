@@ -252,6 +252,7 @@ commitSearchButton.addEventListener("click", () => {
   if (searchTerm !== "") {
     var mainContent = document.getElementById("mainContentSection");
     mainContent.src = "./frames/populate.html";
+    mainContent.send("nullify-typ");
     if (
       !remote.getGlobal("isServerReachable") &&
       !remote.getGlobal("ignoreOfflineNags")
@@ -273,6 +274,7 @@ findBar.addEventListener("keyup", (e) => {
     if (searchTerm !== "") {
       var mainContent = document.getElementById("mainContentSection");
       mainContent.src = "./frames/populate.html";
+      mainContent.send("nullify-typ");
       if (
         !remote.getGlobal("isServerReachable") &&
         !remote.getGlobal("ignoreOfflineNags")

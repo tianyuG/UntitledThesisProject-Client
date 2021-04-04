@@ -29,10 +29,15 @@ minimiseWindow.addEventListener("click", () => {
 });
 
 const openDevTools = document.getElementById("mainMenuDevTools");
-openDevTools.addEventListener("click", () => {
-  // ipcRenderer.send("toggleMainWindowDevTools");
-  document.getElementById("mainContentSection").openDevTools();
-});
+if (remote.getGlobal("allowDevTools")) {
+  openDevTools.addEventListener("click", () => {
+    // ipcRenderer.send("toggleMainWindowDevTools");
+    document.getElementById("mainContentSection").openDevTools();
+  });
+} else {
+  openDevTools.remove();
+  document.getElementById("mainMenuDevToolsPadding").remove();
+}
 
 const openDebug = document.getElementById("mainMenuDebug");
 openDebug.addEventListener("click", () => {
@@ -252,7 +257,7 @@ commitSearchButton.addEventListener("click", () => {
   if (searchTerm !== "") {
     var mainContent = document.getElementById("mainContentSection");
     mainContent.src = "./frames/populate.html";
-    mainContent.send("nullify-typ");
+    // mainContent.send("nullify-typ");
     if (
       !remote.getGlobal("isServerReachable") &&
       !remote.getGlobal("ignoreOfflineNags")
@@ -260,9 +265,10 @@ commitSearchButton.addEventListener("click", () => {
       mainContent.src = "./frames/crc.html";
       // mainContent.openDevTools();
     } else {
+      mainContent.send("nullify-typ");
       // mainContent.openDevTools();
-
-      getSearchResults(searchTerm);
+      getCorrectTitle(searchTerm);
+      // getSearchResults(searchTerm);
     }
   }
 });
@@ -274,20 +280,119 @@ findBar.addEventListener("keyup", (e) => {
     if (searchTerm !== "") {
       var mainContent = document.getElementById("mainContentSection");
       mainContent.src = "./frames/populate.html";
-      mainContent.send("nullify-typ");
+      // mainContent.send("nullify-typ");
       if (
         !remote.getGlobal("isServerReachable") &&
         !remote.getGlobal("ignoreOfflineNags")
       ) {
         mainContent.src = "./frames/crc.html";
-      } else {
         // mainContent.openDevTools();
-
-        getSearchResults(searchTerm);
+      } else {
+        mainContent.send("nullify-typ");
+        // mainContent.openDevTools();
+        getCorrectTitle(searchTerm);
+        // getSearchResults(searchTerm);
       }
     }
   }
 });
+
+function getCorrectTitle(query) {
+  var mainContent = document.getElementById("mainContentSection");
+  var url = "https://en.wikipedia.org/w/api.php";
+
+  var params = {
+    action: "opensearch",
+    format: "json",
+    search: query,
+    namespace: "0",
+    limit: "1",
+    redirects: "resolve",
+  };
+
+  url = url + "?origin=*";
+  Object.keys(params).forEach(function (key) {
+    url += "&" + key + "=" + params[key];
+  });
+
+  fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      // mainContent.send("change-tw1", response[1][0]);
+      if (response[1].length > 0) {
+        console.log("Corrected article title: " + response[1][0]);
+        getSearchResults(response[1][0]);
+      } else {
+        getArticleCandidates(query, 2)
+          .then((randRes) => {
+            // console.log("Nothing");
+            // mainContent.send(
+            //   "change-typ-speed",
+            //   remote.getGlobal("acceleratedStreamingSpeed")
+            // );
+            mainContent.send("change-tw1", query);
+            mainContent.send(
+              "change-typ-speed",
+              remote.getGlobal("acceleratedStreamingSpeed")
+            );
+            mainContent.send(
+              "change-tw2",
+              "<p>Absolutely nothing related to your search term was found. Well done. We humbly suggest the following topics:</p>".concat(
+                randRes.join("")
+              )
+            );
+            mainContent.send(
+              "change-typ-speed",
+              remote.getGlobal("acceleratedStreamingSpeed")
+            );
+          })
+          .catch((e) => {
+            // mainContent.send(
+            //   "change-typ-speed",
+            //   remote.getGlobal("acceleratedStreamingSpeed")
+            // );
+            mainContent.send("change-tw1", "Come Again?");
+            mainContent.send(
+              "change-typ-speed",
+              remote.getGlobal("acceleratedStreamingSpeed")
+            );
+            mainContent.send(
+              "change-tw2",
+              "An error occurred when trying to retrieve the content. Please try again. (Error: " +
+                e +
+                ")"
+            );
+            mainContent.send(
+              "change-typ-speed",
+              remote.getGlobal("acceleratedStreamingSpeed")
+            );
+          });
+      }
+    })
+    .catch((e) => {
+      // mainContent.send(
+      //   "change-typ-speed",
+      //   remote.getGlobal("acceleratedStreamingSpeed")
+      // );
+      mainContent.send("change-tw1", "Come Again?");
+      mainContent.send(
+        "change-typ-speed",
+        remote.getGlobal("acceleratedStreamingSpeed")
+      );
+      mainContent.send(
+        "change-tw2",
+        "An error occurred when trying to retrieve the content. Please try again. (Error: " +
+          e +
+          ")"
+      );
+      mainContent.send(
+        "change-typ-speed",
+        remote.getGlobal("acceleratedStreamingSpeed")
+      );
+    });
+}
 
 function getSearchResults(query) {
   var mainContent = document.getElementById("mainContentSection");
@@ -321,22 +426,41 @@ function getSearchResults(query) {
     })
     .then(function (response) {
       var artKey = Object.keys(response.query.pages)[0];
-      // console.log(response.query.pages[artKey]);
 
       if (artKey === "-1") {
         getArticleCandidates(query, 2)
           .then((randRes) => {
-            console.log("Nothing");
+            // console.log("Nothing");
+            // mainContent.send(
+            //   "change-typ-speed",
+            //   remote.getGlobal("acceleratedStreamingSpeed")
+            // );
             mainContent.send("change-tw1", query);
+            mainContent.send(
+              "change-typ-speed",
+              remote.getGlobal("acceleratedStreamingSpeed")
+            );
             mainContent.send(
               "change-tw2",
               "<p>Absolutely nothing related to your search term was found. Well done. We humbly suggest the following topics:</p>".concat(
                 randRes.join("")
               )
             );
+            mainContent.send(
+              "change-typ-speed",
+              remote.getGlobal("acceleratedStreamingSpeed")
+            );
           })
           .catch((e) => {
+            // mainContent.send(
+            //   "change-typ-speed",
+            //   remote.getGlobal("acceleratedStreamingSpeed")
+            // );
             mainContent.send("change-tw1", "Come Again?");
+            mainContent.send(
+              "change-typ-speed",
+              remote.getGlobal("acceleratedStreamingSpeed")
+            );
             mainContent.send(
               "change-tw2",
               "An error occurred when trying to retrieve the content. Please try again. (Error: " +
@@ -373,8 +497,7 @@ function getSearchResults(query) {
               .then((r) => {
                 artKey = Object.keys(r.query.pages)[0];
 
-                console.log(r);
-                // TODO!!!
+                // console.log(r);
                 // Get the page title for a random result
                 var pageCount = r.query.pages[artKey].links.length;
                 var pageTitle =
@@ -407,7 +530,7 @@ function getSearchResults(query) {
                     return r.json();
                   })
                   .then((r) => {
-                    console.log(r.query.pages);
+                    // console.log(r.query.pages);
                     artKey = Object.keys(r.query.pages)[0];
                     if (
                       Object.keys(r.query.pages[artKey]).includes("pageprops")
@@ -417,10 +540,22 @@ function getSearchResults(query) {
                           "disambiguation"
                         )
                       ) {
+                        // mainContent.send(
+                        //   "change-typ-speed",
+                        //   remote.getGlobal("acceleratedStreamingSpeed")
+                        // );
                         mainContent.send("change-tw1", pageTitle);
+                        mainContent.send(
+                          "change-typ-speed",
+                          remote.getGlobal("acceleratedStreamingSpeed")
+                        );
                         mainContent.send(
                           "change-tw2",
                           "You are reading this message because the page you are looking for does exist in the print edition of Encyclopaedia Mundi, but the digitization process for this article is not yet complete. For now, plesae try looking for something else."
+                        );
+                        mainContent.send(
+                          "change-typ-speed",
+                          remote.getGlobal("acceleratedStreamingSpeed")
                         );
                       } else {
                         displayContent(r, mainContent);
@@ -431,12 +566,24 @@ function getSearchResults(query) {
                   });
               })
               .catch((e) => {
+                // mainContent.send(
+                //   "change-typ-speed",
+                //   remote.getGlobal("acceleratedStreamingSpeed")
+                // );
                 mainContent.send("change-tw1", "Come Again?");
+                mainContent.send(
+                  "change-typ-speed",
+                  remote.getGlobal("acceleratedStreamingSpeed")
+                );
                 mainContent.send(
                   "change-tw2",
                   "An error occurred when trying to retrieve the content. Please try again. (Error: " +
                     e +
                     ")"
+                );
+                mainContent.send(
+                  "change-typ-speed",
+                  remote.getGlobal("acceleratedStreamingSpeed")
                 );
               });
 
@@ -448,12 +595,24 @@ function getSearchResults(query) {
       }
     })
     .catch((e) => {
+      // mainContent.send(
+      //   "change-typ-speed",
+      //   remote.getGlobal("acceleratedStreamingSpeed")
+      // );
       mainContent.send("change-tw1", "Come Again?");
+      mainContent.send(
+        "change-typ-speed",
+        remote.getGlobal("acceleratedStreamingSpeed")
+      );
       mainContent.send(
         "change-tw2",
         "An error occurred when trying to retrieve the content. Please try again. (Error: " +
           e +
           ")"
+      );
+      mainContent.send(
+        "change-typ-speed",
+        remote.getGlobal("acceleratedStreamingSpeed")
       );
     });
 }
@@ -502,7 +661,7 @@ async function getRandoms(count) {
 // Get and generate content from one random Wikipedia article.
 async function getRandomPage() {
   await getRandoms(1).then((r) => {
-    console.log(r);
+    console.log("Random page: " + r);
     getSearchResults(r[0].slice(4, -5));
   });
 }
@@ -524,7 +683,7 @@ async function getArticleCandidates(term, count) {
     url += "&" + key + "=" + params[key];
   });
 
-  console.log(url);
+  // console.log(url);
 
   await fetch(url)
     .then(function (response) {
@@ -532,6 +691,9 @@ async function getArticleCandidates(term, count) {
     })
     .then(function (response) {
       retArr = response[1].map((r) => "<li>" + r + "</li>");
+    })
+    .catch(function (error) {
+      console.log(error);
     });
 
   await getRandoms(4).then((r) => {
@@ -560,6 +722,10 @@ async function getGeneratedAbstract(term, count) {
     })
     .then(function (response) {
       ret = response.output;
+    })
+    .catch(function (error) {
+      console.error(error);
+      throw new Error(error);
     });
 
   return ret;
@@ -568,27 +734,31 @@ async function getGeneratedAbstract(term, count) {
 function sanitiseAbstract(term) {
   var outputString = term;
   var checkString = term.toLowerCase();
-  console.log(checkString);
+  // console.log(checkString);
   if (checkString.includes(" (listen) ")) {
     outputString = outputString.replace(/\(listen\)/gi, "");
-    checkString = outputString.toLowerCase();
+    // checkString = outputString.toLowerCase();
   }
   if (checkString.includes("( ")) {
     outputString = outputString.replace(/\(([ ])+/gi, "(");
-    checkString = outputString.toLowerCase();
+    // checkString = outputString.toLowerCase();
   }
   if (checkString.includes(" )")) {
     outputString = outputString.replace(/([ ])+\)/gi, ")");
-    checkString = outputString.toLowerCase();
+    // checkString = outputString.toLowerCase();
+  }
+  if (checkString.includes("[")) {
+    outputString = outputString.replace(/\[[^\]]*\]/gi, "");
   }
 
   return outputString;
 }
 
 function displayContent(r, c) {
+  // c.send("nullify-typ");
   artKey = Object.keys(r.query.pages)[0];
   var artExtract = r.query.pages[artKey].extract;
-  console.log(artKey + ": " + artExtract);
+  // console.log(artKey + ": " + artExtract);
   var splitArtExtract = [
     artExtract.substring(0, artExtract.search(/[\.!\?]+/) + 1),
     artExtract.substring(artExtract.search(/[\.!\?]+/) + 2),
@@ -596,6 +766,12 @@ function displayContent(r, c) {
 
   // Remove remnants of Wikipedia-styled articles
   splitArtExtract[0] = sanitiseAbstract(splitArtExtract[0]);
+  if ((splitArtExtract[0].length = 0)) {
+    console.log("splitArtAbstract[0] empty: " + splitArtExtract);
+    splitArtExtract[0] = splitArtExtract[1];
+    splitArtExtract[1] =
+      "Indeed, the schnitzel can be eaten when cooked properly.";
+  }
 
   // console.log(splitArtExtract);
   c.send("enable-tw5");
@@ -604,26 +780,27 @@ function displayContent(r, c) {
     remote.getGlobal("maxAbstractCharLength")
   )
     .then((genCont) => {
+      console.log("Generated content: " + genCont);
       c.send("change-tw5", "");
       c.send("change-typ-speed", remote.getGlobal("acceleratedStreamingSpeed"));
-      ipcRenderer.on("tw2-complete-m", () => {
+      ipcRenderer.once("tw2-complete-m", () => {
         c.send("change-tw5", "");
         c.send(
           "change-typ-speed",
           remote.getGlobal("acceleratedStreamingSpeed")
         );
-        c.send("change-tw3", genCont);
+        c.send("change-tw3", sanitiseAbstract(genCont));
         c.send(
           "change-typ-speed",
           remote.getGlobal("acceleratedStreamingSpeed")
         );
       });
-      ipcRenderer.on("tw3-complete-m", () => {
+      ipcRenderer.once("tw3-complete-m", () => {
         c.send(
           "change-typ-speed",
           remote.getGlobal("acceleratedStreamingSpeed")
         );
-        c.send("change-tw4", splitArtExtract[1]);
+        c.send("change-tw4", sanitiseAbstract(splitArtExtract[1]));
         c.send(
           "change-typ-speed",
           remote.getGlobal("acceleratedStreamingSpeed")
@@ -632,14 +809,16 @@ function displayContent(r, c) {
       });
     })
     .catch((err) => {
-      c.send("change-tw5", "X");
+      // For some reason server did not return content, most likely.
+      c.send("change-tw5", "Error: unexpected exception.");
     });
   c.send("change-tw1", r.query.pages[artKey].title);
+  // console.log(r.query.pages[artKey].title);
   // c.send("change-tw2", r.query.pages[artKey].extract);
 
-  ipcRenderer.on("tw1-complete-m", () => {
-    console.log("tw1-complete-received");
-    c.send("change-tw5", "Still decompressing...");
+  ipcRenderer.once("tw1-complete-m", () => {
+    console.log("tw1-complete-received; " + splitArtExtract[0]);
+    c.send("change-tw5", "Decompressing...");
     c.send("change-tw2", splitArtExtract[0]);
   });
 }

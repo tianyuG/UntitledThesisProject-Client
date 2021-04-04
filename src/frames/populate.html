@@ -31,7 +31,7 @@
       });
       resizeObserver.observe(document.body);
 
-      ipcRenderer.once("change-tw1", (event, arg, arg1 = "natural") => {
+      ipcRenderer.on("change-tw1", (event, arg, arg1 = "natural") => {
         tw1 = null;
         console.log(arg1 + " " + Array.isArray(arg1));
         tw1 = new Typewriter(h1El, {
@@ -40,6 +40,7 @@
           cursor: "⎕",
           devMode: true,
         });
+
         tw1
           // .stop()
           // .deleteAll(2000)
@@ -50,17 +51,18 @@
           .changeCursor(" ")
           .callFunction(() => {
             ipcRenderer.send("tw1-complete");
-            console.log("tw1-complete");
+            // console.log("tw1-complete");
           })
           .start();
       });
-      ipcRenderer.once("change-tw2", (event, arg, arg1 = "natural") => {
+      ipcRenderer.on("change-tw2", (event, arg, arg1 = "natural") => {
         tw2 = null;
+        console.log(arg);
         tw2 = new Typewriter(introEl, {
           loop: false,
           delay: arg1,
           cursor: "⎕",
-          devMode: true,
+          devMode: false,
         });
         tw2
           // .stop()
@@ -75,13 +77,13 @@
           })
           .start();
       });
-      ipcRenderer.once("change-tw3", (event, arg, arg1 = "natural") => {
+      ipcRenderer.on("change-tw3", (event, arg, arg1 = "natural") => {
         tw3 = null;
         tw3 = new Typewriter(genEl, {
           loop: false,
           delay: arg1,
           cursor: "⎕",
-          devMode: true,
+          devMode: false,
         });
         tw3
           // .stop()
@@ -96,13 +98,13 @@
           })
           .start();
       });
-      ipcRenderer.once("change-tw4", (event, arg, arg1 = "natural") => {
+      ipcRenderer.on("change-tw4", (event, arg, arg1 = "natural") => {
         tw4 = null;
         tw4 = new Typewriter(outroEl, {
           loop: false,
           delay: arg1,
           cursor: "⎕",
-          devMode: true,
+          devMode: false,
         });
         tw4
           // .stop()
@@ -122,7 +124,7 @@
           loop: false,
           delay: "natural",
           cursor: "⎕",
-          devMode: true,
+          devMode: false,
         });
 
         tw5
@@ -160,7 +162,10 @@
       ipcRenderer.on("disable-tw5", (event, arg) => {
         // console.log(arg);
         if (tw5 !== null) {
-          indicatorEl.parentElement.removeChild(indicatorEl);
+          // indicatorEl.parentElement.removeChild(indicatorEl);
+          tw5.stop();
+          tw5.options.cursor = "";
+          tw5 = null;
         }
       });
 
@@ -180,6 +185,18 @@
       });
 
       ipcRenderer.on("nullify-typ", (event, arg) => {
+        if (tw1 !== null) {
+          tw1.stop();
+        }
+        if (tw2 !== null) {
+          tw2.stop();
+        }
+        if (tw3 !== null) {
+          tw3.stop();
+        }
+        if (tw4 !== null) {
+          tw4.stop();
+        }
         tw1 = null;
         tw2 = null;
         tw3 = null;

@@ -96,6 +96,10 @@ const createWindow = () => {
     mainWindow.webContents.send("tw3-complete-m");
   });
 
+  ipcMain.on("logMsg", (e, a) => {
+    mainWindow.webContents.send("logMsg-m", a);
+  });
+
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
   });
@@ -314,129 +318,6 @@ const createWindow = () => {
       mainWindow.setAlwaysOnTop(true);
     });
   });
-
-  // // Set new window properties
-  // mainWindow.webContents.on(
-  //   "new-window",
-  //   (event, url, frameName, disposition, options, additionalFeatures) => {
-  //     if (frameName === "quitModal") {
-  //       // Set up quit confirmation modal
-  //       event.preventDefault();
-  //       Object.assign(options, {
-  //         modal: true,
-  //         parent: mainWindow,
-  //         webPreferences: {
-  //           devTools: false,
-  //           enableRemoteModule: true,
-  //         },
-  //         transparent: true,
-  //         frame: false,
-  //         resizable: false,
-  //         width: 250,
-  //         height: 90,
-  //         icon: path.join(__dirname, "bin/images/appIcon.png"),
-  //         // useContentSize: true,
-  //       });
-  //       event.newGuest = new BrowserWindow(options);
-  //       event.newGuest.center();
-  //     } else if (frameName === "aboutModal") {
-  //       event.preventDefault();
-  //       Object.assign(options, {
-  //         modal: true,
-  //         parent: mainWindow,
-  //         webPreferences: {
-  //           devTools: true,
-  //           enableRemoteModule: true,
-  //         },
-  //         transparent: true,
-  //         frame: false,
-  //         resizable: false,
-  //         width: 430,
-  //         height: 232,
-  //         icon: path.join(__dirname, "bin/images/appIcon.png"),
-  //         // useContentSize: true,
-  //       });
-  //       event.newGuest = new BrowserWindow(options);
-  //       event.newGuest.center();
-  //       // event.newGuest.openDevTools();
-  //       // Set up media player modal
-  //       // event.preventDefault();
-  //       // Object.assign(options, {
-  //       //   modal: true,
-  //       //   parent: mainWindow,
-  //       //   transparent: true,
-  //       //   frame: false,
-  //       //   resizable: false,
-  //       //   width: 250,
-  //       //   height: 90,
-  //       //   icon: path.join(__dirname, "bin/images/appIcon.png"),
-  //       //   // useContentSize: true,
-  //       // });
-  //       // event.newGuest = new BrowserWindow(options);
-  //       // event.newGuest.center();
-  //     } else if (frameName === "licenseSplash") {
-  //       // TODO: Modify license splash window properties
-  //       app.commandLine.appendSwitch(
-  //         "autoplay-policy",
-  //         "no-user-gesture-required"
-  //       );
-  //       // console.log("license detected");
-  //       event.preventDefault();
-  //       Object.assign(options, {
-  //         webPreferences: {
-  //           devTools: false,
-  //           enableRemoteModule: true,
-  //         },
-  //         frame: false,
-  //         resizable: false,
-  //         fullscreen: true,
-  //         transparent: false,
-  //         // kiosk: true,
-  //         // useContentSize: true,
-  //       });
-  //       event.newGuest = new BrowserWindow(options);
-  //       event.newGuest.center();
-  //       event.newGuest.setAlwaysOnTop(true, "modal-panel");
-  //     } else if (frameName === "debugModal") {
-  //       event.preventDefault();
-  //       Object.assign(options, {
-  //         modal: true,
-  //         parent: mainWindow,
-  //         webPreferences: {
-  //           devTools: false,
-  //           enableRemoteModule: true,
-  //         },
-  //         transparent: true,
-  //         frame: false,
-  //         resizable: false,
-  //         width: 300,
-  //         height: 138,
-  //         icon: path.join(__dirname, "bin/images/appIcon.png"),
-  //         // useContentSize: true,
-  //       });
-  //       event.newGuest = new BrowserWindow(options);
-  //       event.newGuest.center();
-  //     } else if (frameName === "settingsModal") {
-  //       event.preventDefault();
-  //       Object.assign(options, {
-  //         modal: true,
-  //         parent: mainWindow,
-  //         webPreferences: {
-  //           devTools: false,
-  //           enableRemoteModule: true,
-  //         },
-  //         transparent: true,
-  //         frame: false,
-  //         resizable: false,
-  //         width: 240,
-  //         height: 88,
-  //         icon: path.join(__dirname, "bin/images/appIcon.png"),
-  //       });
-  //       event.newGuest = new BrowserWindow(options);
-  //       event.newGuest.center();
-  //     }
-  //   }
-  // );
 
   // and load splash screen.
   splashscreenWindow.loadFile(path.join(__dirname, "splash.html"));

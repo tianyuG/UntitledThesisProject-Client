@@ -332,6 +332,7 @@ function getCorrectTitle(query) {
             //   "change-typ-speed",
             //   remote.getGlobal("acceleratedStreamingSpeed")
             // );
+            mainContent.send("nullify-typ");
             mainContent.send("change-tw1", query);
             mainContent.send(
               "change-typ-speed",
@@ -353,6 +354,7 @@ function getCorrectTitle(query) {
             //   "change-typ-speed",
             //   remote.getGlobal("acceleratedStreamingSpeed")
             // );
+            mainContent.send("nullify-typ");
             mainContent.send("change-tw1", "Come Again?");
             mainContent.send(
               "change-typ-speed",
@@ -376,6 +378,7 @@ function getCorrectTitle(query) {
       //   "change-typ-speed",
       //   remote.getGlobal("acceleratedStreamingSpeed")
       // );
+      mainContent.send("nullify-typ");
       mainContent.send("change-tw1", "Come Again?");
       mainContent.send(
         "change-typ-speed",
@@ -435,6 +438,7 @@ function getSearchResults(query) {
             //   "change-typ-speed",
             //   remote.getGlobal("acceleratedStreamingSpeed")
             // );
+            mainContent.send("nullify-typ");
             mainContent.send("change-tw1", query);
             mainContent.send(
               "change-typ-speed",
@@ -456,6 +460,7 @@ function getSearchResults(query) {
             //   "change-typ-speed",
             //   remote.getGlobal("acceleratedStreamingSpeed")
             // );
+            mainContent.send("nullify-typ");
             mainContent.send("change-tw1", "Come Again?");
             mainContent.send(
               "change-typ-speed",
@@ -544,6 +549,7 @@ function getSearchResults(query) {
                         //   "change-typ-speed",
                         //   remote.getGlobal("acceleratedStreamingSpeed")
                         // );
+                        mainContent.send("nullify-typ");
                         mainContent.send("change-tw1", pageTitle);
                         mainContent.send(
                           "change-typ-speed",
@@ -570,6 +576,7 @@ function getSearchResults(query) {
                 //   "change-typ-speed",
                 //   remote.getGlobal("acceleratedStreamingSpeed")
                 // );
+                mainContent.send("nullify-typ");
                 mainContent.send("change-tw1", "Come Again?");
                 mainContent.send(
                   "change-typ-speed",
@@ -599,6 +606,7 @@ function getSearchResults(query) {
       //   "change-typ-speed",
       //   remote.getGlobal("acceleratedStreamingSpeed")
       // );
+      mainContent.send("nullify-typ");
       mainContent.send("change-tw1", "Come Again?");
       mainContent.send(
         "change-typ-speed",
@@ -667,36 +675,37 @@ async function getRandomPage() {
 }
 
 async function getArticleCandidates(term, count) {
-  var url = "https://en.wikipedia.org/w/api.php";
+  // var url = "https://en.wikipedia.org/w/api.php";
   var retArr = [];
 
-  var params = {
-    action: "opensearch",
-    format: "json",
-    search: term,
-    namespace: "0",
-    limit: count,
-  };
+  // var params = {
+  //   action: "opensearch",
+  //   format: "json",
+  //   search: term,
+  //   namespace: "0",
+  //   limit: count,
+  // };
 
-  url = url + "?origin=*";
-  Object.keys(params).forEach(function (key) {
-    url += "&" + key + "=" + params[key];
-  });
+  // url = url + "?origin=*";
+  // Object.keys(params).forEach(function (key) {
+  //   url += "&" + key + "=" + params[key];
+  // });
 
-  // console.log(url);
+  // // console.log(url);
 
-  await fetch(url)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      retArr = response[1].map((r) => "<li>" + r + "</li>");
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  // await fetch(url)
+  //   .then(function (response) {
+  //     return response.json();
+  //   })
+  //   .then(function (response) {
+  //     retArr = response[1].map((r) => "<li>" + r + "</li>");
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
 
-  await getRandoms(4).then((r) => {
+  var rCount = 4 + Math.floor(Math.random() * 3);
+  await getRandoms(rCount).then((r) => {
     retArr = retArr.concat(r);
   });
 
@@ -751,7 +760,7 @@ function sanitiseAbstract(term) {
     outputString = outputString.replace(/\[[^\]]*\]/gi, "");
   }
   if (checkString.includes("(")) {
-    outputString = outputString.replace(/\([^\]]*\)/gi, "");
+    outputString = outputString.replace(/[ ]*\([^\]]*\)/gi, "");
   }
 
   return outputString;

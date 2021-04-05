@@ -195,6 +195,7 @@ h1 .Typewriter__cursor {
 
 #typ-indicator .Typewriter__cursor {
   font-size: 16px;
+  /* font-family: "Iosevka Web"; */
 }
 
 #typ-outro {

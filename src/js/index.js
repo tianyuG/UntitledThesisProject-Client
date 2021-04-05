@@ -739,16 +739,19 @@ function sanitiseAbstract(term) {
     outputString = outputString.replace(/\(listen\)/gi, "");
     // checkString = outputString.toLowerCase();
   }
-  if (checkString.includes("( ")) {
-    outputString = outputString.replace(/\(([ ])+/gi, "(");
-    // checkString = outputString.toLowerCase();
-  }
-  if (checkString.includes(" )")) {
-    outputString = outputString.replace(/([ ])+\)/gi, ")");
-    // checkString = outputString.toLowerCase();
-  }
+  // if (checkString.includes("( ")) {
+  //   outputString = outputString.replace(/\(([ ])+/gi, "(");
+  //   // checkString = outputString.toLowerCase();
+  // }
+  // if (checkString.includes(" )")) {
+  //   outputString = outputString.replace(/([ ])+\)/gi, ")");
+  //   // checkString = outputString.toLowerCase();
+  // }
   if (checkString.includes("[")) {
     outputString = outputString.replace(/\[[^\]]*\]/gi, "");
+  }
+  if (checkString.includes("(")) {
+    outputString = outputString.replace(/\([^\]]*\)/gi, "");
   }
 
   return outputString;

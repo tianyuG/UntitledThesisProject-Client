@@ -7,9 +7,11 @@ document.onkeydown = function (e) {
   }
 };
 
-document.body.addEventListener("click", closeSelf, true);
-document.body.addEventListener("contextmenu", closeSelf, true);
-document.body.addEventListener("visibilitychange", closeSelf, true);
+if (!remote.getGlobal("allowDevTools")) {
+  document.body.addEventListener("click", closeSelf, true);
+  document.body.addEventListener("visibilitychange", closeSelf, true);
+  document.body.addEventListener("contextmenu", closeSelf, true);
+}
 
 function closeSelf() {
   ipcRenderer.send("stop-audio");

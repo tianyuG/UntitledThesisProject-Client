@@ -15,17 +15,17 @@ global.isServerReachable = false;
 global.maxAbstractCharLength = 250;
 global.acceleratedStreamingSpeed = "20";
 // DEV FLAGS
-global.allowCliFlags = true;
-global.ignoreOfflineNags = true;
-global.ignoreStartupSlowdown = true;
-global.allowDevTools = true;
-global.allowKeyboardShortcuts = true;
+// global.allowCliFlags = true;
+// global.ignoreOfflineNags = true;
+// global.ignoreStartupSlowdown = true;
+// global.allowDevTools = true;
+// global.allowKeyboardShortcuts = true;
 
-// global.allowCliFlags = false;
-// global.ignoreOfflineNags = false;
-// global.ignoreStartupSlowdown = false;
-// global.allowDevTools = false;
-// global.allowKeyboardShortcuts = false;
+global.allowCliFlags = false;
+global.ignoreOfflineNags = false;
+global.ignoreStartupSlowdown = false;
+global.allowDevTools = false;
+global.allowKeyboardShortcuts = false;
 
 // // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 // // add "electron-squirrel-startup": "^1.0.0", to dependencies in package.json if uncommented
@@ -152,6 +152,7 @@ const createWindow = () => {
   });
 
   ipcMain.on("open-licenseSplash", () => {
+    mainWindow.center();
     app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
     licenseSplash = new BrowserWindow({
       width: 800,
@@ -165,20 +166,30 @@ const createWindow = () => {
       frame: false,
       resizable: false,
       // fullscreen: true,
+      icon: path.join(__dirname, "bin/images/appIcon.png"),
       transparent: false,
       show: false,
     });
     licenseSplash.loadFile(path.join(__dirname, "licenseSplash.html"));
     mainWindow.setAlwaysOnTop(false);
+
     licenseSplash.once("ready-to-show", () => {
+      licenseSplash.center();
+      mainWindow.hide();
       licenseSplash.show();
+      if (global.allowDevTools) {
+        licenseSplash.webContents.openDevTools();
+      }
     });
     licenseSplash.on("close", () => {
       licenseSplash.hide();
+      mainWindow.show();
     });
     licenseSplash.on("blur", () => {
-      aboutModal.webContents.send("stop-audio");
-      licenseSplash.close();
+      if (!global.allowDevTools) {
+        aboutModal.webContents.send("stop-audio");
+        licenseSplash.close();
+      }
     });
     licenseSplash.on("close", () => {
       aboutModal.webContents.send("stop-audio");

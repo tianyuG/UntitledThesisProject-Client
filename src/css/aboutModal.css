@@ -8,6 +8,11 @@
     url("../bin/fonts/Iosevka/iosevka-regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "MondwestReg";
+  src: url("../bin/fonts/Mondwest/Mondwest-Regular.woff2") format("woff2");
+}
+
 body {
   overflow: hidden;
 }

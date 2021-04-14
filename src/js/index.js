@@ -256,7 +256,6 @@ commitSearchButton.addEventListener("click", () => {
   // console.log(searchTerm);
   if (searchTerm !== "") {
     var mainContent = document.getElementById("mainContentSection");
-    mainContent.src = "./frames/populate.html";
     // mainContent.send("nullify-typ");
     if (
       !remote.getGlobal("isServerReachable") &&
@@ -265,9 +264,12 @@ commitSearchButton.addEventListener("click", () => {
       mainContent.src = "./frames/crc.html";
       // mainContent.openDevTools();
     } else {
+      mainContent.src = "./frames/populate.html";
       mainContent.send("nullify-typ");
       // mainContent.openDevTools();
-      getCorrectTitle(searchTerm);
+      setTimeout(() => {
+        getCorrectTitle(searchTerm);
+      }, 250);
       // getSearchResults(searchTerm);
     }
   }
@@ -279,7 +281,6 @@ findBar.addEventListener("keyup", (e) => {
     var searchTerm = document.getElementById("findBar").value;
     if (searchTerm !== "") {
       var mainContent = document.getElementById("mainContentSection");
-      mainContent.src = "./frames/populate.html";
       // mainContent.send("nullify-typ");
       if (
         !remote.getGlobal("isServerReachable") &&
@@ -288,9 +289,12 @@ findBar.addEventListener("keyup", (e) => {
         mainContent.src = "./frames/crc.html";
         // mainContent.openDevTools();
       } else {
+        mainContent.src = "./frames/populate.html";
         mainContent.send("nullify-typ");
         // mainContent.openDevTools();
-        getCorrectTitle(searchTerm);
+        setTimeout(() => {
+          getCorrectTitle(searchTerm);
+        }, 250);
         // getSearchResults(searchTerm);
       }
     }
@@ -806,18 +810,21 @@ function displayContent(r, c) {
           "change-typ-speed",
           remote.getGlobal("acceleratedStreamingSpeed")
         );
+        c.send("change-tw5", " ");
       });
       ipcRenderer.once("tw3-complete-m", () => {
+        // c.send("disable-tw5");
+        // c.send("change-tw5", " ");
         c.send(
           "change-typ-speed",
           remote.getGlobal("acceleratedStreamingSpeed")
         );
+
         c.send("change-tw4", sanitiseAbstract(splitArtExtract[1]));
         c.send(
           "change-typ-speed",
           remote.getGlobal("acceleratedStreamingSpeed")
         );
-        c.send("disable-tw5");
       });
     })
     .catch((err) => {

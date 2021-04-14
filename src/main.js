@@ -15,17 +15,17 @@ global.isServerReachable = false;
 global.maxAbstractCharLength = 250;
 global.acceleratedStreamingSpeed = "20";
 // DEV FLAGS
-global.allowCliFlags = true;
-global.ignoreOfflineNags = true;
-global.ignoreStartupSlowdown = true;
-global.allowDevTools = true;
-global.allowKeyboardShortcuts = true;
+// global.allowCliFlags = true;
+// global.ignoreOfflineNags = true;
+// global.ignoreStartupSlowdown = true;
+// global.allowDevTools = true;
+// global.allowKeyboardShortcuts = true;
 
-// global.allowCliFlags = false;
-// global.ignoreOfflineNags = false;
-// global.ignoreStartupSlowdown = false;
-// global.allowDevTools = false;
-// global.allowKeyboardShortcuts = false;
+global.allowCliFlags = false;
+global.ignoreOfflineNags = false;
+global.ignoreStartupSlowdown = false;
+global.allowDevTools = false;
+global.allowKeyboardShortcuts = false;
 
 // // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 // // add "electron-squirrel-startup": "^1.0.0", to dependencies in package.json if uncommented

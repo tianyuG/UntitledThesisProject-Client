@@ -30,14 +30,15 @@ body {
   flex-wrap: nowrap;
 }
 
-aMod-logo {
+#aMod-logo {
   width: 30px;
   height: 30px;
+  margin-top: 1px;
 }
 
 #aMod-content {
   padding-left: 14px;
-  margin-top: 0;
+  margin-top: -2px;
   padding-top: 0;
 }
 

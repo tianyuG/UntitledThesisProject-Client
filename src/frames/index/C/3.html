@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "CF-105 Arrow";
+      const s1 =
+        "The Avro Canada CF-105 Arrow was a delta-winged interceptor aircraft designed and built by Avro Canada. The CF-105 held the promise of Mach 2 speeds at altitudes exceeding 50,000 feet (15,000 m) and was intended to serve as the Royal Canadian Air Force's (RCAF) primary interceptor into the 1960s and beyond.";
+      const s2 =
+        "As soon after entering operational capability testing there were reports about how high speed avropolipship flight could be considered one of these types which resulted largely in failure due primarily to inadequate runway design or weather conditions, however this development has led some observers claiming not only have AVOAS successfully flown around North America but also through many other regions including Cuba; they may even exist now though no official announcement is made regarding their existence until recently. Although almost any successful launch occurs within less than two weeks), most are likely still possible if flying above surface targets can occur between 3–5 hours prior air raids based upon radar detection signals transmitted via satellite navigation systems used against Soviet Union submarines. There might well been problems along such lines";
+      const s3 =
+        "On 20 February 1959, Prime Minister of Canada John Diefenbaker abruptly halted the development of both the Arrow and its Iroquois engines before the scheduled project review to evaluate the program could be held. Canada tried to sell the Arrow to the US and Britain, but no agreements were concluded. Two months later the assembly line, tooling, plans, existing airframes, and engines were ordered to be destroyed.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

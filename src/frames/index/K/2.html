@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "KFUM's Boldklub Roskilde";
+      const s1 =
+        "KFUM's Boldklub Roskilde is an association football club based in the town of Roskilde, Denmark, that competes in the Danish 2nd Division, the third tier of the Danish football league system.";
+      const s2 =
+        "This season’s championship will be held at a venue known as Stadholm (which was founded by former captain Sven Hofer from 1991 to 1993) and features several national competitions for both sides on its roster – including one sponsored team vs. two rivalries which saw some significant changes since 1994. The team also hosts a competition held by UEFA and European soccer federation FIFA at The Stadberg Museum on Friday evening. Their opponents are Bayern Munich (13–8), Borussia Dortmund, Barcelona FC [11]. They were named last year for their achievements when they scored three goals from midfield against Bayer Leverkusen with 4:06 left to play due towards injury; while Liverpool had won 5-4 overall during this period: it was all part one because Germany took home five points out West after falling short just two weeks before its final match as well – but despite losing 10/6 away games over eight months prior there have not been any defeats since then.";
+      const s3 =
+        "In recent decades, Roskilde KFUM has become established in the Denmark Series, the fourth highest tier in the Danish football league system.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

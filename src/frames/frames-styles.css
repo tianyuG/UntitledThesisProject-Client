@@ -1,11 +1,27 @@
 @font-face {
   font-family: "MondwestReg";
   src: url("../bin/fonts/Mondwest/Mondwest-Regular.woff2") format("woff2");
+  /* font-display: swap; */
 }
 
 @font-face {
   font-family: "MondwestBld";
   src: url("../bin/fonts/Mondwest/Mondwest-Bold.woff2") format("woff2");
+  /* font-display: swap; */
+}
+
+@font-face {
+  font-family: "SourceHan";
+  src: url("../bin/fonts/SourceHan/SourceHanSerifCN-Regular.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SourceHanKR";
+  src: url("../bin/fonts/SourceHan/SourceHanSerifKR-Regular.woff2")
+    format("woff2");
+  font-display: swap;
 }
 
 @font-face {
@@ -16,6 +32,7 @@
   font-style: normal;
   src: url("../bin/fonts/Iosevka/iosevka-regular.woff2") format("woff2"),
     url("../bin/fonts/Iosevka/iosevka-regular.ttf") format("truetype");
+  /* font-display: swap; */
 }
 
 ::-webkit-scrollbar {
@@ -94,12 +111,12 @@ button:not(:disabled):active {
   padding: 2px 11px 0 13px;
 }
 
-@media (not(hover)) {
+/* @media (not(hover)) {
   button:not(:disabled):hover {
     box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a,
       inset -2px -2px #dfdfdf, inset 2px 2px #808080;
   }
-}
+} */
 
 button:focus {
   outline: 1px dotted #000000;
@@ -130,7 +147,8 @@ body {
 }
 
 h1 {
-  font-family: "MondwestBld";
+  font-family: "MondwestBld", "SourceHan", "SourceHanKR", serif;
+  /* font-display: swap; */
   font-weight: 400;
   font-size: 40px;
   padding-top: 0;
@@ -143,7 +161,8 @@ h1 {
 div,
 a,
 li {
-  font-family: "MondwestReg", serif;
+  font-family: "MondwestReg", "SourceHan", "SourceHanKR", serif;
+  /* font-display: swap; */
   font-weight: 400;
   /* font-size: 36px; */
   font-size: 20px;
@@ -153,7 +172,7 @@ li {
 }
 
 p {
-  font-family: "MondwestReg", serif;
+  font-family: "MondwestReg", "SourceHan", "SourceHanKR", serif;
   font-weight: 400;
   /* font-size: 36px; */
   font-size: 20px;

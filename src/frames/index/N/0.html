@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "Nabisco";
+      const s1 =
+        "Nabisco (/nəˈbɪskoʊ/, abbreviated from the earlier name National Biscuit Company) is an American manufacturer of cookies and snacks headquartered in East Hanover, New Jersey.";
+      const s2 =
+        "A special trademark was purchased by Kraft Heinz to mark its new national home for ”Beverage Cookies.” The brand's first major sale occurred at 3 a.m., which took place on November 1st after it had received approval from FDA President John Rumsfeld III Jr.";
+      const s3 =
+        "All Nabisco cookie or cracker products are branded Christie in Canada. Nabisco opened corporate offices as the National Biscuit Company in the Home Insurance Building in the Chicago Loop in 1898, the world's first skyscraper.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

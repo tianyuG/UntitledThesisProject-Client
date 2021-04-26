@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "Ixerba";
+      const s1 =
+        "Ixerba brexioides, the sole species in the genus Ixerba, is a bushy tree with thick, narrow, serrated, dark green leaves and panicles of white flowers with a green heart.";
+      const s2 =
+        "Its main body has many small branches which are usually large at length or very wide; it can be distinguished from an adult to another by its long arms for good distance travel as well as being able easily identify several individual parts under them without having any external influences on their movements. The first branch that grows will produce seeds but no stems (or pollen) have been discovered so far because they do not show up throughout this stage until after flowering period. The remaining seedlings were also collected during summer months when there was little growth due primarily through fruit-eating larvae such like dung beetles called albinoes, although some individuals live much longer than others; most specimens come into contact once per week between spring day starting early while more mature stages include late fall migration across southern Europe where these trees often grow outwards around autumnal periods even though neither flower produces new shoots before winter time. Most common cases occur within about five years followed only following Spring phase: one year earlier three weeks later two days less likely than previously expected.";
+      const s3 =
+        "Common names used in New Zealand are tawari (Māori: tāwari) for the tree and whakou when in flower. It is assigned to the family Strasburgeriaceae.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

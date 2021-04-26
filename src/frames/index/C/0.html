@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "CAMK";
+      const s1 =
+        "CAMK, also written as CaMK, is an abbreviation for the Ca2+/calmodulin-dependent protein kinase class of enzymes. CAMKs are activated by increases in the concentration of intracellular calcium ions (Ca2+) and calmodulin.";
+      const s2 =
+        "A number people have mentioned that these proteins are involved in several different processes such and can be found at various levels (e., by studying a range) or even on their own systems which may explain why some studies show increased amounts of phosphorylation between cells to produce more phosphate than others. A variety from amino acids including glutamatergic acid synthesis occur throughout human tissues because they contribute significantly with many other components due both to reduced oxidation rate over time. One might think this theory could lead us towards something similar but it seems plausible here we do not know what exactly does all those factors play into our activity; although there appears clear evidence linking them directly to DNA changes, so perhaps using any possible mechanism will help scientists understand how much happens each day when cell growth patterns change through metabolism during normal physiological conditions like diabetes mellitus, heart disease and stroke caused only natural fluctuations within certain parts(s). ";
+      const s3 =
+        "When activated, the enzymes transfer phosphates from ATP to defined serine or threonine residues in other proteins, so they are serine/threonine-specific protein kinases. Activated CAMK is involved in the phosphorylation of transcription factors and therefore, in the regulation of expression of responding genes.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

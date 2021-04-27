@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "Ucayali moist forests";
+      const s1 =
+        "The Ucayali moist forests (NT0174) is an ecoregion in the western Amazon rainforest of Peru. ";
+      const s2 =
+        "Although it has been described by researchers including scientists from Argentina where their unique range varies widely among various groups to some degree during wet periods such that most tropical regions are considered suitable locations with different ecological parameters, this diversity may be due primarily through natural processes but also more likely because they require increased rainfall since temperatures do not increase throughout warm areas like deserts. In a recent study, scientists discovered that wet forest conditions are affecting many tropical subtropical species such as tributaries and arid belt regions near Cerna to Chile, Indonesia. As well for water-dependent organisms like plants or algae, these problems may be exacerbated by climate change because they cannot readily cope with changing air pressures while simultaneously maintaining their ecological stability; thus it becomes increasingly difficult not only when there's already substantial biodiversity loss during dry seasons but also throughout our lifetimes due mainly to natural variability on land use.";
+      const s3 =
+        "Annual rainfall is 600–2,500 millimetres (24–98 in). At a sample location at 7.75°S 75.75°W the Köppen climate classification is ”Af”: equatorial, fully humid. Mean temperatures range from 24.7 °C (76.5 °F) in July to 26.1 °C (79.0 °F) in November. Yearly total rainfall is about 1,700 millimetres (67 in). Monthly rainfall ranges from 62.4 millimetres (2.46 in) in August to 205.9 millimetres (8.11 in) in March.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

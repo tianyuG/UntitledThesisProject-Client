@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "Zero Gravity Corporation";
+      const s1 =
+        "Zero Gravity Corporation (also known as ZERO-G) is an American company based in Dumfries, Virginia, formerly of Fort Lauderdale, Florida, which operates weightless flights from United States airports.";
+      const s2 =
+        "The firm was founded by Steve Aheuser and Peter Sperling at the end last year with two employees working on a new concept called Powerhouse: Superpower Luggage that would allow passengers to carry luggage without baggage when carrying anything heavier than one or more pounds per person over its own body using electric motors powered through carbon fibre for electricity generation; plus another ”lightweight” lightweight portable system capable outfitted into your home's doorways where you can keep up—but not only have they been able get around airport security but also their ability both directly outside any seatbelt belt so those who may need some sort less restrictive bag are allowed access via airlocks connected between doors allowing them easily secure under ground transport such like plane seats. According Tokei Press, The Bigger Than Life Is Better because it has no internal combustion engine. Because this allows greater flexibility compared simply looking inside our vehicle then we'll be talking about just how many times there will actually really Beam/Powerhouses available across all four types…so much power!";
+      const s3 =
+        "Unlike NASA, ZERO-G is governed under Part 121 of FAA regulations (as are all US commercial passenger and cargo airlines) enabling the company to cater to both tourists and researchers alike. ";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

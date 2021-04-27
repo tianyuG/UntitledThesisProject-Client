@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "4-1000A";
+      const s1 =
+        "The 4-1000A/8166 is a radial-beam tetrode designed for use in radio transmitters.";
+      const s2 =
+        "This new technology uses the power of an electrical transformer to produce pulses and other forms from 3,000mV down (10x) into 20 microns each that travels through it at its current rate by moving forward one centimetre per second - or 0% across all three paths using two different means such as magnetic resonance imaging. In addition some 10 000Mv are sent on average after being passed between both antennas via various routes but none have been successfully achieved over this length. The most commonly used ”radial” transmitter can provide much lower frequencies than conventional 1 MHz transducers because transmission speed varies greatly within short bursts; however if you plan upon sending more signal every day instead your main equipment will become less efficient thanks simply relying entirely solely onto signals coming directly up behind yourself during high velocities, so even then many transmissions may not reach enough target areas unless directed very far away.";
+      const s3 =
+        "A complete cooling system is required to operate the tube at rated values. A centrifugal fan pressurizes the equipment chassis and provides a continuous stream of cooling air. A specially designed socket is used to direct the air over the filament and grid connections, and a glass chimney (Pyrex®) then directs the air around the tube's glass envelope; chassis-mounted metal clips are used to center the chimney around the tube. Finally, a finned, cylindrical heat sink is attached to the anode connection (top of the tube) to provide additional cooling for the anode's glass-to-metal seal. ";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

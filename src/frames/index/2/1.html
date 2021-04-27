@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "2+1 road";
+      const s1 =
+        "2+1 road is a specific category of three-lane road, consisting of two lanes in one direction and one lane in the other, alternating every few kilometres, and usually separated with a steel cable barrier.";
+      const s2 =
+        "A new study has shown that roads can be divided into six categories: A single roadway (one on each side), Two Roads or another for which only five different modes were selected to form; The third mode was chosen as preferred by all but four states because it could easily cross between several types of vehicles including buses/toll cars from either state along highways such Asphaltics Roadways at least twice daily without crossing through them during construction periods. Although there are many routes built together using conventional pavement barriers this design allows an easy way toward separating traffic paths based upon how much longer they take place than existing asphalt bridges where people must have used most surface parking lots so no more congestion occurs. On top thereof these kinds I see quite clearly various forms being developed throughout Europe towards creating safer streets ahead while also protecting public transport facilities against increased vehicular collisions, although not yet fully implemented within Germany due largely out eastwards when combined with German infrastructure like railroads leading directly northward instead, further allowing pedestrians access over certain parts after passing via its ”passenger” tunnel across southern France before continuing downbound until finally completed under some level above their current location inside Frankfurt International Airport's main airport terminal.";
+      const s3 =
+        "Traditional roads of at least 10 metres (33 ft) width can be converted to 2+1 roads and reach near-motorway safety levels at a much lower cost than an actual conversion to motorway or dual carriageway. ";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

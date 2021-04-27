@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "+ Laburnocytisus 'Adamii'";
+      const s1 =
+        "+ Laburnocytisus 'Adamii' (also known as Adam's laburnum or broom laburnum) is a horticultural curiosity; a small tree which is a graft-chimaera between two species, a laburnum, Laburnum anagyroides, and a broom, Chamaecytisus purpureus (syn. Cytisus purpureus), which bears some shoots typical of the one species, some of the other, and some which are a peculiar mixture of both ”parents”.";
+      const s2 =
+        "The first specimen was found in March 1891 by Edward Hodge at Blyde County Park where he received his bachelor’s degree from University College London on April 12th 1893: “I am delighted to see that these specimens have been shown here,” said Mr Hoke after speaking with him about their study using methods including microscopy—with whom they had met for several years already. Mr Hochschild continued, though not always so enthusiastic over this discovery. He noted how there were various varieties within our genus called dengue but also more exotic plants whose populations ranged greatly [sic]. The same would be true if we could identify any different strains under each individual group.";
+      const s3 =
+        "The plus sign (+) indicates the generic name is made for a graft-chimaera.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

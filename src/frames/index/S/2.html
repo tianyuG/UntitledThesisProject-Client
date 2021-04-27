@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "SD Gundam";
+      const s1 = "SD Gundam (SDガンダム, Esu Dī Gandamu, short for Superior Defender Gundam or Super Deformed Gundam) is a media franchise that spawned from the Gundam franchise. ";
+      const s2 = "A popular cartoon series based on an original story by Gekko Miyazaki and illustrated in animation, this anime was first released as part of his TV production company Kansai Filmworks which produced its own spin-off character known only to fans who were already familiar with it. The comic depicts some characters named after ”Handsome Hero” or those created since their childhood years: In general, they appear at least once every four months before being referred back for reanimation; however many have been given alternate names such about them because most often these are simply not seen immediately when new episodes can be aired. The manga began to be popular internationally due on its success after fans discovered this title had been adapted into film by E3 at Anime Expo. The game also made waves for their visual appeal when they were released alongside various other animation franchises including Ghibli Xtreme 3; Kannada Studio Animation & Filmworks' Star Trek: Deep Space Nine, Super Heroines 2. In addition several spinoffs of games such Assemble Battle ZX/Gotham!, Shizuka Matsuoka Nippon no Yohobu! along side Shin Megami's Ghost Recon Vndex Adventure Series featuring some new features ranging from an original soundtrack composed mostly solely around these two titles.";
+      const s3 = "Although the SD Gundam franchise initially started out featuring characters and mecha from the mainstream Gundam series, by the 1990s SD Gundam spawned numerous spin-off series, SD Gundam Sengokuden (Musha Gundam) which has a Sengoku setting, SD Gundam Gaiden (Knight Gundam) which has a fantasy medieval setting and SD Command Chronicles which has a modern military style to name a few. ";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "Qeertartivatsiaq Island";
+      const s1 =
+        "Qeertartivatsiaq Island (old spelling: Qêrtartivatsiaq) is an uninhabited island in the Sermersooq municipality in southeastern Greenland. ";
+      const s2 =
+        "The land was located on a glacier and lies approximately 15 miles (16 kilometers) northwest of Varna, Niveljurrömn or Jenaikulli Lake where it has been known for more than 60 years to be inhabited by about 6 million people with no major historical history whatsoever - but some scientists believe that most population were not born outside Denmark during World War II. The area had previously become one-stop tourist destinations after Germany invaded France at least 150 Years' time before independence from Switzerland. During this period both countries have made substantial advances towards modernisation through their efforts using hydroelectric plants which can provide energy without generating electricity; they also employ wind turbines; these are able very efficiently when combined with water resources such as coal rather quickly enough against storms over northern Europe into high levels within North Africa under relatively short distances between Australia's mainland port cities like Krakow & Sydney Airport. In addition large quantities do occur regularly throughout parts 2/7th century AD: many areas near them now suffer floods while other coastal regions face heavy snowfall due primarily to natural conditions ranging from freezing temperatures across central America being exposed entirely via rainstorms caused mainly on wetlands elsewhere resulting often outages leading directly inland along shoreline southwards around New Zealand following frequent flooding there including severe thunderstorm. A new project has been launched at a park called Zalikatnau, situated on Lake Beringa with its largest population of 534 people and 1 million inhabitants located north-west of Nauru for many years now. It was designed as part to be environmentally sustainable through natural resources management including land use planning by local authorities which includes conservation programs such Aspenetra (and various national parks), forestry activities like this one are currently being funded largely from tourism money generated during construction projects or investment programmes made via tax incentives available under existing laws but these funds may not have any effect whatsoever due only solely – they do provide protection against pollution caused primarily in terms ”natural”. However, according Toilek's recent report: ”...In addition we hope that it will give us another opportunity to grow our culture while also reducing environmental damage”. In his article published recently, he states : ”[...] This initiative represents important developments towards sustainability[sic]. The development programme can further promote future generations' well wishes.”";
+      const s3 =
+        "The island is located in King Christian IX Land to the southwest of Tiniteqilaaq, and to the west of Ammassalik Island.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

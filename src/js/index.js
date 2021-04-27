@@ -165,7 +165,7 @@ mainIndexQ.addEventListener("click", () => {
   document.getElementById("mainContentSection").src = "./frames/index/Q.html";
 });
 
-const mainIndexR = document.getElementById("mainindexU");
+const mainIndexR = document.getElementById("mainindexR");
 mainIndexR.addEventListener("click", () => {
   document.getElementById("mainContentSection").src = "./frames/index/R.html";
 });

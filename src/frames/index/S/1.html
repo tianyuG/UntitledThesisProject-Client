@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UTP</title>
+    <link rel="stylesheet" href="../../frames-styles.css" />
+  </head>
+
+  <body>
+    <h1 id="typ-h1"></h1>
+    <div id="typ-intro"></div>
+    <div id="typ-gen"></div>
+    <div id="typ-outro"></div>
+    <div id="typ-indicator" style="font-family: 'Iosevka Web'"></div>
+
+    <script src="../../../js/core.js"></script>
+    <script type="text/javascript">
+      var h1El = document.getElementById("typ-h1");
+      var introEl = document.getElementById("typ-intro");
+      var genEl = document.getElementById("typ-gen");
+      var outroEl = document.getElementById("typ-outro");
+      var indicatorEl = document.getElementById("typ-indicator");
+      var tw1 = null;
+      var tw2 = null;
+      var tw3 = null;
+      var tw4 = null;
+      var tw5 = null;
+      const s0 = "ScS";
+      const s1 =
+        "ScS (Suite Centres Sunderland), is a home furnishings retailer in the United Kingdom, specialising in sofas, carpets and flooring, dining and occasional furniture. ";
+      const s2 =
+        "This shop can serve up fresh local produce including coffee shops from different countries for an exceptional selection of handmade fabrics such Aspen or Spruce-tooth products. The company has been named 'The British House of Commons' by its UK-based website. The company also offers an excellent selection of contemporary products for sale at some stores including: Cottage Art Museum - £7.";
+      const s3 =
+        "As part of the company's growth strategy, in 1997, the business was listed on the Official List and, as ScS Upholstery plc, was admitted to trading on the London Stock Exchange’s main market for listed securities.";
+
+      const resizeObserver = new ResizeObserver(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      resizeObserver.observe(document.body);
+
+      tw1 = new Typewriter(h1El, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw2 = new Typewriter(introEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw3 = new Typewriter(genEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw4 = new Typewriter(outroEl, {
+        loop: false,
+        delay: 30,
+        cursor: " ",
+      });
+
+      tw5 = new Typewriter(indicatorEl, {
+        loop: false,
+        delay: "natural",
+        cursor: "⎕",
+      });
+
+      tw1
+        .changeCursor("⎕")
+        .pauseFor(150)
+        .typeString(s0)
+        .pauseFor(250)
+        .changeCursor(" ")
+        .callFunction(() => {
+          tw2
+            .changeCursor("⎕")
+            .pauseFor(150)
+            .typeString(s1)
+            .pauseFor(250)
+            .changeCursor(" ")
+            .callFunction(() => {
+              tw3
+                .changeCursor("⎕")
+                .pauseFor(150)
+                .typeString(s2)
+                .pauseFor(250)
+                .changeCursor(" ")
+                .callFunction(() => {
+                  tw4
+                    .changeCursor("⎕")
+                    .pauseFor(150)
+                    .typeString(s3)
+                    .pauseFor(250)
+                    .changeCursor(" ")
+                    .callFunction(() => {
+                      tw5.changeCursor(" ").start();
+                    })
+                    .start();
+                })
+                .start();
+            })
+            .start();
+        })
+        .start();
+    </script>
+  </body>
+</html>

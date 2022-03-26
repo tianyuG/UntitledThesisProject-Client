@@ -2,8 +2,9 @@
 
 ## Forewords for the making the repo public (March 2022)
 
-![Encyclopaedia Mundi splashscreen, with part of Renoir's « Le Déjeuner des canotiers » on the top of the screen, with pixelated phrases 'Encyclopaedia Mundi', 'Pitchman-Survoy Inc.', 'Concise Digital Knowledge Repository', 'Development build. Confidential—Not for Public Release' below the image.](./Thesis%20Poster/splashscreen.jpg)
-![Encyclopaedia Mundi running on the Windows 10 desktop environment.](./Thesis%20Poster/screenshot.png)
+<!-- ![Encyclopaedia Mundi splashscreen, with part of Renoir's « Le Déjeuner des canotiers » on the top of the screen, with pixelated phrases 'Encyclopaedia Mundi', 'Pitchman-Survoy Inc.', 'Concise Digital Knowledge Repository', 'Development build. Confidential—Not for Public Release' below the image.](./Thesis%20Poster/splashscreen.jpg) -->
+
+![Screenshot of Encyclopaedia Mundi.](./Thesis%20Poster/EM_interface.PNG)
 
 Encyclopaedia Mundi (or UntitledThesisProject/UTP, which you will see in the code sparingly) is my Master of Fine Arts thesis work. You can fine more detail archived at VTechWorks: [https://vtechworks.lib.vt.edu/handle/10919/103645](https://vtechworks.lib.vt.edu/handle/10919/103645). A short video documentation can be found at [https://youtu.be/X5VTAI36Cc8](https://youtu.be/X5VTAI36Cc8).
 
